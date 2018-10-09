@@ -1,0 +1,17 @@
+IDI_ICON              ICON    DISCARDABLE     "res/app.ico"
+1 VERSIONINFO
+FILEVERSION 4,2,1,58
+PRODUCTVERSION 4,2,1,58
+FILEFLAGSMASK 0x3fL
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "FileVersion", "4,2,1,58"
+            VALUE "Description", "Cafe control programm"
+            VALUE "Copyright", "(C)2014, Kudryashov Vasily"
+            VALUE "Email", "end1_1@yahoo.com"
+        END
+    END
+END

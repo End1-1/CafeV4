@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DlgEmployee</class>
+ <widget class="QDialog" name="DlgEmployee">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>444</width>
+    <height>176</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="1">
+      <widget class="QPLineEdit" name="lineEdit_4">
+       <property name="field" stdset="0">
+        <string>LNAME</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" colspan="2">
+      <widget class="FBtnOkCancel" name="widget" native="true"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Position</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Last name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPLineEdit" name="lineEdit_5">
+       <property name="field" stdset="0">
+        <string>LOGIN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>First name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Login</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPLineEdit" name="lineEdit">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="field" stdset="0">
+        <string>ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPComboBox" name="comboBox">
+       <property name="fieldId" stdset="0">
+        <string>GROUP_ID</string>
+       </property>
+       <property name="fieldName" stdset="0">
+        <string>GROUP_NAME</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>EMPLOYES_GROUP</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPLineEdit" name="lineEdit_3">
+       <property name="field" stdset="0">
+        <string>FNAME</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>State</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPComboBox" name="comboBox_2">
+       <property name="fieldId" stdset="0">
+        <string>STATE_ID</string>
+       </property>
+       <property name="fieldName" stdset="0">
+        <string>STATE_NAME</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>EMPLOYEE_STATE</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QPComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qpcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FBtnOkCancel</class>
+   <extends>QWidget</extends>
+   <header location="global">fbtnokcancel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QPLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qplineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

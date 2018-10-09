@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BaseGrid</class>
+ <widget class="QMainWindow" name="BaseGrid">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>2</number>
+    </property>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTableWidget" name="tableGrid">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::HLine</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="tableTotal">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::HLine</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionEdit"/>
+   <addaction name="actionDocument_preview"/>
+   <addaction name="actionStation_control_panel"/>
+   <addaction name="actionGroup_of_types"/>
+   <addaction name="actionDelete"/>
+   <addaction name="separator"/>
+   <addaction name="actionFind_Text"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="actionFilter"/>
+   <addaction name="separator"/>
+   <addaction name="actionPrint_preview"/>
+   <addaction name="actionPrint"/>
+   <addaction name="actionExport_to_MS_Excel"/>
+   <addaction name="separator"/>
+   <addaction name="actionRecipe"/>
+   <addaction name="actionEmployesRoles"/>
+   <addaction name="actionSet_password"/>
+   <addaction name="actionSpecial_comment_for_dish"/>
+   <addaction name="actionRoles"/>
+   <addaction name="actionGroupProp"/>
+   <addaction name="actionMake_New_Hall"/>
+   <addaction name="actionSalary"/>
+   <addaction name="actionCalculate_selfcost"/>
+   <addaction name="actionAdd_to_menu"/>
+   <addaction name="actionChange_store_of_saled_dishes"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/new.png</normaloff>:/res/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/edit.png</normaloff>:/res/edit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/delete.png</normaloff>:/res/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionFilter">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/filter.png</normaloff>:/res/filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set filter</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/refresh.png</normaloff>:/res/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionExport_to_MS_Excel">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/excel.png</normaloff>:/res/excel.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export to MS Excel</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+E</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/print.png</normaloff>:/res/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPrint_preview">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/printpreview.png</normaloff>:/res/printpreview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+  </action>
+  <action name="actionRecipe">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/recipe.png</normaloff>:/res/recipe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Recipe</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionEmployesRoles">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/permission.png</normaloff>:/res/permission.png</iconset>
+   </property>
+   <property name="text">
+    <string>EmployesRoles</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionSet_password">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/Lock.png</normaloff>:/res/Lock.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set password</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionGroup_of_types">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/list.png</normaloff>:/res/list.png</iconset>
+   </property>
+   <property name="text">
+    <string>Group of types</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionStation_control_panel">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/control.png</normaloff>:/res/control.png</iconset>
+   </property>
+   <property name="text">
+    <string>Station control panel</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionSpecial_comment_for_dish">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/permission.png</normaloff>:/res/permission.png</iconset>
+   </property>
+   <property name="text">
+    <string>Special comment for dish</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRoles">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/permission.png</normaloff>:/res/permission.png</iconset>
+   </property>
+   <property name="text">
+    <string>Roles</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDocument_preview">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/paste.png</normaloff>:/res/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Document preview</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionGroupProp">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/magic.png</normaloff>:/res/magic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change property of group of dishes</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionMake_New_Hall">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/hall.png</normaloff>:/res/hall.png</iconset>
+   </property>
+   <property name="text">
+    <string>Make New Hall</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionFind_Text">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/preview.png</normaloff>:/res/preview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Find Text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionFind_next">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/preview.png</normaloff>:/res/preview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Find next</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionSalary">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/cash.png</normaloff>:/res/cash.png</iconset>
+   </property>
+   <property name="text">
+    <string>Salary</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionCalculate_selfcost">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/cash.png</normaloff>:/res/cash.png</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate selfcost</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionAdd_to_menu">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/plus.png</normaloff>:/res/plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add to menu</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionChange_store_of_saled_dishes">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/res/recipe.png</normaloff>:/res/recipe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change store of saled dishes</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

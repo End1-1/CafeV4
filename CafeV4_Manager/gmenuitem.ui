@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GMenuItem</class>
+ <widget class="QMainWindow" name="GMenuItem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1025</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Main</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="chRemind">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QPushButton" name="btnColor">
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Remind</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="leDescription"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Description</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0" colspan="3">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="1">
+           <widget class="QPColorEdit" name="leColor">
+            <property name="field" stdset="0">
+             <string>COLOR</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Payment</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Queue</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Color</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Code</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QPLineEdit" name="leCode">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="field" stdset="0">
+             <string>ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QPLineEdit" name="leName">
+            <property name="field" stdset="0">
+             <string>NAME</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QPComboBox" name="cbType">
+            <property name="fieldName" stdset="0">
+             <string>TYPE_NAME</string>
+            </property>
+            <property name="fieldId" stdset="0">
+             <string>TYPE_ID</string>
+            </property>
+            <property name="table" stdset="0">
+             <string>ME_TYPES</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QPLineEdit" name="leQueue">
+            <property name="field" stdset="0">
+             <string>QUEUE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QPComboBox" name="cbPayment">
+            <property name="fieldId" stdset="0">
+             <string>PAYMENT_MOD</string>
+            </property>
+            <property name="fieldName" stdset="0">
+             <string>NAME</string>
+            </property>
+            <property name="table" stdset="0">
+             <string>ME_DISHES_MOD</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Second code</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QLineEdit" name="leSecondCode"/>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Second price</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="leRPrice"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Menu</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>1</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>1</number>
+        </property>
+        <property name="bottomMargin">
+         <number>1</number>
+        </property>
+        <item>
+         <widget class="CustomTableWidget" name="gridMenu">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectItems</enum>
+          </property>
+          <column>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Menu</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Store</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Print</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Print1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Print2</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Recipe</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="CustomTableWidget" name="tblGoods">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <column>
+           <property name="text">
+            <string>Goods id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Goods name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Qty</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Unit name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Amount</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tblTotal">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="autoScroll">
+           <bool>false</bool>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Image</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="btnLoadImage">
+          <property name="text">
+           <string>Load image</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGraphicsView" name="grImage">
+          <property name="maximumSize">
+           <size>
+            <width>500</width>
+            <height>500</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="lbWebInfo">
+          <property name="text">
+           <string>To use images you need to configure web server</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <action name="actionRNew_row">
+   <property name="text">
+    <string>New row</string>
+   </property>
+   <property name="toolTip">
+    <string>New row</string>
+   </property>
+   <property name="shortcut">
+    <string>Ins</string>
+   </property>
+  </action>
+  <action name="actionRDelete_row">
+   <property name="text">
+    <string>Delete row</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete row</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionRCopy_recipe">
+   <property name="text">
+    <string>Copy recipe</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy recipe</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionRPaste_recipe">
+   <property name="text">
+    <string>Paster recipe</string>
+   </property>
+   <property name="toolTip">
+    <string>Paster recipe</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QPLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qplineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QPComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qpcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QPColorEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qplineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CustomTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>customtablewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

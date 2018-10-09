@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DlgMenuCopy</class>
+ <widget class="QDialog" name="DlgMenuCopy">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>379</width>
+    <height>112</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Copy menu</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="1">
+      <widget class="QPComboBox" name="cbTo">
+       <property name="fieldName" stdset="0">
+        <string>NAME</string>
+       </property>
+       <property name="fieldId" stdset="0">
+        <string>ID</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>ME_MENUS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPComboBox" name="cbFrom">
+       <property name="fieldName" stdset="0">
+        <string>NAME</string>
+       </property>
+       <property name="fieldId" stdset="0">
+        <string>ID</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>ME_MENUS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>From</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>To</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="btnStart">
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="btnClose">
+       <property name="text">
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QPComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qpcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

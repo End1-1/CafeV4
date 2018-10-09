@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DlgGoods</class>
+ <widget class="QDialog" name="DlgGoods">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>859</width>
+    <height>251</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="5" column="1">
+      <widget class="QPLineEdit" name="lePrice">
+       <property name="field" stdset="0">
+        <string>PRICE</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPComboBox" name="cbUnit">
+       <property name="fieldId" stdset="0">
+        <string>UNIT_ID</string>
+       </property>
+       <property name="fieldName" stdset="0">
+        <string>UNIT_NAME</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>FOOD_UNITS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPLineEdit" name="leName">
+       <property name="field" stdset="0">
+        <string>NAME</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Group</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0" colspan="2">
+      <widget class="QWidget" name="widget" native="true">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>72</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>OK</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Next</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>71</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Unit</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Price</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPComboBox" name="cbGroup">
+       <property name="fieldId" stdset="0">
+        <string>GROUP_ID</string>
+       </property>
+       <property name="fieldName" stdset="0">
+        <string>GROUP_NAME</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>FOOD_GROUPS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPLineEdit" name="leId">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="field" stdset="0">
+        <string>ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Auto out</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QPLineEdit" name="leAutoout">
+       <property name="field" stdset="0">
+        <string notr="true">AUTO_OUT</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="chNewIdRezim">
+       <property name="text">
+        <string>Manual id</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QListWidget" name="lstSimGoods"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QPComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qpcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QPLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qplineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>cbGroup</tabstop>
+  <tabstop>cbUnit</tabstop>
+  <tabstop>leName</tabstop>
+  <tabstop>lePrice</tabstop>
+  <tabstop>leAutoout</tabstop>
+  <tabstop>leId</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

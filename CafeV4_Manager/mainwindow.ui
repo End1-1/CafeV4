@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1110</width>
+    <height>769</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cafe Manager</string>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QMdiArea" name="mdiArea">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>-20</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>720</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="activationOrder">
+     <enum>QMdiArea::ActivationHistoryOrder</enum>
+    </property>
+    <property name="viewMode">
+     <enum>QMdiArea::SubWindowView</enum>
+    </property>
+    <property name="documentMode">
+     <bool>true</bool>
+    </property>
+    <property name="tabsClosable">
+     <bool>false</bool>
+    </property>
+    <property name="tabsMovable">
+     <bool>false</bool>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1110</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuProgram">
+    <property name="title">
+     <string>Program</string>
+    </property>
+    <addaction name="actionLogin"/>
+    <addaction name="actionLogout"/>
+    <addaction name="actionChange_password"/>
+    <addaction name="separator"/>
+    <addaction name="actionMain_database"/>
+    <addaction name="actionDatabases"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuCatalog">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Directory</string>
+    </property>
+    <widget class="QMenu" name="menuEmployes">
+     <property name="title">
+      <string>Employes</string>
+     </property>
+     <addaction name="actionEmployes_groups"/>
+     <addaction name="actionEmployes"/>
+    </widget>
+    <widget class="QMenu" name="menuMenu">
+     <property name="title">
+      <string>Menu</string>
+     </property>
+     <addaction name="actionMenus"/>
+     <addaction name="actionGroup_of_types"/>
+     <addaction name="actionDishes_types"/>
+     <addaction name="actionDishes"/>
+     <addaction name="actionPrinter_schemas"/>
+     <addaction name="actionDishes_comment"/>
+     <addaction name="actionDishes_remove_states"/>
+     <addaction name="actionNew_menu_names"/>
+     <addaction name="actionNew_menu"/>
+     <addaction name="actionNew_recipes"/>
+    </widget>
+    <widget class="QMenu" name="menuGoods">
+     <property name="title">
+      <string>Goods</string>
+     </property>
+     <addaction name="actionFood_groups"/>
+     <addaction name="actionFood_units"/>
+     <addaction name="actionFood_names"/>
+    </widget>
+    <widget class="QMenu" name="menuHall">
+     <property name="title">
+      <string>Hall</string>
+     </property>
+     <addaction name="actionHalls"/>
+     <addaction name="actionTables"/>
+    </widget>
+    <widget class="QMenu" name="menuConfigurations">
+     <property name="title">
+      <string>Configurations</string>
+     </property>
+     <addaction name="actionStation_configuration"/>
+     <addaction name="actionGroup_queries_2"/>
+    </widget>
+    <addaction name="menuEmployes"/>
+    <addaction name="menuMenu"/>
+    <addaction name="menuGoods"/>
+    <addaction name="actionStorages"/>
+    <addaction name="menuHall"/>
+    <addaction name="actionPartners"/>
+    <addaction name="menuConfigurations"/>
+    <addaction name="actionDiscount_cards"/>
+   </widget>
+   <widget class="QMenu" name="menuActions">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <addaction name="actionNew_store_order"/>
+    <addaction name="actionRecount_output_of_dishes"/>
+    <addaction name="actionCorrect_output_sales_storages"/>
+    <addaction name="actionPrint_inventorization_blank"/>
+    <addaction name="actionNew_salary_document"/>
+    <addaction name="separator"/>
+    <addaction name="actionSinchronize_database_changes"/>
+    <addaction name="actionGet_store_orders_from_AS"/>
+    <addaction name="separator"/>
+    <addaction name="actionTablet_control"/>
+   </widget>
+   <widget class="QMenu" name="menuReports">
+    <property name="title">
+     <string>Reports</string>
+    </property>
+    <addaction name="actionStore_documents"/>
+    <addaction name="actionSales"/>
+    <addaction name="actionSalary"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuOther_Reports">
+    <property name="title">
+     <string>Other Reports</string>
+    </property>
+    <addaction name="actionMovement_of_goods"/>
+    <addaction name="actionRecipes_2"/>
+    <addaction name="actionRemoved_orders"/>
+    <addaction name="actionGroup_queries"/>
+   </widget>
+   <addaction name="menuProgram"/>
+   <addaction name="menuActions"/>
+   <addaction name="menuReports"/>
+   <addaction name="menuOther_Reports"/>
+   <addaction name="menuCatalog"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::TopToolBarArea</set>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::TopToolBarArea</set>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionEdit"/>
+   <addaction name="actionDelete"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="actionFilter"/>
+   <addaction name="actionSearch"/>
+   <addaction name="actionSearch_Next"/>
+   <addaction name="separator"/>
+   <addaction name="actionPrint_preview"/>
+   <addaction name="actionPrint"/>
+   <addaction name="actionExport_to_Excel"/>
+   <addaction name="actionSales_settings"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionRecipe"/>
+   <addaction name="actionMenu_2"/>
+   <addaction name="actionMagic"/>
+   <addaction name="actionView_prices"/>
+   <addaction name="actionSet_password"/>
+   <addaction name="actionClear_password"/>
+   <addaction name="actionAccess_control"/>
+   <addaction name="actionUp"/>
+   <addaction name="actionDown"/>
+   <addaction name="actionMultiselection"/>
+   <addaction name="actionCorrect_output_store_of_sales_table"/>
+   <addaction name="actionImage"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_3">
+   <property name="windowTitle">
+    <string>toolBar_3</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomToolBarArea</set>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionUpdate"/>
+  </widget>
+  <action name="actionLogin">
+   <property name="text">
+    <string>Login</string>
+   </property>
+  </action>
+  <action name="actionLogout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionEmployes_groups">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Employes groups</string>
+   </property>
+  </action>
+  <action name="actionEmployes">
+   <property name="text">
+    <string>Employes</string>
+   </property>
+  </action>
+  <action name="actionMain_database">
+   <property name="text">
+    <string>Main database</string>
+   </property>
+  </action>
+  <action name="actionDatabases">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Databases</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/exit.png</normaloff>:/res/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionDishes_types">
+   <property name="text">
+    <string>Dishes types</string>
+   </property>
+  </action>
+  <action name="actionMenus">
+   <property name="text">
+    <string>Menus</string>
+   </property>
+  </action>
+  <action name="actionDishes">
+   <property name="text">
+    <string>Dishes</string>
+   </property>
+  </action>
+  <action name="actionNew_store_order">
+   <property name="text">
+    <string>New store order</string>
+   </property>
+  </action>
+  <action name="actionFood_groups">
+   <property name="text">
+    <string>Goods groups</string>
+   </property>
+  </action>
+  <action name="actionFood_units">
+   <property name="text">
+    <string>Goods units</string>
+   </property>
+  </action>
+  <action name="actionFood_names">
+   <property name="text">
+    <string>Goods names</string>
+   </property>
+  </action>
+  <action name="actionStorages">
+   <property name="text">
+    <string>Storages</string>
+   </property>
+  </action>
+  <action name="actionStore_documents">
+   <property name="text">
+    <string>Store documents</string>
+   </property>
+  </action>
+  <action name="actionInventoiztionDocuments">
+   <property name="text">
+    <string>Inventorization documents</string>
+   </property>
+  </action>
+  <action name="actionStore">
+   <property name="text">
+    <string>Store</string>
+   </property>
+  </action>
+  <action name="actionPrinter_schemas">
+   <property name="text">
+    <string>Printer schemas</string>
+   </property>
+  </action>
+  <action name="actionSales">
+   <property name="text">
+    <string>Sales</string>
+   </property>
+  </action>
+  <action name="actionChange_password">
+   <property name="text">
+    <string>Change password</string>
+   </property>
+  </action>
+  <action name="actionNew_inventorization_order">
+   <property name="text">
+    <string>New inventorization order</string>
+   </property>
+  </action>
+  <action name="actionDishes_comment">
+   <property name="text">
+    <string>Dishes comments</string>
+   </property>
+  </action>
+  <action name="actionRecipes">
+   <property name="text">
+    <string>Recipes</string>
+   </property>
+  </action>
+  <action name="actionGroup_of_types">
+   <property name="text">
+    <string>Group of types</string>
+   </property>
+  </action>
+  <action name="actionDf">
+   <property name="text">
+    <string>df</string>
+   </property>
+  </action>
+  <action name="actionHalls">
+   <property name="text">
+    <string>Halls</string>
+   </property>
+  </action>
+  <action name="actionTables">
+   <property name="text">
+    <string>Tables</string>
+   </property>
+  </action>
+  <action name="actionRecount_output_of_dishes">
+   <property name="text">
+    <string>Recount output of dishes</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionPartners">
+   <property name="text">
+    <string>Partners</string>
+   </property>
+  </action>
+  <action name="actionDishes_remove_states">
+   <property name="text">
+    <string>Dishes remove states</string>
+   </property>
+  </action>
+  <action name="actionOther_reports">
+   <property name="text">
+    <string>Other reports</string>
+   </property>
+  </action>
+  <action name="actionPrint_inventorization_blank">
+   <property name="text">
+    <string>Print inventorization blank</string>
+   </property>
+  </action>
+  <action name="actionSalary">
+   <property name="text">
+    <string>Salary</string>
+   </property>
+  </action>
+  <action name="actionCustomers">
+   <property name="text">
+    <string>Customers</string>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="text">
+    <string>History</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/new.png</normaloff>:/img/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/refresh.png</normaloff>:/img/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/cancel.png</normaloff>:/img/cancel.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </action>
+  <action name="actionSales_settings">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/dollar.png</normaloff>:/img/dollar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sales settings</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/saveas.png</normaloff>:/img/saveas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/copy.png</normaloff>:/img/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/paste.png</normaloff>:/img/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionSinchronize_database_changes">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/reload.png</normaloff>:/img/reload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sinchronize database changes</string>
+   </property>
+  </action>
+  <action name="actionRecipe">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/recipe.png</normaloff>:/img/recipe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Recipe</string>
+   </property>
+  </action>
+  <action name="actionMenu_2">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/permission.png</normaloff>:/img/permission.png</iconset>
+   </property>
+   <property name="text">
+    <string>Menu</string>
+   </property>
+  </action>
+  <action name="actionFilter">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/filter.png</normaloff>:/img/filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Filter</string>
+   </property>
+  </action>
+  <action name="actionMagic">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/magic.png</normaloff>:/img/magic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Magic</string>
+   </property>
+  </action>
+  <action name="actionPrint_preview">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/printpreview.png</normaloff>:/img/printpreview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/print.png</normaloff>:/img/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actionExport_to_Excel">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/excel.png</normaloff>:/img/excel.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export to Excel</string>
+   </property>
+  </action>
+  <action name="actionGet_store_orders_from_AS">
+   <property name="text">
+    <string>Get store orders from AS</string>
+   </property>
+  </action>
+  <action name="actionSimple_sales">
+   <property name="text">
+    <string>Simple sales</string>
+   </property>
+  </action>
+  <action name="actionMovement_of_goods">
+   <property name="text">
+    <string>Movement of goods</string>
+   </property>
+  </action>
+  <action name="actionView_prices">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/dollar.png</normaloff>:/res/dollar.png</iconset>
+   </property>
+   <property name="text">
+    <string>View prices</string>
+   </property>
+  </action>
+  <action name="actionSet_password">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/add-key-icon.png</normaloff>:/res/add-key-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set password</string>
+   </property>
+  </action>
+  <action name="actionClear_password">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/remove-key-icon.png</normaloff>:/res/remove-key-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear password</string>
+   </property>
+  </action>
+  <action name="actionAccess_control">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/permission.png</normaloff>:/res/permission.png</iconset>
+   </property>
+   <property name="text">
+    <string>Access control</string>
+   </property>
+  </action>
+  <action name="actionUp">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/up.png</normaloff>:/res/up.png</iconset>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </action>
+  <action name="actionDown">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/down.png</normaloff>:/res/down.png</iconset>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </action>
+  <action name="actionMultiselection">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/unchecked.png</normaloff>:/res/unchecked.png</iconset>
+   </property>
+   <property name="text">
+    <string>Multiselection</string>
+   </property>
+  </action>
+  <action name="actionHistory_2">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/history.png</normaloff>:/res/history.png</iconset>
+   </property>
+   <property name="text">
+    <string>History</string>
+   </property>
+  </action>
+  <action name="actionNew_salary_document">
+   <property name="text">
+    <string>New salary document</string>
+   </property>
+  </action>
+  <action name="actionRecipes_2">
+   <property name="text">
+    <string>Recipes</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset resource="img.qrc">
+     <normaloff>:/img/search.png</normaloff>:/img/search.png</iconset>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionRemoved_orders">
+   <property name="text">
+    <string>Removed orders</string>
+   </property>
+  </action>
+  <action name="actionSearch_Next">
+   <property name="text">
+    <string>Search Next</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionTablet_control">
+   <property name="text">
+    <string>Tablet control</string>
+   </property>
+  </action>
+  <action name="actionCorrect_output_store_of_sales_table">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/reload.png</normaloff>:/res/reload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Correct output store of sales table</string>
+   </property>
+  </action>
+  <action name="actionCorrect_output_sales_storages">
+   <property name="text">
+    <string>Correct output sales storages</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="text">
+    <string>New version of program available now. Click here to update</string>
+   </property>
+  </action>
+  <action name="actionImage">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/res/img.png</normaloff>:/res/img.png</iconset>
+   </property>
+   <property name="text">
+    <string>Image</string>
+   </property>
+  </action>
+  <action name="actionGroup_queries">
+   <property name="text">
+    <string>Group queries</string>
+   </property>
+  </action>
+  <action name="actionStation_configuration">
+   <property name="text">
+    <string>Station configuration</string>
+   </property>
+  </action>
+  <action name="actionGroup_queries_2">
+   <property name="text">
+    <string>Group queries</string>
+   </property>
+  </action>
+  <action name="actionDiscount_cards">
+   <property name="text">
+    <string>Discount cards</string>
+   </property>
+  </action>
+  <action name="actionNew_menu">
+   <property name="text">
+    <string>New menu</string>
+   </property>
+  </action>
+  <action name="actionNew_recipes">
+   <property name="text">
+    <string>New recipes</string>
+   </property>
+  </action>
+  <action name="actionNew_menu_names">
+   <property name="text">
+    <string>New menu names</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CFilterDialog</class>
+ <widget class="QDialog" name="CFilterDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>655</width>
+    <height>542</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="leSearch"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRefresh">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../img.qrc">
+          <normaloff>:/img/refresh.png</normaloff>:/img/refresh.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnUncheck">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../img.qrc">
+          <normaloff>:/img/cancel.png</normaloff>:/img/cancel.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnApply">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../img.qrc">
+          <normaloff>:/img/ok.png</normaloff>:/img/ok.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tblData">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../img.qrc"/>
+ </resources>
+ <connections/>
+</ui>
