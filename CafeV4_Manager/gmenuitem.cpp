@@ -131,11 +131,6 @@ void GMenuItem::actionSave()
         return;
     for (int i = 0; i < ui->gridMenu->rowCount(); i++) {
         if (ui->gridMenu->item(i, 0)->checkState() == Qt::Checked) {
-            if (!ui->gridMenu->item(i, 4)->data(Qt::UserRole).toInt()) {
-                m_sqlDrv->rollback();
-                QMessageBox::critical(this, tr("Error"), tr("Printer schema is not defined"));
-                return;
-            }
             if (!ui->gridMenu->item(i, 3)->data(Qt::UserRole).toInt()) {
                 m_sqlDrv->rollback();
                 QMessageBox::critical(this, tr("Error"), tr("Storage is not defined"));
@@ -175,8 +170,16 @@ void GMenuItem::actionSave()
         m_sqlDrv->bind(":qty", ui->tblGoods->item(i, 2)->data(Qt::DisplayRole));
         m_sqlDrv->execSQL();
     }
+
+    /* correct queue */
+    m_sqlDrv->prepare("update me_dishes set queue=queue+1 where id<>:id and queue>=:queue");
+    m_sqlDrv->bind(":queue", ui->leQueue->text().toInt());
+    m_sqlDrv->bind(":id", m_id);
+    m_sqlDrv->execSQL();
+
     m_sqlDrv->close();
     uploadImageToServer();
+
     QMessageBox::information(this, tr("Information"), tr("Saved"));
 }
 

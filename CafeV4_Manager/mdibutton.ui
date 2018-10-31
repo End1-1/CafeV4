@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>1</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -66,8 +75,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/cancel.png</normaloff>:/res/cancel.png</iconset>
+         <iconset resource="img.qrc">
+          <normaloff>:/img/cancel.png</normaloff>:/img/cancel.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -80,7 +89,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="res.qrc"/>
+  <include location="img.qrc"/>
  </resources>
  <connections/>
 </ui>

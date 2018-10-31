@@ -1178,6 +1178,14 @@
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto waste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AUTO_WASTE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgGoodsUnits</name>
@@ -3274,7 +3282,7 @@
     </message>
     <message>
         <source>Printer schema is not defined</source>
-        <translation>Տպելու սչեման նշված չէ</translation>
+        <translation type="vanished">Տպելու սչեման նշված չէ</translation>
     </message>
     <message>
         <source>Storage is not defined</source>
@@ -4669,6 +4677,10 @@
     </message>
     <message>
         <source>Unit id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waste</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -10,6 +10,7 @@ DlgGoods::DlgGoods(QMap<QString, QList<QVariant> > &values, QWidget *parent) :
     ui->setupUi(this);
     ui->lePrice->setValidator(new QDoubleValidator(0, 1000000, 2));
     ui->leAutoout->setValidator(new QIntValidator());
+    ui->leAutoWaste->setValidator(new QDoubleValidator(0, 10, 2));
     SETTINGS
     ui->cbGroup->setCurrentIndex(s.value("dlggoods_cbgroup").toInt());
     ui->cbUnit->setCurrentIndex(s.value("dlggoods_cbunit").toInt());
@@ -41,8 +42,8 @@ void DlgGoods::btnOK()
 {
     QSqlCache::removeChache("FOOD_NAMES");
     m_sqlDriver->openDB();
-    QString query("update or insert into food_names (id, group_id, unit_id, name, price, auto_out) "
-                  "values (:id, :group_id, :unit_id, :name, :price, :auto_out) "
+    QString query("update or insert into food_names (id, group_id, unit_id, name, price, auto_out, auto_waste) "
+                  "values (:id, :group_id, :unit_id, :name, :price, :auto_out, :auto_waste) "
                   "matching(id)");
     m_sqlDriver->prepare(query);
     m_sqlDriver->bind(":id", ui->leId->text());
@@ -50,6 +51,7 @@ void DlgGoods::btnOK()
     m_sqlDriver->bind(":unit_it", ui->cbUnit->currentItemData());
     m_sqlDriver->bind(":name", ui->leName->text());
     m_sqlDriver->bind(":auto_out", ui->leAutoout->text());
+    m_sqlDriver->bind(":auto_waste", ui->leAutoWaste->text().toDouble());
     m_sqlDriver->execSQL();
     m_sqlDriver->close();
     QDlgQuery::btnOK();

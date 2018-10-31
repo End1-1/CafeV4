@@ -115,10 +115,8 @@
  <tabstops>
   <tabstop>leText</tabstop>
   <tabstop>leTextCode</tabstop>
-  <tabstop>leTextName</tabstop>
   <tabstop>btnOK</tabstop>
   <tabstop>btnCancel</tabstop>
-  <tabstop>leText_2</tabstop>
  </tabstops>
  <resources/>
  <connections/>

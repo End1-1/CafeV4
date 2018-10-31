@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>859</width>
-    <height>251</height>
+    <height>266</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,13 +16,6 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="1">
-      <widget class="QPLineEdit" name="lePrice">
-       <property name="field" stdset="0">
-        <string>PRICE</string>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="1">
       <widget class="QPComboBox" name="cbUnit">
        <property name="fieldId" stdset="0">
@@ -33,6 +26,20 @@
        </property>
        <property name="table" stdset="0">
         <string>FOOD_UNITS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPLineEdit" name="lePrice">
+       <property name="field" stdset="0">
+        <string>PRICE</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Id</string>
        </property>
       </widget>
      </item>
@@ -50,13 +57,6 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Id</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
@@ -64,7 +64,27 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="0" colspan="2">
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Price</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPComboBox" name="cbGroup">
+       <property name="fieldId" stdset="0">
+        <string>GROUP_ID</string>
+       </property>
+       <property name="fieldName" stdset="0">
+        <string>GROUP_NAME</string>
+       </property>
+       <property name="table" stdset="0">
+        <string>FOOD_GROUPS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0" colspan="2">
       <widget class="QWidget" name="widget" native="true">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -124,40 +144,20 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Price</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QPComboBox" name="cbGroup">
-       <property name="fieldId" stdset="0">
-        <string>GROUP_ID</string>
-       </property>
-       <property name="fieldName" stdset="0">
-        <string>GROUP_NAME</string>
-       </property>
-       <property name="table" stdset="0">
-        <string>FOOD_GROUPS</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPLineEdit" name="leId">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="field" stdset="0">
-        <string>ID</string>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="0">
       <widget class="QLabel" name="label_6">
        <property name="text">
         <string>Auto out</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="chNewIdRezim">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="text">
+        <string>Manual id</string>
        </property>
       </widget>
      </item>
@@ -168,17 +168,41 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="chNewIdRezim">
+     <item row="0" column="1">
+      <widget class="QPLineEdit" name="leId">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="field" stdset="0">
+        <string>ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Manual id</string>
+        <string>Auto waste</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QPLineEdit" name="leAutoWaste">
+       <property name="field" stdset="0">
+        <string>AUTO_WASTE</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item row="0" column="1">
-    <widget class="QListWidget" name="lstSimGoods"/>
+    <widget class="QListWidget" name="lstSimGoods">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -195,12 +219,18 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>leId</tabstop>
+  <tabstop>chNewIdRezim</tabstop>
   <tabstop>cbGroup</tabstop>
   <tabstop>cbUnit</tabstop>
   <tabstop>leName</tabstop>
   <tabstop>lePrice</tabstop>
   <tabstop>leAutoout</tabstop>
-  <tabstop>leId</tabstop>
+  <tabstop>leAutoWaste</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>lstSimGoods</tabstop>
  </tabstops>
  <resources/>
  <connections/>

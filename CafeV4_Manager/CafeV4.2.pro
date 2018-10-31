@@ -8,7 +8,7 @@ QT       += core gui network xml printsupport sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = CafeV4
+TARGET = Cafe
 TEMPLATE = app
 
 RC_FILE = res.rc

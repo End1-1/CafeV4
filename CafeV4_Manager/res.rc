@@ -1,20 +1,20 @@
 IDI_ICON              ICON    DISCARDABLE     "img/app.ico"
 1 VERSIONINFO
-FILEVERSION 2,4,34,311
-PRODUCTVERSION 2,4,34,311
+FILEVERSION 2,5,35,312
+PRODUCTVERSION 2,5,35,312
 FILEFLAGSMASK 0x3fL
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "FileVersion", "2,4,34,311\0"
-            VALUE "FileDescription", "Cafe control programm\0"
-            VALUE "LegalCopyright", "(C)2014-2018, JAZZVE LLC\0"
-            VALUE "Email", "it@jazzve.am\0"
-            VALUE "OriginalFilename", "CafeV4.exe\0"
-            VALUE "ProductName", "Cafe4\0"
-            VALUE "ProductVersion", "2.4\0"
+            VALUE "FileVersion", "2,5,35,312\0"
+            VALUE "FileDescription", "Cafe automatization\0"
+            VALUE "LegalCopyright", "(C)2014-2018, VK Soft\0"
+            VALUE "Email", "end1_1@yahoo.com\0"
+            VALUE "OriginalFilename", "Cafe.exe\0"
+            VALUE "ProductName", "AutoCafe\0"
+            VALUE "ProductVersion", "2.5\0"
         END
     END
     BLOCK "VarFileInfo"

@@ -657,8 +657,8 @@
   </action>
   <action name="actionView_prices">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/dollar.png</normaloff>:/res/dollar.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/dollar.png</normaloff>:/img/dollar.png</iconset>
    </property>
    <property name="text">
     <string>View prices</string>
@@ -666,8 +666,8 @@
   </action>
   <action name="actionSet_password">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/add-key-icon.png</normaloff>:/res/add-key-icon.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/add-key-icon.png</normaloff>:/img/add-key-icon.png</iconset>
    </property>
    <property name="text">
     <string>Set password</string>
@@ -675,8 +675,8 @@
   </action>
   <action name="actionClear_password">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/remove-key-icon.png</normaloff>:/res/remove-key-icon.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/remove-key-icon.png</normaloff>:/img/remove-key-icon.png</iconset>
    </property>
    <property name="text">
     <string>Clear password</string>
@@ -684,8 +684,8 @@
   </action>
   <action name="actionAccess_control">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/permission.png</normaloff>:/res/permission.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/permission.png</normaloff>:/img/permission.png</iconset>
    </property>
    <property name="text">
     <string>Access control</string>
@@ -693,8 +693,8 @@
   </action>
   <action name="actionUp">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/up.png</normaloff>:/res/up.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/up.png</normaloff>:/img/up.png</iconset>
    </property>
    <property name="text">
     <string>Up</string>
@@ -702,8 +702,8 @@
   </action>
   <action name="actionDown">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/down.png</normaloff>:/res/down.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/down.png</normaloff>:/img/down.png</iconset>
    </property>
    <property name="text">
     <string>Down</string>
@@ -711,8 +711,8 @@
   </action>
   <action name="actionMultiselection">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/unchecked.png</normaloff>:/res/unchecked.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/unchecked.png</normaloff>:/img/unchecked.png</iconset>
    </property>
    <property name="text">
     <string>Multiselection</string>
@@ -769,8 +769,8 @@
   </action>
   <action name="actionCorrect_output_store_of_sales_table">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/reload.png</normaloff>:/res/reload.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/reload.png</normaloff>:/img/reload.png</iconset>
    </property>
    <property name="text">
     <string>Correct output store of sales table</string>
@@ -788,8 +788,8 @@
   </action>
   <action name="actionImage">
    <property name="icon">
-    <iconset>
-     <normaloff>:/res/img.png</normaloff>:/res/img.png</iconset>
+    <iconset resource="img.qrc">
+     <normaloff>:/img/img.png</normaloff>:/img/img.png</iconset>
    </property>
    <property name="text">
     <string>Image</string>
