@@ -1014,6 +1014,10 @@
         <source>Price</source>
         <translation>Գին</translation>
     </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished">Թարմացնել</translation>
+    </message>
 </context>
 <context>
     <name>DlgFoodGroups</name>

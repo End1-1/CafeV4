@@ -27,7 +27,6 @@ public:
 private:
     Ui::DlgFoodCache *ui;
     static QList<Food> m_foodCache;
-    void refreshFoodCache();
     QList<Food> m_proxyFood;
     void prepareTable();
     void foodToTable();
@@ -45,9 +44,11 @@ protected:
     virtual bool eventFilter(QObject *o, QEvent *e);
 
 private slots:
+    void refreshFoodCache();
     void textChangedCode(const QString &text);
     void textChangedName(const QString &text);
     void on_tblGoods_doubleClicked(const QModelIndex &index);
+    void on_tblGoods_customContextMenuRequested(const QPoint &pos);
 };
 
 #endif // DLGFOODCACHE_H

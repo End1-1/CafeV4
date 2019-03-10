@@ -1,6 +1,7 @@
 #include "dlgfoodcache.h"
 #include "ui_dlgfoodcache.h"
 #include "core.h"
+#include <QMenu>
 
 QList<Food> DlgFoodCache::m_foodCache;
 
@@ -136,4 +137,11 @@ void DlgFoodCache::on_tblGoods_doubleClicked(const QModelIndex &index)
 {
     Q_UNUSED(index)
     tryAccept();
+}
+
+void DlgFoodCache::on_tblGoods_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *m = new QMenu(this);
+    m->addAction(tr("Refresh"), this, SLOT(refreshFoodCache()));
+    m->popup(ui->tblGoods->mapToGlobal(pos));
 }

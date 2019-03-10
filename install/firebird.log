@@ -112,3 +112,17 @@ COMP-2	Wed Oct 24 08:35:25 2018
 	Uncommitted work may have been lost.
 	Error writing data to the connection.
 
+
+COMP-2	Thu Dec 13 10:03:33 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.7.1, address = 10.10.7.1/3050
+
+
+COMP-2	Thu Dec 13 10:03:36 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Thu Dec 13 13:10:42 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+

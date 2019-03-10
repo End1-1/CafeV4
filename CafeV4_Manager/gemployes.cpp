@@ -93,6 +93,9 @@ void GEmployes::setPassword()
         m_sqlDrv->execSQL();
     }
     if (p2.length()) {
+        m_sqlDrv->prepare("update employes set password2='' where password2=:password2");
+        m_sqlDrv->bind(":password2", QString(QCryptographicHash(QCryptographicHash::Md5).hash(p2.toLatin1(), QCryptographicHash::Md5).toHex()));
+        m_sqlDrv->execSQL();
         m_sqlDrv->prepare("update employes set password2=:password2 where id=:id");
         m_sqlDrv->bind(":password2", QString(QCryptographicHash(QCryptographicHash::Md5).hash(p2.toLatin1(), QCryptographicHash::Md5).toHex()));
         m_sqlDrv->bind(":id", cellValue(l.at(0).row(), 0));

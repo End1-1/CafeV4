@@ -17,6 +17,14 @@ int main(int argc, char *argv[])
     paths.append(appFullPath);
     QCoreApplication::setLibraryPaths(paths);
 
+#ifndef QT_DEBUG
+    QStringList libPath;
+    libPath << "./";
+    libPath << "./platforms";
+    libPath << "./sqldrivers";
+    QCoreApplication::setLibraryPaths(libPath);
+#endif
+
 
     QApplication a(argc, argv);
     QSystem system(argv, a.applicationName());
