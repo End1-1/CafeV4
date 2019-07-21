@@ -31,7 +31,7 @@ class QImportFromAS : public QBaseSqlWindow
     Q_OBJECT
 
 public:
-    explicit QImportFromAS(QWidget *parent = 0);
+    explicit QImportFromAS(QWidget *parent = nullptr);
     ~QImportFromAS();
     virtual void actionSave();
     virtual void actionRefresh();

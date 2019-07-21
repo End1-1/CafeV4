@@ -230,11 +230,14 @@ void QImportFromAS::actionRefresh()
         bool odd = true;
         for (QList<Record>::iterator ri = r.begin(); ri != r.end(); ri++) {
             if (di->type == 3) {
-                if (odd) {
-                    odd = false;
+                if (!ri->fdbcr) {
                     continue;
-                } else
-                    odd = true;
+                }
+//                if (odd) {
+//                    odd = false;
+//                    continue;
+//                } else
+//                    odd = true;
             }
             if (di->type == 5) {
                 if (!ri->fdbcr)

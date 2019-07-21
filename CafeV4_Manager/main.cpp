@@ -11,22 +11,16 @@
 int main(int argc, char *argv[])
 {
 
-    QString appFullPath(argv[0]);
-    appFullPath = appFullPath.mid(0, appFullPath.lastIndexOf("\\"));
-    QStringList paths = QCoreApplication::libraryPaths();
-    paths.append(appFullPath);
-    QCoreApplication::setLibraryPaths(paths);
+    QApplication a(argc, argv);
 
 #ifndef QT_DEBUG
-    QStringList libPath;
+    QStringList libPath = QCoreApplication::libraryPaths();
     libPath << "./";
     libPath << "./platforms";
     libPath << "./sqldrivers";
     QCoreApplication::setLibraryPaths(libPath);
 #endif
 
-
-    QApplication a(argc, argv);
     QSystem system(argv, a.applicationName());
     Q_UNUSED(system);
 
@@ -39,16 +33,16 @@ int main(int argc, char *argv[])
     QString trFile = ":/CafeV4.qm";
     QFile f(trFile);
     if (!f.exists()) {
-        QMessageBox::critical(0, "Translator", "Could not load the file " + trFile);
+        QMessageBox::critical(nullptr, "Translator", "Could not load the file " + trFile);
         trFile = "./CafeV4.qm";
     }
     if (!f.exists(trFile)) {
-        QMessageBox::critical(0, "Translator", "Could not load the file " + trFile);
+        QMessageBox::critical(nullptr, "Translator", "Could not load the file " + trFile);
     }
 
-    QTranslator *t = new QTranslator(0);
+    QTranslator *t = new QTranslator(nullptr);
     if (!t->load(trFile)) {
-        QMessageBox::critical(0, "Translator", trFile);
+        QMessageBox::critical(nullptr, "Translator", trFile);
     }
     a.installTranslator(t);
 

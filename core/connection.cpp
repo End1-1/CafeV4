@@ -149,14 +149,11 @@ const QString Connection::server()
 
 QString Connection::userName()
 {
-#ifdef WIN32
-    wchar_t userName[100];
-    DWORD userNameSize = sizeof(userName);
-    memset(&userName[0], 0, userNameSize);
-    GetUserName(userName, &userNameSize);
-    return QString::fromWCharArray(userName);
-#endif
-    return "Unknown";
+    QString name = getenv("USER");
+    if (name.isEmpty()) {
+        name = getenv("USERNAME");
+    }
+    return  name;
 }
 
 void Connection::setServerUrl(const QString &url)

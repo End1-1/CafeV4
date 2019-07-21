@@ -1,0 +1,128 @@
+
+COMP-2	Mon Apr 30 12:50:32 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.12.1, address = 10.10.12.1/3050
+
+
+COMP-2	Mon Apr 30 12:50:32 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Tue May 08 15:14:28 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.5.1, address = 10.10.5.1/3050
+
+
+COMP-2	Tue May 08 15:14:28 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Fri Aug 10 10:28:44 2018
+	INET/inet_error: read errno = 10053, server host = 10.1.0.2, address = 10.1.0.2/3050
+
+
+COMP-2	Thu Aug 16 09:43:00 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+
+
+COMP-2	Thu Aug 16 09:43:28 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Tue Sep 04 18:17:50 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.12.1, address = 10.10.12.1/3050
+
+
+COMP-2	Tue Sep 04 18:17:52 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Wed Sep 05 15:45:30 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.14.1, address = 10.10.14.1/3050
+
+
+COMP-2	Wed Sep 05 15:45:32 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Mon Sep 24 20:40:53 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+
+
+COMP-2	Mon Sep 24 20:40:56 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Mon Sep 24 22:25:00 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+
+
+COMP-2	Mon Sep 24 22:25:14 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Thu Oct 18 14:21:32 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.7.1, address = 10.10.7.1/3050
+
+
+COMP-2	Thu Oct 18 15:17:48 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Mon Oct 22 16:57:18 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.5.8, address = 10.10.5.8/3050
+
+
+COMP-2	Mon Oct 22 16:57:34 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Wed Oct 24 08:34:37 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+
+
+COMP-2	Wed Oct 24 08:34:47 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Wed Oct 24 08:35:15 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.7.1, address = 10.10.7.1/3050
+
+
+COMP-2	Wed Oct 24 08:35:25 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Thu Dec 13 10:03:33 2018
+	INET/inet_error: send errno = 10054, server host = 10.10.7.1, address = 10.10.7.1/3050
+
+
+COMP-2	Thu Dec 13 10:03:36 2018
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+COMP-2	Thu Dec 13 13:10:42 2018
+	INET/inet_error: read errno = 10054, server host = 10.10.10.1, address = 10.10.10.1/3050
+

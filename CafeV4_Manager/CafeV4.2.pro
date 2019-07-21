@@ -14,7 +14,7 @@ TEMPLATE = app
 RC_FILE = res.rc
 
 INCLUDEPATH += ./table
-INCLUDEPATH += C:/Qt/projects/FastF
+INCLUDEPATH += C:/projects/FastF
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -347,7 +347,8 @@ FORMS    += mainwindow.ui \
     table/cfilterdialog.ui \
     table/ceditdialog.ui
 
-RESOURCES += img.qrc
+RESOURCES += img.qrc \
+    ../core_gui/res.qrc
 
 ICON = img/app.ico
 

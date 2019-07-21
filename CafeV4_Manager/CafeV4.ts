@@ -1182,14 +1182,6 @@
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Auto waste</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>AUTO_WASTE</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DlgGoodsUnits</name>

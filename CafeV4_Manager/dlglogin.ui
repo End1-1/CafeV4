@@ -44,7 +44,7 @@
         <string>Login</string>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset>
          <normaloff>:/res/ok.png</normaloff>:/res/ok.png</iconset>
        </property>
       </widget>
@@ -55,7 +55,7 @@
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset>
          <normaloff>:/res/cancel.png</normaloff>:/res/cancel.png</iconset>
        </property>
       </widget>
@@ -129,7 +129,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset>
          <normaloff>:/res/eye.png</normaloff>:/res/eye.png</iconset>
        </property>
       </widget>
@@ -151,8 +151,6 @@
   <tabstop>pushButton</tabstop>
   <tabstop>cbDatabase</tabstop>
  </tabstops>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
