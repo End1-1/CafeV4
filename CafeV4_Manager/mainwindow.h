@@ -31,6 +31,12 @@ public:
         return t;
     }
 
+    template<class T>
+    static T* createWindow2() {
+        T *t = new T();
+
+    }
+
 public slots:
     void on_actionLogin_triggered();
     

@@ -11,7 +11,7 @@ DlgGoods::DlgGoods(QMap<QString, QList<QVariant> > &values, QWidget *parent) :
     ui->lePrice->setValidator(new QDoubleValidator(0, 1000000, 2));
     ui->leAutoout->setValidator(new QIntValidator());
     //ui->leAutoWaste->setValidator(new QDoubleValidator(0, 10, 2));
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     ui->cbGroup->setCurrentIndex(s.value("dlggoods_cbgroup").toInt());
     ui->cbUnit->setCurrentIndex(s.value("dlggoods_cbunit").toInt());
 }
@@ -101,12 +101,12 @@ void DlgGoods::on_pushButton_2_clicked()
 
 void DlgGoods::on_cbGroup_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("dlggoods_cbgroup", index);
 }
 
 void DlgGoods::on_cbUnit_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("dlggoods_cbunit", index);
 }

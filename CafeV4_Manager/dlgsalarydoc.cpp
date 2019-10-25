@@ -40,7 +40,7 @@ DlgSalaryDoc::DlgSalaryDoc(const QString &docid, QWidget *parent) :
     if (m_sqlDrv->next())
         ui->leDebetCredit->setText(m_sqlDrv->valStr("ACC_DEBIT_CREDIT"));
     m_sqlDrv->close();
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("def_cash_index", false);
     getCashList();
     getEmployesList();
@@ -268,9 +268,9 @@ void DlgSalaryDoc::actionRefresh()
     ui->tblList->clearContents();
     ui->tblList->setRowCount(0);
     QMap<int, float> pmap;
-    pmap[14] = 0.03;
+    pmap[14] = 0.033;
     pmap[15] = 0.03;
-    pmap[3] = 0.025;
+    pmap[3] = 0.028;
     pmap[16] = 0.025;
     pmap[49] = 0.025;
     m_sqlDrv->openDB();
@@ -299,8 +299,8 @@ void DlgSalaryDoc::actionRefresh()
             continue;
         float v = m_sqlDrv->valFloat("AMOUNT") * (pmap[m_sqlDrv->valInt("GROUP_ID")]);
         int vi = ((int)(v / 100)) * 100;
-        if (!vi)
-            continue;
+        if (vi < 3000)
+            vi = 3000;
         int row = ui->tblList->rowCount();
         ui->tblList->setRowCount(row + 1);
         for (int i = 0; i < ui->tblList->columnCount(); i++)
@@ -693,6 +693,7 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId)
 #define OSALARYOFGROUP 16
 #define OSUMSALARYOFGROUP 17
 #define OTOTALSALE3 18
+#define OAMOUNTOFEMPLOYEE 19
     //date1 = date1 + one day (param1) + time (param2) ; date2 = date1 + one day + time (param3),
 
     QMap<int, float> mem;
@@ -843,7 +844,7 @@ void DlgSalaryDoc::on_btnHall_clicked()
 
 void DlgSalaryDoc::on_cbCash_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     if (!s.value("def_cash_index").toBool())
         return;
     QStringList l = s.value("def_cash_id_sal_doc", "").toString().split(";", QString::SkipEmptyParts);

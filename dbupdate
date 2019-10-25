@@ -1,0 +1,60 @@
+/* DB - 1 */
+create table sys_reminders (fid integer primary key, faddress varchar(64), fport integer);
+create table sys_app (fid integer primary key, fname varchar(64), fversion varchar(64));
+CREATE SEQUENCE GEN_SYS_APP_ID;
+CREATE SEQUENCE GEN_SYS_reminders_ID;
+set term ^ ;
+create trigger sys_app_bi for sys_app
+active before insert position 0
+as
+begin
+  if (new.fid is null) then
+    new.fid = gen_id(gen_sys_app_id,1);
+end^
+
+create trigger sys_reminders_bi for sys_reminders
+active before insert position 0
+as
+begin
+  if (new.fid is null) then
+    new.fid = gen_id(gen_sys_reminders_id,1);
+end^
+
+CREATE OR ALTER trigger o_dishes_reminder_bi for o_dishes_reminder
+active before insert position 0
+AS
+begin
+  new.id = gen_id(gen_o_dishes_reminder_id, 1);
+end^
+
+set term ; ^
+insert into sys_app ( fname, fversion) values ('DB', '1');
+commit work;
+alter table o_dishes_reminder add record_id integer;
+alter table o_dishes_reminder alter column record_id position 2;
+alter table o_dishes_reminder add state_id smallint;
+alter table o_dishes_reminder alter column state_id position 2;
+alter table o_dishes_reminder add date_register  timestamp ;
+alter table o_dishes_reminder alter column date_register position 3;
+CREATE UNIQUE INDEX O_DISHES_REMINDER_IDX1 ON O_DISHES_REMINDER (RECORD_ID);
+CREATE INDEX O_DISHES_REMINDER_IDX2 ON O_DISHES_REMINDER (STATE_ID);
+alter table o_dishes add remove_reason varchar(512);
+
+/* DB - 2 */
+update sys_app set fversion='2' where fname='DB';
+create table sys_cnfappn (fid integer primary key, fname varchar(128));
+create sequence gen_sys_cnfappn_id;
+alter table o_dishes_reminder add request_correction integer default 0;
+alter table o_dishes_reminder add request_correction_qty decimal(12,2) default 0;
+alter table o_dishes add moved_from varchar(16);
+
+set term ^ ;
+
+CREATE OR ALTER trigger o_dishes_reminder_bi for o_dishes_reminder
+active before insert position 0
+AS
+begin
+	new.id = gen_id(gen_sys_cnfappn_id, 1);
+end^
+
+set term ; ^

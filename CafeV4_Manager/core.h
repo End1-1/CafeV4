@@ -29,7 +29,6 @@
 
 #include "../core/toolkit.h"
 #include "../core/printing.h"
-#include "../core/DEF_SETTINGS.h"
 #include "../core/definitions.h"
 #include "../core_gui/dlglist.h"
 #include "../core/connection.h"

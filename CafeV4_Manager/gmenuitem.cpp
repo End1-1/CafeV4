@@ -355,7 +355,7 @@ void GMenuItem::loadMenu()
     }
     m_sqlDrv->close();
 
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     qDebug() << s.value("gmenuitem_payment", 0).toInt();
     ui->cbPayment->setIndexOfData(s.value("gmenuitem_payment", 0).toInt());
     ui->cbType->setIndexOfData(s.value("gmenuitem_type", 0).toInt());
@@ -729,12 +729,12 @@ void GMenuItem::on_btnLoadImage_clicked()
 
 void GMenuItem::on_cbType_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("gmenuitem_type", ui->cbType->itemData(index));
 }
 
 void GMenuItem::on_cbPayment_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("gmenuitem_payment", ui->cbPayment->itemData(index));
 }

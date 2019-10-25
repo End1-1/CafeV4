@@ -154,7 +154,6 @@ HEADERS  += mainwindow.h \
     foodgridwidget.h \
     mdibutton.h \
     dlgpassword.h \
-    ../core/DEF_SETTINGS.h \
     dlgrecalculation.h \
     dlgsalarydoc.h \
     dlgsimpleselect.h \

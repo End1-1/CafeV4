@@ -7,7 +7,7 @@ DlgEmployee::DlgEmployee(QMap<QString, QList<QVariant> > &values, QWidget *paren
     ui(new Ui::DlgEmployee)
 {
     ui->setupUi(this);
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     ui->comboBox->setIndexOfData(s.value("dlgemployee_combo", 0).toInt());
     ui->comboBox_2->setIndexOfData(s.value("dlgemployee_combo2", 0).toInt());
 }
@@ -19,12 +19,12 @@ DlgEmployee::~DlgEmployee()
 
 void DlgEmployee::on_comboBox_2_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("dlgemployee_combo2", ui->comboBox_2->itemData(index));
 }
 
 void DlgEmployee::on_comboBox_currentIndexChanged(int index)
 {
-    SETTINGS
+    QSettings s("Jazzve", "Cafe4");
     s.setValue("dlgemployee_combo", ui->comboBox->itemData(index));
 }
