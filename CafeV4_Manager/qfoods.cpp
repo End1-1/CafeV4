@@ -30,9 +30,6 @@ QFoods::QFoods(QWidget *parent) :
     SqlField *fName = new SqlField("NAME", tr("Name"), 300, 0, QVariant::String, 0, false);
     m_fields.append(fName);
 
-    SqlField *fAutoWaste = new SqlField("AUTO_WASTE", tr("Waste"), 80, 0, QVariant::Double, 0, false);
-    m_fields.append(fAutoWaste);
-
     addField("PRICE", tr("Price"), 100, QVariant::Double);
     addField("AUTO_OUT", tr("Autoout"), 100, QVariant::Int);
 

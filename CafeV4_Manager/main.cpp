@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
     }
     a.installTranslator(t);
 
-
     QFontDatabase fontDb;
     int fontId = fontDb.addApplicationFont(a.applicationDirPath() + "./ahuni.ttf");
     QString fontFamily = fontDb.applicationFontFamilies(fontId).at(0);

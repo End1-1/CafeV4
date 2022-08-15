@@ -20,6 +20,8 @@ private:
 
 protected:
     virtual void btnOK();
+    void clearAll();
+
 private slots:
     void on_leId_textChanged(const QString &arg1);
 };

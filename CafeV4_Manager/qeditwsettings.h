@@ -12,8 +12,9 @@ class QEditWSettings : public QBaseSqlWindow
     Q_OBJECT
 
 public:
-    explicit QEditWSettings(const QString &id, QWidget *parent = 0);
+    explicit QEditWSettings(QWidget *parent = 0);
     ~QEditWSettings();
+    void setId(const QString &id);
     virtual void actionCostum(int action);
     virtual void actionSave();
 

@@ -81,7 +81,7 @@ void DlgViewImage::downloadResponse(QByteArray &data, bool isError)
         ui->grImage->fitInView(s->itemsBoundingRect(), Qt::KeepAspectRatio);
         ui->lbImageSize->setText(QString("%1 Kb").arg(data.size() / 1000));
     }
-    n->deleteLater();
+    sender()->deleteLater();
 }
 
 void DlgViewImage::on_btnClose_clicked()

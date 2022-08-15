@@ -2,17 +2,25 @@
 #include "ui_qeditwsettings.h"
 #include <QClipboard>
 
-QEditWSettings::QEditWSettings(const QString &id, QWidget *parent) :
+QEditWSettings::QEditWSettings(QWidget *parent) :
     QBaseSqlWindow(parent),
-    ui(new Ui::QEditWSettings),
-    m_id(id)
+    ui(new Ui::QEditWSettings)
 {
     ui->setupUi(this);
 
     m_actions << "actionSave" << "actionCopy" << "actionPaste";
     ui->grid->setColumnWidth(0, 350);
     ui->grid->setColumnWidth(1, 200);
+}
 
+QEditWSettings::~QEditWSettings()
+{
+    delete ui;
+}
+
+void QEditWSettings::setId(const QString &id)
+{
+    m_id = id;
     m_sqlDrv->prepare("select key_name, key_value from sys_settings_values where settings_id=:settings_id order by 1");
     m_sqlDrv->bind(":settings_id", m_id);
     m_sqlDrv->execSQL();
@@ -32,12 +40,6 @@ QEditWSettings::QEditWSettings(const QString &id, QWidget *parent) :
     m_sqlDrv->m_query->next();
     setWindowTitle(tr("Sales settings") + ": " + m_sqlDrv->valStr("NAME"));
     m_sqlDrv->close();
-
-}
-
-QEditWSettings::~QEditWSettings()
-{
-    delete ui;
 }
 
 void QEditWSettings::actionCostum(int action)

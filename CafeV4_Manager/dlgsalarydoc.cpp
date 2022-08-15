@@ -1,9 +1,9 @@
 #include "dlgsalarydoc.h"
 #include "ui_dlgsalarydoc.h"
-#include "mdibutton.h"
 #include "dlgsimpleselect.h"
 #include "core.h"
 #include "../../common/qdlgcache.h"
+#include "dlgratewaiters.h"
 #include <QUuid>
 #include <QLocale>
 
@@ -44,8 +44,6 @@ DlgSalaryDoc::DlgSalaryDoc(const QString &docid, QWidget *parent) :
     s.setValue("def_cash_index", false);
     getCashList();
     getEmployesList();
-    if (docid.toInt())
-        getDoc();
 
     QStringList l = s.value("def_cash_id_sal_doc", "").toString().split(";", QString::SkipEmptyParts);
     QMap<QString, QString> v;
@@ -59,9 +57,23 @@ DlgSalaryDoc::DlgSalaryDoc(const QString &docid, QWidget *parent) :
     show();
 }
 
+DlgSalaryDoc::DlgSalaryDoc(QWidget *parent) :
+    DlgSalaryDoc("0", parent)
+{
+
+}
+
 DlgSalaryDoc::~DlgSalaryDoc()
 {
     delete ui;
+}
+
+void DlgSalaryDoc::setDoc(const QString &docid)
+{
+    ui->leDocNum->setText(docid);
+    if (ui->leDocNum->text().toInt()) {
+        getDoc();
+    }
 }
 
 void DlgSalaryDoc::actionPrintPreview()
@@ -145,12 +157,14 @@ void DlgSalaryDoc::actionSave()
     m_sqlDrv->bind(":halls", m_hallValues);
     m_sqlDrv->execSQL();
 
-    m_sqlDrv->prepare("insert into salary_body values (null, :doc_id, :employee_id, :amount, :role_id)");
+    m_sqlDrv->prepare("insert into salary_body values (null, :doc_id, :employee_id, :amount, :role_id, :rating, :nv)");
     m_sqlDrv->bind(":doc_id", ui->leDocNum->text());
     for (int i = 0, count = ui->tblList->rowCount(); i < count; i++) {
         m_sqlDrv->bind(":employee_id", ui->tblList->item(i, 0)->data(Qt::DisplayRole).toString());
         m_sqlDrv->bind(":amount", ui->tblList->item(i, AMOUNT_COL)->data(Qt::DisplayRole).toString());
         m_sqlDrv->bind(":role_id", ui->tblList->item(i, 1)->data(Qt::DisplayRole).toString());
+        m_sqlDrv->bind(":rating", ui->tblList->item(i, 5)->data(Qt::DisplayRole).toDouble());
+        m_sqlDrv->bind(":nv", ui->tblList->item(i, 6)->data(Qt::DisplayRole).toDouble());
         m_sqlDrv->execSQL();
     }
 
@@ -170,13 +184,16 @@ void DlgSalaryDoc::actionCostum(int a)
         m_sqlDrv->openDB();
         m_sqlDrv->execSQL("select conn_str, username, pwd, salary_db from sys_as_conn");
         if (m_sqlDrv->m_query->next()) {
+            qDebug() << m_sqlDrv->valStr("CONN_STR");
             d.setDatabaseName(m_sqlDrv->valStr("CONN_STR") + ";Database=" + m_sqlDrv->valStr("SALARY_DB"));
             d.setUserName(m_sqlDrv->valStr("USERNAME"));
             d.setPassword(m_sqlDrv->valStr("PWD"));
+        } else {
+            QMessageBox::critical(this, tr("Error"), tr("No AS record"));
         }
         m_sqlDrv->close();
         if (!d.open()) {
-            QMessageBox::critical(this, tr("Error"), tr("Cannot connect to AS database"));
+            QMessageBox::critical(this, tr("Error"), tr("Cannot connect to AS database") + "<br>" + d.lastError().databaseText());
             return;
         }
         d.transaction();
@@ -268,11 +285,19 @@ void DlgSalaryDoc::actionRefresh()
     ui->tblList->clearContents();
     ui->tblList->setRowCount(0);
     QMap<int, float> pmap;
-    pmap[14] = 0.033;
+//    pmap[14] = 0.033;
+//    pmap[15] = 0.03;
+//    pmap[3] = 0.028;
+//    pmap[16] = 0.025;
+//    pmap[49] = 0.025;
+//    pmap[70] = 0.03;
+    pmap[14] = 0.037;
     pmap[15] = 0.03;
-    pmap[3] = 0.028;
-    pmap[16] = 0.025;
-    pmap[49] = 0.025;
+    pmap[3] = 0.032;
+    pmap[16] = 0.03;
+    pmap[49] = 0.033;
+    pmap[70] = 0.035;
+    pmap[90] = 0.033;
     m_sqlDrv->openDB();
     QString sql1 = "select e.id, e.group_id, e.fname || ' ' || e.lname as name, eg.name as gname, sum(o.amount) as amount "
                    "from o_order o, employes e, employes_group eg "
@@ -294,9 +319,13 @@ void DlgSalaryDoc::actionRefresh()
     m_sqlDrv->bind(":date1", ui->deStart->date());
     m_sqlDrv->bind(":date2", ui->deEnd->date());
     m_sqlDrv->execSQL();
+    QStringList names;
+    QList<int> rates;
+    QList<double> amount;
     while (m_sqlDrv->next()) {
         if (!pmap.contains(m_sqlDrv->valInt("GROUP_ID")))
             continue;
+        amount.append(m_sqlDrv->valFloat("AMOUNT"));
         float v = m_sqlDrv->valFloat("AMOUNT") * (pmap[m_sqlDrv->valInt("GROUP_ID")]);
         int vi = ((int)(v / 100)) * 100;
         if (vi < 3000)
@@ -310,6 +339,34 @@ void DlgSalaryDoc::actionRefresh()
         ui->tblList->item(row, 2)->setText(m_sqlDrv->valStr("GNAME"));
         ui->tblList->item(row, 3)->setText(m_sqlDrv->valStr("NAME"));
         ui->tblList->item(row, 4)->setText(QString::number(vi));
+        ui->tblList->item(row, 5)->setText("5");
+        ui->tblList->item(row, 6)->setText(QString::number(pmap[m_sqlDrv->valStr("GROUP_ID").toInt()]));
+        names.append(m_sqlDrv->valStr("NAME"));
+        rates.append(0);
+    }
+    DlgRateWaiters::getRates(names, rates);
+    for (int i = 0; i < ui->tblList->rowCount(); i++) {
+        ui->tblList->item(i, 5)->setText(QString::number(rates.at(i)));
+        double nv = pmap[ui->tblList->item(i, 1)->data(Qt::DisplayRole).toInt()];
+        switch (rates.at(i)){
+        case 5:
+        case 4:
+            break;
+        case 3:
+            nv -= 0.0025 ;
+            break;
+        case 2:
+            nv -= 0.005;
+            break;
+        case 1:
+            break;
+        }
+        float v = trunc((amount.at(i) * nv) / 100) * 100;
+        if (v < 3000) {
+            v = 3000;
+        }
+        ui->tblList->item(i, 6)->setText(QString::number(nv));
+        ui->tblList->item(i, 4)->setText(QString::number(v));
     }
     m_loadedAutomaticaly = true;
     countTotalAmount();
@@ -467,7 +524,8 @@ void DlgSalaryDoc::getDoc()
         ui->leOperator->setText(m_sqlDrv->valStr("OPERATOR_NAME"));
         m_hallValues = m_sqlDrv->valStr("HALLS");
     }
-    m_sqlDrv->prepare("select sb.employee_id, e.fname || ' ' || e.lname as employee_name, sb.role_id as post_id, sb.amount "
+    m_sqlDrv->prepare("select sb.employee_id, e.fname || ' ' || e.lname as employee_name, sb.role_id as post_id, sb.amount, "
+                        "sb.rating, sb.nv "
                       "from salary_body sb, employes e "
                       "where sb.employee_id=e.id and sb.doc_id=:id");
     m_sqlDrv->bind(":id", ui->leDocNum->text());
@@ -479,6 +537,8 @@ void DlgSalaryDoc::getDoc()
         data.append(m_post[m_sqlDrv->valStr("POST_ID")]);
         data.append(m_sqlDrv->valStr("EMPLOYEE_NAME"));
         data.append(m_sqlDrv->valFloat("AMOUNT"));
+        data.append(m_sqlDrv->valInt("RATING"));
+        data.append(m_sqlDrv->valFloat("NV"));
         addEmployee(data);
     }
     if (m_hallValues.length()) {
@@ -507,7 +567,7 @@ void DlgSalaryDoc::countSalaries()
 {
     float amount = 0;
     for (int i = 0, count = ui->tblList->rowCount(); i < count; i++) {
-        amount = getSalaryOfGroup(ui->tblList->item(i, 1)->data(Qt::DisplayRole).toInt());
+        amount = getSalaryOfGroup(ui->tblList->item(i, 1)->data(Qt::DisplayRole).toInt(), ui->tblList->item(i, 0)->data(Qt::DisplayRole).toInt());
         if (amount < 0)
             amount = ui->tblList->item(i, AMOUNT_COL)->text().toFloat();
         ui->tblList->item(i, AMOUNT_COL)
@@ -577,6 +637,8 @@ void DlgSalaryDoc::on_btnAdd_clicked()
     data.append(employee_data["POST_NAME"]);
     data.append(employee_data["EMPLOYEE_NAME"]);
     data.append(0.0);
+    data.append(5);
+    data.append(0);
     addEmployee(data);
     ui->cbEmployee->setCurrentIndex(-1);
     ui->cbEmployee->setFocus();
@@ -673,7 +735,7 @@ void DlgSalaryDoc::on_deEnd_dateChanged(const QDate &date)
     changeSavedState(false);
 }
 
-float DlgSalaryDoc::getSalaryOfGroup(int groupId)
+float DlgSalaryDoc::getSalaryOfGroup(int groupId, int currentstaff)
 {
 #define OMANUAL 1
 #define OTOTALSALE 2
@@ -694,6 +756,14 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId)
 #define OSUMSALARYOFGROUP 17
 #define OTOTALSALE3 18
 #define OAMOUNTOFEMPLOYEE 19
+#define OTOTALSALE4 20
+#define OTOTALSALE5 21
+#define OTOTALSALE6 22
+#define ODISHESSALES_1 23
+#define ODISHESSALES_2 24
+#define ODISHSALE_LU 25
+#define OINDIVDUALSALE 26
+
     //date1 = date1 + one day (param1) + time (param2) ; date2 = date1 + one day + time (param3),
 
     QMap<int, float> mem;
@@ -752,7 +822,7 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId)
             mem[s.cell] = mem[params[1].toInt()] * params[0].toFloat();
             break;
         case OROUND:
-            mem[s.cell] = trunc(mem[s.cell]);
+            mem[s.cell] = trunc(mem[s.cell] / pow(10, params[0].toInt())) * pow(10, params[0].toInt()) ;
             break;
         case OLESS:
             if (mem[params[0].toInt()] < mem[params[1].toInt()])
@@ -774,10 +844,10 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId)
             break;
         case OCOUNTEMPLOYES:
             mem[s.cell] = 0;
-            for (int i = 0; i < ui->tblList->rowCount(); i++) {
+            for (int k = 0; k < ui->tblList->rowCount(); k++) {
                 QStringList emps = params[0].split(",", QString::SkipEmptyParts);
-                ui->tblList->item(i, GROUP_COL)->text();
-                if (emps.contains(ui->tblList->item(i, GROUP_COL)->text()))
+                ui->tblList->item(k, GROUP_COL)->text();
+                if (emps.contains(ui->tblList->item(k, GROUP_COL)->text()))
                     mem[s.cell] ++;
             }
             break;
@@ -808,26 +878,108 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId)
             break;
         case OSALARYOFGROUP: {
             bool found = false;
-            for (int i = 0; i < ui->tblList->rowCount(); i++)
-                if (ui->tblList->item(i, 1)->data(Qt::DisplayRole).toInt() == params[0].toInt()) {
+            for (int k = 0; k < ui->tblList->rowCount(); k++)
+                if (ui->tblList->item(k, 1)->data(Qt::DisplayRole).toInt() == params[0].toInt()) {
                     found = true;
                     break;
                 }
             if (found)
-                mem[s.cell] = getSalaryOfGroup(params[0].toInt());
+                mem[s.cell] = getSalaryOfGroup(params[0].toInt(), currentstaff);
             else
                 mem[s.cell] = 0;
             break;
         }
         case OSUMSALARYOFGROUP: {
             int qty = 0;
-            for (int i = 0; i < ui->tblList->rowCount(); i++)
-                if (ui->tblList->item(i, 1)->data(Qt::DisplayRole).toInt() == params[0].toInt())
+            for (int k = 0; k < ui->tblList->rowCount(); k++)
+                if (ui->tblList->item(k, 1)->data(Qt::DisplayRole).toInt() == params[0].toInt())
                     qty++;
             mem[s.cell] = mem[params[1].toInt()] * qty;
             break;
         }
+        case OTOTALSALE4:
+            m_sqlDrv->prepare("select sum(amount) as amount from o_order o where date_open between :date1 and :date2 and state_id=2" + hallCondition);
+            m_sqlDrv->bind(":date1", QDateTime::fromString(ui->deStart->date().toString("dd.MM.yyyy") + " 08:00:00", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->bind(":date2", QDateTime::fromString(ui->deEnd->date().toString("dd.MM.yyyy") + " 16:59:59", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->execSQL();
+            m_sqlDrv->m_query->next();
+            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT");
+            break;
+        case OTOTALSALE5:
+            m_sqlDrv->prepare("select sum(amount) as amount from o_order o where date_open between :date1 and :date2 and state_id=2" + hallCondition);
+            m_sqlDrv->bind(":date1", QDateTime::fromString(ui->deStart->date().toString("dd.MM.yyyy") + " 17:00:00", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->bind(":date2", QDateTime::fromString(ui->deEnd->date().toString("dd.MM.yyyy") + " 23:59:59", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->execSQL();
+            m_sqlDrv->m_query->next();
+            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT");
+            break;
+        case OTOTALSALE6:
+            m_sqlDrv->prepare("select sum(amount) as amount from o_order o where date_open between :date1 and :date2 and state_id=2" + hallCondition);
+            m_sqlDrv->bind(":date1", QDateTime::fromString(ui->deStart->date().toString("dd.MM.yyyy") + " 00:00:01", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->bind(":date2", QDateTime::fromString(ui->deEnd->date().toString("dd.MM.yyyy") + " 08:00:00", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->execSQL();
+            m_sqlDrv->m_query->next();
+            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT");
+            break;
+        case ODISHESSALES_1:
+            m_sqlDrv->prepare("select sum((d.qty*d.price) "
+                                "+ (d.qty*d.price*o.amount_inc_value) "
+                                "- (((d.qty*d.price) + (d.qty*d.price*o.amount_inc_value))) * o.amount_dec_value) "
+                                "from o_dishes d "
+                                "left join o_order o on o.id=d.order_id "
+                                "where o.state_id=2 and d.state_id=1 "
+                                "and o.date_cash=:date_cash "
+                                "and d.lu between :lu1 and :lu2 ");
+            m_sqlDrv->bind(":date_cash", ui->deDate->date());
+            m_sqlDrv->bind(":lu1", QDateTime::fromString(ui->deDate->date().toString("dd.MM.yyyy") + " 08:00:00", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->bind(":lu2", QDateTime::fromString(ui->deDate->date().toString("dd.MM.yyyy") + " 23:59:59", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->execSQL();
+            m_sqlDrv->next();
+            mem[s.cell] = m_sqlDrv->val().toFloat();
+            break;
+        case ODISHESSALES_2:
+            m_sqlDrv->prepare("select sum((d.qty*d.price) "
+                                "+ (d.qty*d.price*o.amount_inc_value) "
+                                "- (((d.qty*d.price) + (d.qty*d.price*o.amount_inc_value))) * o.amount_dec_value) "
+                                "from o_dishes d "
+                                "left join o_order o on o.id=d.order_id "
+                                "where o.state_id=2 and d.state_id=1 "
+                                "and o.date_cash=:date_cash "
+                                "and d.lu between :lu1 and :lu2 ");
+            m_sqlDrv->bind(":date_cash", ui->deDate->date());
+            m_sqlDrv->bind(":lu1", QDateTime::fromString(ui->deDate->date().addDays(1).toString("dd.MM.yyyy") + " 00:00:01", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->bind(":lu2", QDateTime::fromString(ui->deDate->date().addDays(1).toString("dd.MM.yyyy") + " 07:59:59", "dd.MM.yyyy HH:mm:ss"));
+            m_sqlDrv->execSQL();
+            m_sqlDrv->next();
+            mem[s.cell] = m_sqlDrv->val().toFloat();
+            break;
+        case ODISHSALE_LU:
+            m_sqlDrv->prepare("select sum((d.qty*d.price) "
+                                "+ (d.qty*d.price*o.amount_inc_value) "
+                                "- (((d.qty*d.price) + (d.qty*d.price*o.amount_inc_value))) * o.amount_dec_value) "
+                                "from o_dishes d "
+                                "left join o_order o on o.id=d.order_id "
+                                "where o.state_id=2 and d.state_id=1 "
+                                "and o.date_cash=:date_cash "
+                                "and cast(d.lu as time) between :lu1 and :lu2 ");
+            m_sqlDrv->bind(":lu1", QTime::fromString(params[0], "HH:mm:ss"));
+            m_sqlDrv->bind(":lu2", QTime::fromString(params[1], "HH:mm:ss"));
+            m_sqlDrv->bind(":date_cash", ui->deDate->date());
+            m_sqlDrv->execSQL();
+            m_sqlDrv->next();
+            mem[s.cell] = m_sqlDrv->val().toFloat();
+            break;
+        case OINDIVDUALSALE:
+            m_sqlDrv->prepare("select sum(amount) as amount from o_order o where date_cash between :date1 and :date2 and state_id=2 and staff_id=:staff_id" + hallCondition);
+            m_sqlDrv->bind(":date1", ui->deStart->date());
+            m_sqlDrv->bind(":date2", ui->deEnd->date());
+            m_sqlDrv->bind(":staff_id", currentstaff);
+            m_sqlDrv->execSQL();
+            m_sqlDrv->m_query->next();
+            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT");
+            break;
         }
+
     }
     return -1;
 }

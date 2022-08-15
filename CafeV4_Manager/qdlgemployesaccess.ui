@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QDlgEmployesAccess</class>
- <widget class="QMainWindow" name="QDlgEmployesAccess">
+ <widget class="QWidget" name="QDlgEmployesAccess">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,117 +13,100 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="spacing">
-     <number>2</number>
-    </property>
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
-     <number>2</number>
-    </property>
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Sales</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-        <property name="leftMargin">
-         <number>2</number>
-        </property>
-        <property name="topMargin">
-         <number>2</number>
-        </property>
-        <property name="rightMargin">
-         <number>2</number>
-        </property>
-        <property name="bottomMargin">
-         <number>2</number>
-        </property>
-        <item>
-         <widget class="QTableWidget" name="tblSales">
-          <column>
-           <property name="text">
-            <string>Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Read</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Write</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Managment</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-        <property name="leftMargin">
-         <number>2</number>
-        </property>
-        <property name="topMargin">
-         <number>2</number>
-        </property>
-        <property name="rightMargin">
-         <number>2</number>
-        </property>
-        <property name="bottomMargin">
-         <number>2</number>
-        </property>
-        <item>
-         <widget class="QTableWidget" name="tblManagment">
-          <column>
-           <property name="text">
-            <string>Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Read</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Write</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Sales</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QTableWidget" name="tblSales">
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Read</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Write</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
      </widget>
-    </item>
-   </layout>
-  </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Managment</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QTableWidget" name="tblManagment">
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Read</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Write</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

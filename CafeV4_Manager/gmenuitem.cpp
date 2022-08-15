@@ -16,24 +16,20 @@ int GMenuItem::m_lastPaymentIndex;
 int GMenuItem::m_lastColor = 878787;
 int GMenuItem::m_lastTab = 0;
 
-GMenuItem::GMenuItem(int id, QWidget *parent) :
+GMenuItem::GMenuItem(QWidget *parent) :
     QBaseSqlWindow(parent),
     ui(new Ui::GMenuItem)
 {
     ui->setupUi(this);
     setWindowTitle(tr("New dish"));
-    m_mdiButton->setIcon(QIcon(":/img/recipe.png"));
-    m_id = id;
 
-    if (!id) {
-        ui->cbType->setCurrentIndex(m_lastTypeIndex);
-        ui->cbPayment->setCurrentIndex(m_lastPaymentIndex);
-        if (m_lastColor == 878787)
-            m_lastColor = -1;
-        ui->leColor->setText(QString::number(m_lastColor));
-    } else
-        ui->leCode->setText(QString::number(id));
+    ui->cbType->setCurrentIndex(m_lastTypeIndex);
+    ui->cbPayment->setCurrentIndex(m_lastPaymentIndex);
+    if (m_lastColor == 878787)
+        m_lastColor = -1;
+    ui->leColor->setText(QString::number(m_lastColor));
     ui->tabWidget->setCurrentIndex(m_lastTab);
+    m_id = 0;
 
     /* From menu item */
     m_actions << "actionSave" << "actionSearch" << "actionNew";
@@ -51,7 +47,28 @@ GMenuItem::GMenuItem(int id, QWidget *parent) :
     ui->gridMenu->setColumnWidth(5, 100);
     ui->gridMenu->setColumnWidth(6, 100);
 
-    loadMenu();
+    QSqlCache c;
+    QMap<int, QString> &c_menu = c.getCache("ME_MENUS");
+    QMap<int, QString> &c_store = c.getCache("ST_STORAGES");
+    QMap<int, QString> &c_print_schema = c.getCache("ME_PRINTER_SCHEMA");
+    ui->gridMenu->setRowCount(c_menu.count());
+    int row = 0;
+    for (QMap<int, QString>::const_iterator it = c_menu.begin(); it != c_menu.end(); it++) {
+        QTableWidgetItem *itemCheck = new QTableWidgetItem();
+        itemCheck->setData(Qt::UserRole, it.key());
+        itemCheck->setFlags(itemCheck->flags() | (Qt::ItemIsSelectable | Qt::ItemIsUserCheckable));
+        itemCheck->setCheckState(Qt::Unchecked);
+        ui->gridMenu->setItem(row, 0, itemCheck);
+        QTableWidgetItem *menuItem = new QTableWidgetItem(it.value());
+        menuItem->setData(Qt::UserRole, it.key());
+        ui->gridMenu->setItem(row, 1, menuItem);
+        ui->gridMenu->setItem(row, 2, new QTableWidgetItem());
+        ui->gridMenu->setItem(row, 3, new QTableWidgetItem());
+        ui->gridMenu->setItem(row, 4, new QTableWidgetItem());
+        ui->gridMenu->setItem(row, 5, new QTableWidgetItem());
+        ui->gridMenu->setItem(row, 6, new QTableWidgetItem());
+        row++;
+    }
 
     ui->tblGoods->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->tblGoods, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showRecipeMenu(QPoint)));
@@ -64,6 +81,8 @@ GMenuItem::GMenuItem(int id, QWidget *parent) :
     if (QSystem::WebUrl.length())
         ui->lbWebInfo->setText(QSystem::WebUrl);
     ui->btnLoadImage->setEnabled(QSystem::WebUrl.length());
+    QSettings s("Jazzve", "Cafe4");
+    ui->chCopyNumToCliboard->setChecked(s.value("chCopyNumToCliboard").toBool());
 }
 
 GMenuItem::~GMenuItem()
@@ -75,8 +94,7 @@ GMenuItem::~GMenuItem()
 void GMenuItem::actionNew()
 {
     CHECK_VIEWER_AND_MAINDB
-    GMenuItem *i = new GMenuItem(0, this);
-    i->show();
+    ___mainWindow->createWindow<GMenuItem>(nullptr);
 }
 
 void GMenuItem::actionSave()
@@ -108,7 +126,7 @@ void GMenuItem::actionSave()
     m_sqlDrv->bind(":payment_mod", ui->cbPayment->currentItemData());
     m_sqlDrv->bind(":color", ui->leColor->text().toInt());
     m_sqlDrv->bind(":queue", ui->leQueue->text().toInt());
-    m_sqlDrv->bind(":remind", ui->chRemind->isChecked());
+    m_sqlDrv->bind(":remind", ui->leRemind->text().toInt());
     m_sqlDrv->bind(":img_link", m_imgLink);
     m_sqlDrv->bind(":descr", ui->leDescription->text());
     m_sqlDrv->bind(":rdish", ui->leSecondCode->text().toInt());
@@ -154,11 +172,11 @@ void GMenuItem::actionSave()
             return;
         }
 
-    /* Recipe */
+    /* Recipe *//*
     m_sqlDrv->prepare("execute procedure backup_recipes(:user_id, :dish_id)");
     m_sqlDrv->bind(":user_id", ___ff_user->id);
     m_sqlDrv->bind(":dish_id", m_id);
-    m_sqlDrv->execSQL();
+    m_sqlDrv->execSQL();*/
     m_sqlDrv->prepare("delete from me_recipes where dish_id=:dish_id");
     m_sqlDrv->bind(":dish_id", m_id);
     m_sqlDrv->execSQL();
@@ -171,14 +189,11 @@ void GMenuItem::actionSave()
         m_sqlDrv->execSQL();
     }
 
-    /* correct queue */
-    m_sqlDrv->prepare("update me_dishes set queue=queue+1 where id<>:id and queue>=:queue");
-    m_sqlDrv->bind(":queue", ui->leQueue->text().toInt());
-    m_sqlDrv->bind(":id", m_id);
-    m_sqlDrv->execSQL();
-
     m_sqlDrv->close();
     uploadImageToServer();
+    if (ui->chCopyNumToCliboard->isChecked()) {
+        qApp->clipboard()->setText(ui->leCode->text());
+    }
 
     QMessageBox::information(this, tr("Information"), tr("Saved"));
 }
@@ -194,6 +209,13 @@ void GMenuItem::setTabIndex(int index)
 {
     m_lastTab = index;
     ui->tabWidget->setCurrentIndex(index);
+}
+
+void GMenuItem::setDish(int id)
+{
+    m_id = id;
+    ui->leCode->setText(QString::number(id));
+    loadMenu();
 }
 
 void GMenuItem::storeChange(int index)
@@ -303,24 +325,7 @@ void GMenuItem::loadMenu()
     QMap<int, QString> &c_store = c.getCache("ST_STORAGES");
     QMap<int, QString> &c_print_schema = c.getCache("ME_PRINTER_SCHEMA");
 
-    ui->gridMenu->setRowCount(c_menu.count());
     int row = 0;
-    for (QMap<int, QString>::const_iterator it = c_menu.begin(); it != c_menu.end(); it++) {
-        QTableWidgetItem *itemCheck = new QTableWidgetItem();
-        itemCheck->setData(Qt::UserRole, it.key());
-        itemCheck->setFlags(itemCheck->flags() | (Qt::ItemIsSelectable | Qt::ItemIsUserCheckable));
-        itemCheck->setCheckState(Qt::Unchecked);
-        ui->gridMenu->setItem(row, 0, itemCheck);
-        QTableWidgetItem *menuItem = new QTableWidgetItem(it.value());
-        menuItem->setData(Qt::UserRole, it.key());
-        ui->gridMenu->setItem(row, 1, menuItem);
-        ui->gridMenu->setItem(row, 2, new QTableWidgetItem());
-        ui->gridMenu->setItem(row, 3, new QTableWidgetItem());
-        ui->gridMenu->setItem(row, 4, new QTableWidgetItem());
-        ui->gridMenu->setItem(row, 5, new QTableWidgetItem());
-        ui->gridMenu->setItem(row, 6, new QTableWidgetItem());
-        row++;
-    }
 
     if (!m_sqlDrv->prepare("select menu_id, price, store_id, print_schema, state_id, print1, print2 from me_dishes_menu where dish_id=:dish_id"))
         return;
@@ -378,7 +383,7 @@ void GMenuItem::loadMenu()
         ui->leColor->setText(QString::number(m_sqlDrv->val().toInt()));
         ui->leQueue->setText(m_sqlDrv->val().toString());
         ui->cbPayment->setIndexOfData(m_sqlDrv->val().toInt());
-        ui->chRemind->setChecked(m_sqlDrv->val().toBool());
+        ui->leRemind->setText(m_sqlDrv->val().toString());
         m_imgLink = m_sqlDrv->val().toString();
         ui->leDescription->setText(m_sqlDrv->val().toString());
         ui->leSecondCode->setText(m_sqlDrv->val().toString());
@@ -512,7 +517,6 @@ void GMenuItem::webResponse(const QString &response, bool isError)
 
 void GMenuItem::webRawResponse(QByteArray &data, bool isError)
 {
-    QNet *n = static_cast<QNet*>(sender());
     if (isError) {
         QMessageBox::critical(this, tr("Network error"), data);
     } else {
@@ -523,7 +527,7 @@ void GMenuItem::webRawResponse(QByteArray &data, bool isError)
         ui->grImage->setScene(s);
         ui->grImage->fitInView(s->itemsBoundingRect(), Qt::KeepAspectRatio);
     }
-    n->deleteLater();
+    sender()->deleteLater();
 }
 
 void GMenuItem::on_gridMenu_currentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
@@ -737,4 +741,10 @@ void GMenuItem::on_cbPayment_currentIndexChanged(int index)
 {
     QSettings s("Jazzve", "Cafe4");
     s.setValue("gmenuitem_payment", ui->cbPayment->itemData(index));
+}
+
+void GMenuItem::on_chCopyNumToCliboard_clicked(bool checked)
+{
+    QSettings s("Jazzve", "Cafe4");
+    s.setValue("chCopyNumToCliboard", checked);
 }

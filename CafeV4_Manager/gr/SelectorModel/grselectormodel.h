@@ -8,10 +8,11 @@ class GrSelectorModel : public QObject
     Q_OBJECT
 public:
     explicit GrSelectorModel(QObject *parent = nullptr);
+    bool mResult;
+    QString mSql;
+    QStringList mFields;
+    bool mMultiselection;
 
-signals:
-
-public slots:
 };
 
 #endif // GRSELECTORMODEL_H

@@ -12,11 +12,15 @@ class DlgOrder : public QBaseSqlWindow
     Q_OBJECT
 
 public:
-    explicit DlgOrder(const QString &id, QWidget *parent = 0);
+    explicit DlgOrder(QWidget *parent = 0);
+    void setId(const QString &id);
     virtual void actionDelete();
     virtual void actionCostum(int action);
     virtual void actionSave();
     ~DlgOrder();
+
+private slots:
+    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::DlgOrder *ui;
@@ -24,6 +28,7 @@ private:
     void loadOrder();
     void showHistory();
     void copyDishes();
+    void loadHistory();
 };
 
 #endif // DLGORDER_H

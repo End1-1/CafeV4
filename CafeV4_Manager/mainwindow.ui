@@ -20,55 +20,30 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QMdiArea" name="mdiArea">
-    <property name="enabled">
-     <bool>true</bool>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMaximumSize</enum>
     </property>
-    <property name="geometry">
-     <rect>
-      <x>-20</x>
-      <y>0</y>
-      <width>1280</width>
-      <height>720</height>
-     </rect>
+    <property name="leftMargin">
+     <number>1</number>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
+    <property name="topMargin">
+     <number>1</number>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+    <property name="rightMargin">
+     <number>1</number>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
+    <property name="bottomMargin">
+     <number>1</number>
     </property>
-    <property name="lineWidth">
-     <number>0</number>
-    </property>
-    <property name="activationOrder">
-     <enum>QMdiArea::ActivationHistoryOrder</enum>
-    </property>
-    <property name="viewMode">
-     <enum>QMdiArea::SubWindowView</enum>
-    </property>
-    <property name="documentMode">
-     <bool>true</bool>
-    </property>
-    <property name="tabsClosable">
-     <bool>false</bool>
-    </property>
-    <property name="tabsMovable">
-     <bool>false</bool>
-    </property>
-    <property name="tabShape">
-     <enum>QTabWidget::Rounded</enum>
-    </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::North</enum>
-    </property>
-   </widget>
+    <item>
+     <widget class="QTabWidget" name="tab">
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -157,6 +132,7 @@
      <string>Actions</string>
     </property>
     <addaction name="actionNew_store_order"/>
+    <addaction name="actionStaff_food"/>
     <addaction name="actionRecount_output_of_dishes"/>
     <addaction name="actionCorrect_output_sales_storages"/>
     <addaction name="actionPrint_inventorization_blank"/>
@@ -255,7 +231,6 @@
    <addaction name="actionRefresh"/>
    <addaction name="actionFilter"/>
    <addaction name="actionSearch"/>
-   <addaction name="actionSearch_Next"/>
    <addaction name="separator"/>
    <addaction name="actionPrint_preview"/>
    <addaction name="actionPrint"/>
@@ -745,21 +720,10 @@
    <property name="text">
     <string>Search</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+F</string>
-   </property>
   </action>
   <action name="actionRemoved_orders">
    <property name="text">
     <string>Removed orders</string>
-   </property>
-  </action>
-  <action name="actionSearch_Next">
-   <property name="text">
-    <string>Search Next</string>
-   </property>
-   <property name="shortcut">
-    <string>F3</string>
    </property>
   </action>
   <action name="actionTablet_control">
@@ -828,6 +792,11 @@
   <action name="actionNew_menu_names">
    <property name="text">
     <string>New menu names</string>
+   </property>
+  </action>
+  <action name="actionStaff_food">
+   <property name="text">
+    <string>Staff food</string>
    </property>
   </action>
  </widget>

@@ -55,5 +55,6 @@
         <file>img/up.png</file>
         <file>img/zoom_in.png</file>
         <file>img/zoom_out.png</file>
+        <file>img/menu.png</file>
     </qresource>
 </RCC>

@@ -2,7 +2,6 @@
 #define QGROUPQUERY_H
 
 #include "mdiwindow.h"
-#include "mdibutton.h"
 #include "qgroupqueryfilter.h"
 #include <QMdiSubWindow>
 #include <QMdiArea>
@@ -47,7 +46,6 @@ class QGroupQuery : public MdiWindow
 public:
     static QToolBar *m_toolBarBtn;
     static QToolBar *m_toolBarWnd;
-    static QMdiArea *m_mdiArea;
     static QStringList m_mainDb;
     explicit QGroupQuery(QWidget *parent = 0);
     ~QGroupQuery();
@@ -57,8 +55,6 @@ public:
 
 private:
     Ui::QGroupQuery *ui;
-    QMdiSubWindow *m_subWindow;
-    MdiButton *m_mdiButton;
     QMutex m_mutex;
     QList<BindValue> m_bindValues;
     QString m_queryTitle;

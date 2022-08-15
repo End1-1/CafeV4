@@ -84,8 +84,8 @@ void gremoveorders::actionEdit()
         return;
     }
 
-    DlgOrder *d = new DlgOrder(cellValue(l.toList().at(0), 4).toString(), this);
-    d->show();
+    auto *d = ___mainWindow->createWindow<DlgOrder>(nullptr);
+    d->setId(cellValue(l.toList().at(0), 4).toString());
 }
 
 int gremoveorders::addRow()

@@ -16,8 +16,9 @@ class DlgSalaryFormula : public QBaseSqlWindow
     Q_OBJECT
     
 public:
-    explicit DlgSalaryFormula(const QString &postId, const QString &postName, QWidget *parent = 0);
+    explicit DlgSalaryFormula(QWidget *parent = 0);
     ~DlgSalaryFormula();
+    void setPostId(const QString &postId, const QString &postName);
     virtual void actionNew();
     virtual void actionEdit();
     virtual void actionDelete();

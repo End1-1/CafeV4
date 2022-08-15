@@ -4,10 +4,9 @@
 #include "core.h"
 #include <QClipboard>
 
-DlgOrder::DlgOrder(const QString &id, QWidget *parent) :
+DlgOrder::DlgOrder(QWidget *parent) :
     QBaseSqlWindow(parent),
-    ui(new Ui::DlgOrder),
-    m_id(id)
+    ui(new Ui::DlgOrder)
 {
     m_actions << "actionSave" << "actionCopy" << "actionExport_to_Excel";
     if (___ff_user->roleRead(ROLE_M_REMOVE_ORDERS))
@@ -25,9 +24,16 @@ DlgOrder::DlgOrder(const QString &id, QWidget *parent) :
          ui->tblImportant->setColumnWidth(i, widths[i]);
 
     setWindowTitle(tr("Order"));
-    if (m_id.length())
-        loadOrder();
 
+
+}
+
+void DlgOrder::setId(const QString &id)
+{
+    m_id = id;
+    if (m_id.length() > 0) {
+        loadOrder();
+    }
 }
 
 void DlgOrder::actionDelete()
@@ -160,4 +166,35 @@ void DlgOrder::copyDishes()
         clipBoard += "\r\n";
     }
     qApp->clipboard()->setText(clipBoard);
+}
+
+void DlgOrder::loadHistory()
+{
+    ui->tblHistory->clear();
+    ui->tblHistory->setRowCount(0);
+    m_sqlDrv->prepare("select fdate, ftime, fcomp, fuser, ftr, fdata from o_tr where forder=:forder order by fdate, ftime");
+    m_sqlDrv->bind(":forder", m_id);
+    m_sqlDrv->execSQL();
+    QList<int> colWidths;
+    colWidths << 120 << 100 << 100 << 250 << 200 << 400;
+    for (int i = 0; i < ui->tblHistory->columnCount(); i++) {
+        ui->tblHistory->setColumnWidth(i, colWidths.at(i));
+    }
+    while (m_sqlDrv->next()) {
+        int r = ui->tblHistory->rowCount();
+        ui->tblHistory->setRowCount(ui->tblHistory->rowCount() + 1);
+        ui->tblHistory->setItem(r, 0, new QTableWidgetItem(m_sqlDrv->valStr("FDATE")));
+        ui->tblHistory->setItem(r, 1, new QTableWidgetItem(m_sqlDrv->valStr("FTIME")));
+        ui->tblHistory->setItem(r, 2, new QTableWidgetItem(m_sqlDrv->valStr("FCOMP")));
+        ui->tblHistory->setItem(r, 3, new QTableWidgetItem(m_sqlDrv->valStr("FUSER")));
+        ui->tblHistory->setItem(r, 4, new QTableWidgetItem(m_sqlDrv->valStr("FTR")));
+        ui->tblHistory->setItem(r, 5, new QTableWidgetItem(m_sqlDrv->valStr("FDATA")));
+    }
+}
+
+void DlgOrder::on_tabWidget_currentChanged(int index)
+{
+    if (index == 3) {
+        loadHistory();
+    }
 }

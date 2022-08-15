@@ -37,20 +37,24 @@ StoreOrder::StoreOrder(const QString &docId, QWidget *parent) :
     ui->tableWidget->installEventFilter(this);
 
     getFoodList();
-    ui->deDocDate->setDate(QDate::currentDate());
-    ui->lbDocNum->setText("#" + docId);
-    m_docNum = docId;
+    ui->deDocDate->setDate(QDate::currentDate());  
     ui->tableWidget->installEventFilter(this);
 
     ui->cbStoreInputName->setCurrentIndex(-1);
     ui->cbStoreOutputName->setCurrentIndex(-1);
     ui->cbAction->setCurrentIndex(-1);
     ui->leOperator->setText(___ff_user->fullName);
-
-    if (m_docNum.toInt())
-        loadDoc();
+    if (docId.toInt() > 0) {
+        setId(docId);
+    }
 
     qApp->processEvents();
+
+}
+
+StoreOrder::StoreOrder(QWidget *parent) :
+    StoreOrder("0", parent)
+{
 
 }
 
@@ -58,6 +62,14 @@ StoreOrder::~StoreOrder()
 {
     delete m_dock;
     delete ui;
+}
+
+void StoreOrder::setId(const QString &id)
+{
+    m_docNum = id;
+    ui->lbDocNum->setText("#" + id);
+    if (m_docNum.toInt())
+        loadDoc();
 }
 
 void StoreOrder::actionSave()
@@ -508,7 +520,7 @@ bool StoreOrder::eventFilter(QObject *object, QEvent *event)
         }
     }
 
-    return QMainWindow::eventFilter(object, event);
+    return QWidget::eventFilter(object, event);
 }
 
 void StoreOrder::dockAccepted(int id)

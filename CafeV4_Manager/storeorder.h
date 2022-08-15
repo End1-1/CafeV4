@@ -15,7 +15,9 @@ class StoreOrder : public QBaseSqlWindow
 
 public:
     explicit StoreOrder(const QString &docId, QWidget *parent  = 0);
+    explicit StoreOrder(QWidget *parent = 0);
     ~StoreOrder();    
+    void setId(const QString &id);
     virtual void actionSave();
     virtual void actionPrint();
     virtual void actionPrintPreview();
@@ -57,4 +59,4 @@ private slots:
     void on_btnRemoveDish_clicked();
 };
 
-#endif // STOREORDER_H}
+#endif // STOREORDER_H

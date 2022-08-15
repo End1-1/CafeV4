@@ -4,18 +4,17 @@
 #include "dlgsettingspassword.h"
 #include "dlgpassword.h"
 #include "mainwindow.h"
-#include "nmenunames.h"
 #include "dlgrecalculation.h"
 #include "dlgsalarydoc.h"
 #include "dlgabout.h"
 #include "qsqlcache.h"
 #include "gsettings.h"
 #include "qbasesqlwindow.h"
-#include "nrecipes.h"
 #include "qsinchronizedatabasechanges.h"
 #include "gmenu.h"
 #include "qimportfromas.h"
 #include "gsalerreportcommon.h"
+#include "grmenu.h"
 #include "gdocinstore.h"
 #include "gsalarydoc.h"
 #include "gfullfinalmovement.h"
@@ -26,7 +25,6 @@
 #include "qhall.h"
 #include "qdishestypes.h"
 #include "qstorages.h"
-#include "nmenu.h"
 #include "dlgconnection.h"
 #include "qfoodgroup.h"
 #include "qfoodunits.h"
@@ -35,6 +33,7 @@
 #include "qdishesgroupofgroup.h"
 #include "qtotalrecipes.h"
 #include "gremoveorders.h"
+//#include "stafffood.h"
 #include <QLibrary>
 #include <QShortcut>
 #include "dlgcorrectoutstoreofsales.h"
@@ -44,6 +43,7 @@
 #include "gdiscountcard.h"
 #include "qdishremovereason.h"
 #include "cnfmaindb.h"
+#include <QToolButton>
 
 typedef QString (*actionName)();
 typedef int (*call)(QWidget *);
@@ -58,27 +58,31 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addWidget(m_connectionUrl);
     ___mainWindow = this;
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    setCentralWidget(ui->mdiArea);
-    ___dlgProgress = new DlgProgress(this);
     ___toolBar = ui->toolBar;
     ___toolBarBtn = ui->toolBar_2;
-    ___mdiArea = ui->mdiArea;
-    ___mdiArea->setLayoutDirection(Qt::LeftToRight);
     logout();
+    m_tabWidget = ui->tab;
 
-    QBaseSqlWindow::init(___toolBarBtn, ___toolBar, ___mdiArea);
+    QBaseSqlWindow::init(___toolBarBtn, ___toolBar);
     QGroupQuery::m_toolBarBtn = ___toolBarBtn;
-    QGroupQuery::m_toolBarWnd = ___toolBar;
-    QGroupQuery::m_mdiArea = ___mdiArea;
-    QShortcut *hotF13 = new QShortcut(QKeySequence(Qt::Key_F3), this);
-    hotF13->setContext(Qt::ApplicationShortcut);
-    connect(hotF13, SIGNAL(activated()), SLOT(search()));
+    QGroupQuery::m_toolBarWnd = ___toolBar;;
+
+    QToolButton *btn = new QToolButton(ui->tab);
+    btn->setMinimumSize(20, 20);
+    btn->setIcon(QIcon(":/img/menu.png"));
+    connect(btn, &QToolButton::clicked, this, &MainWindow::showMenu);
+    ui->tab->setCornerWidget(btn, Qt::TopLeftCorner);
+    btn->show();
+
+    QShortcut *hotEsc = new QShortcut(QKeySequence(Qt::Key_Escape), this);
+    connect(hotEsc, SIGNAL(activated()), this, SLOT(escapeKey()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_F), this,SLOT(search()));
+    new QShortcut(QKeySequence(Qt::Key_F3), this, SLOT(searchNext()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete ___dlgProgress;
 }
 
 void MainWindow::on_actionLogin_triggered()
@@ -136,7 +140,7 @@ void MainWindow::on_actionLogin_triggered()
         m_costumReports.clear();
         QDir d = QSystem::appPath() + "\\plugins\\";
         QStringList files = d.entryList();
-        for (QStringList::const_iterator i = files.begin(); i != files.end(); i++) {
+        for (QStringList::const_iterator i = files.constBegin(); i != files.constEnd(); i++) {
             if (*i == "." || *i == "..")
                 continue;
             QLibrary l(d.path() + "/" + *i);
@@ -152,6 +156,14 @@ void MainWindow::on_actionLogin_triggered()
         }
     }
     delete login;
+}
+
+void MainWindow::showMenu()
+{
+    GridWidget *gw = dynamic_cast<GridWidget*>(ui->tab->currentWidget());
+    if (gw) {
+        gw->showMenu();
+    }
 }
 
 void MainWindow::costumAction()
@@ -179,23 +191,15 @@ void MainWindow::logout()
 
 void MainWindow::deleteMdiChilds()
 {
-    ui->mdiArea->closeAllSubWindows();
+    while (ui->tab->count() > 0) {
+        ui->tab->widget(0)->deleteLater();
+        ui->tab->removeTab(0);
+    }
 }
 
 void MainWindow::on_actionLogout_triggered()
 {
     logout();
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    hide();
-    ___dlgProgress->show(tr("Closing"));
-    logout();
-    for (int i = 0; i < 100000; i++) {
-        qApp->processEvents();
-    }
-    QMainWindow::closeEvent(event);
 }
 
 void MainWindow::setToolbarButtonsInvisible()
@@ -208,23 +212,22 @@ void MainWindow::setToolbarButtonsInvisible()
 
 void MainWindow::on_actionNew_store_order_triggered()
 {
-    StoreOrder *storeOrder = new StoreOrder("0", this);
-    storeOrder->show();
+    createWindow<StoreOrder>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionDishes_triggered()
 {
-    createWindow<GMenu>();
+    createWindow<GMenu>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionStore_documents_triggered()
 {
-    createWindow<GDocInStore>();
+    createWindow<GDocInStore>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionEmployes_triggered()
 {
-    createWindow<GEmployes>();
+    createWindow<GEmployes>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionRecount_output_of_dishes_triggered()
@@ -236,13 +239,13 @@ void MainWindow::on_actionRecount_output_of_dishes_triggered()
 
 void MainWindow::on_actionNew_salary_document_triggered()
 {
-    DlgSalaryDoc *d = new DlgSalaryDoc("0", this);
-    Q_UNUSED(d)
+
+    DlgSalaryDoc *d = createWindow<DlgSalaryDoc>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionSalary_triggered()
 {
-    createWindow<GSalaryDoc>();
+    createWindow<GSalaryDoc>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -265,29 +268,64 @@ void MainWindow::on_actionNew_triggered()
 
 MdiWindow *MainWindow::activeBaseGrid()
 {
-    QMdiSubWindow *s = ui->mdiArea->activeSubWindow();
+    QWidget *s = ui->tab->currentWidget();
     if (!s)
         return 0;
-    MdiWindow *b = qobject_cast<MdiWindow*>(s->widget());
+    MdiWindow *b = qobject_cast<MdiWindow*>(s);
     return b;
+}
+
+void MainWindow::continueCreateWindow(QWidget *t, QAction *a)
+{
+    if (a == nullptr) {
+        a = new QAction();
+    }
+    MdiWindow *mw = dynamic_cast<MdiWindow*>(t);
+    if (mw) {
+        mw->setToolbarButtons(___toolBarBtn);
+    }
+    GridWidget *gw = dynamic_cast<GridWidget*>(t);
+    if (gw) {
+        gw->setTitle(a->text());
+        gw->prepare();
+        gw->go();
+    }
+    m_tabWidget->addTab(t, a->icon(), a->text());
+    m_tabWidget->setCurrentWidget(t);
 }
 
 void MainWindow::search()
 {
     MdiWindow *b = activeBaseGrid();
-    if (b)
-        b->actionSearchNext();
+    if (b) {
+        b->actionSearch();
+    } else {
+        GridWidget *gw = dynamic_cast<GridWidget*>(ui->tab->currentWidget());
+        if (gw) {
+            gw->search();
+        }
+    }
 }
 
-void MainWindow::on_mdiArea_subWindowActivated(QMdiSubWindow *arg1)
+void MainWindow::searchNext()
 {
-    setToolbarButtonsInvisible();
-    if (!arg1)
-        return;
-    MdiWindow *b = qobject_cast<MdiWindow*>(arg1->widget());
-    if (!b)
-        return;
-    b->setToolbarButtons(___toolBarBtn);
+    MdiWindow *b = activeBaseGrid();
+    if (b) {
+        b->actionSearchNext();
+    } else {
+        GridWidget *gw = dynamic_cast<GridWidget*>(ui->tab->currentWidget());
+        if (gw) {
+            gw->search();
+        }
+    }
+}
+
+void MainWindow::escapeKey()
+{
+    GridWidget *gw = dynamic_cast<GridWidget*>(ui->tab->currentWidget());
+    if (gw) {
+        gw->escapeKey();
+    }
 }
 
 void MainWindow::on_actionEdit_triggered()
@@ -341,7 +379,7 @@ void MainWindow::on_actionPaste_triggered()
 
 void MainWindow::on_actionSinchronize_database_changes_triggered()
 {
-    createWindow<QSinchronizeDatabaseChanges>();
+    createWindow<QSinchronizeDatabaseChanges>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionRecipe_triggered()
@@ -395,7 +433,7 @@ void MainWindow::on_actionExport_to_Excel_triggered()
 
 void MainWindow::on_actionGet_store_orders_from_AS_triggered()
 {
-    createWindow<QImportFromAS>();
+    createWindow<QImportFromAS>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionView_prices_triggered()
@@ -409,7 +447,7 @@ void MainWindow::on_actionView_prices_triggered()
 
 void MainWindow::on_actionMovement_of_goods_triggered()
 {
-    createWindow<GFullFinalMovement>();
+    createWindow<GFullFinalMovement>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionSet_password_triggered()
@@ -435,7 +473,7 @@ void MainWindow::on_actionAccess_control_triggered()
 
 void MainWindow::on_actionEmployes_groups_triggered()
 {
-    createWindow<QEmployesGroups>();
+    createWindow<QEmployesGroups>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionUp_triggered()
@@ -461,7 +499,7 @@ void MainWindow::on_actionMultiselection_triggered()
 
 void MainWindow::on_actionSales_triggered()
 {
-    createWindow<QSale>();
+    createWindow<QSale>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionHistory_2_triggered()
@@ -473,22 +511,22 @@ void MainWindow::on_actionHistory_2_triggered()
 
 void MainWindow::on_actionMenus_triggered()
 {
-    createWindow<QMenuNames>();
+    createWindow<QMenuNames>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionHalls_triggered()
 {
-    createWindow<QHall>();
+    createWindow<QHall>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionDishes_types_triggered()
 {
-    createWindow<QDishesTypes>();
+    createWindow<QDishesTypes>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionStorages_triggered()
 {
-    createWindow<QStorages>();
+    createWindow<QStorages>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionMain_database_triggered()
@@ -509,33 +547,33 @@ void MainWindow::on_actionMain_database_triggered()
 
 void MainWindow::on_actionFood_groups_triggered()
 {
-    createWindow<QFoodGroup>();
+    createWindow<QFoodGroup>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionFood_units_triggered()
 {
-    createWindow<QFoodUnits>();
+    createWindow<QFoodUnits>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionFood_names_triggered()
 {
-    createWindow<QFoods>();
+    createWindow<QFoods>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionPrinter_schemas_triggered()
 {
-    createWindow<QPrintSchema>();
+    createWindow<QPrintSchema>(static_cast<QAction*>(sender()));
 }
 
 
 void MainWindow::on_actionGroup_of_types_triggered()
 {
-    createWindow<QDishesGroupOfGroup>();
+    createWindow<QDishesGroupOfGroup>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionRecipes_2_triggered()
 {
-    createWindow<QTotalRecipes>();
+    createWindow<QTotalRecipes>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionSearch_triggered()
@@ -547,14 +585,12 @@ void MainWindow::on_actionSearch_triggered()
 
 void MainWindow::on_actionRemoved_orders_triggered()
 {
-    createWindow<gremoveorders>();
+    createWindow<gremoveorders>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionSearch_Next_triggered()
 {
-    MdiWindow *b = activeBaseGrid();
-    if (b)
-        b->actionSearchNext();
+
 }
 
 void MainWindow::on_actionTablet_control_triggered()
@@ -586,51 +622,51 @@ void MainWindow::on_actionImage_triggered()
 
 void MainWindow::on_actionGroup_queries_triggered()
 {
-    createWindow<QGroupQuery>();
+    createWindow<QGroupQuery>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionStation_configuration_triggered()
 {
-    createWindow<GSettings>();
+    createWindow<GSettings>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionGroup_queries_2_triggered()
 {
-    createWindow<GGroupQueries>();
+    createWindow<GGroupQueries>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionDiscount_cards_triggered()
 {
-    createWindow<GDiscountCard>();
+    createWindow<GDiscountCard>(static_cast<QAction*>(sender()));
 }
 
 void MainWindow::on_actionDishes_remove_states_triggered()
 {
-    createWindow<QDishRemoveReason>();
+    createWindow<QDishRemoveReason>(static_cast<QAction*>(sender()));
 }
 
-void MainWindow::on_actionRecipes_triggered()
+void MainWindow::on_tab_currentChanged(int index)
 {
+    MdiWindow *m = dynamic_cast<MdiWindow*>(ui->tab->currentWidget());
+    if (m) {
+        m->setToolbarButtons(___toolBarBtn);
+    } else {
 
+    }
 }
 
-
-void MainWindow::on_actionInventoiztionDocuments_triggered()
+void MainWindow::on_tab_tabCloseRequested(int index)
 {
-
-}
-
-void MainWindow::on_actionNew_menu_triggered()
-{
-    createWindow<NMenu>();
-}
-
-void MainWindow::on_actionNew_recipes_triggered()
-{
-    createWindow<nrecipes>();
+    ui->tab->widget(index)->deleteLater();
+    ui->tab->removeTab(index);
 }
 
 void MainWindow::on_actionNew_menu_names_triggered()
 {
-    createWindow<NMenuNames>();
+    createWindow<GRMenu>(static_cast<QAction*>(sender()));
+}
+
+void MainWindow::on_actionStaff_food_triggered()
+{
+    //createWindow<StaffFood>(static_`st<QAction*>(sender()));
 }

@@ -74,9 +74,9 @@ void QTotalRecipes::actionEdit()
         return;
     }
 
-    GMenuItem *d = new GMenuItem(dishId, this);
+    GMenuItem *d = ___mainWindow->createWindow<GMenuItem>(nullptr);
+    d->setDish(dishId);
     d->setTabIndex(2);
-    d->show();
 }
 
 void QTotalRecipes::actionBeforeSelect()

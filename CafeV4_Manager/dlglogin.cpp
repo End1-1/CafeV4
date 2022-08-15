@@ -5,6 +5,7 @@
 #include "qsqldb.h"
 #include "cnfmaindb.h"
 #include "cgridwidget.h"
+#include "grdb.h"
 
 dlgLogin::dlgLogin(QWidget *parent) :
     QDialog(parent),
@@ -91,6 +92,12 @@ void dlgLogin::loginOnServer()
     __DBPATH__ = m["dbpath"];
     __DBUSER__ = m["dbuser"];
     __DBPASS__ = m["dbpass"];
+
+    _gr_host_ = "";
+    _gr_path_ = m["dbpath"];
+    _gr_user_ = m["dbuser"];
+    _gr_pass_ = m["dbpass"];
+
     if (___ff_user) {
         delete ___ff_user;
         ___ff_user = 0;

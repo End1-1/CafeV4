@@ -34,8 +34,8 @@
 #include "../core/connection.h"
 #include "qsqldrv.h"
 
-#include "dlgprogress.h"
 #include "printpreview.h"
+#include "mainwindow.h"
 #include "dockidname.h"
 #include "storeorder.h"
 #include "ff_user.h"
@@ -54,11 +54,9 @@
 #define CHECK_VIEWER_AND_MAINDB if (___ff_user->roleRead(ROLE_M_VIEWER) || !QSystem::isMain()) {QMessageBox::warning(this, QObject::tr("Information"), QObject::tr("Inpossible in viewer mode, or this database is not master.")); return;}
 #define CHECK_MAINDB if ()
 
-extern DlgProgress *___dlgProgress;
-extern QMdiArea *___mdiArea;
 extern QToolBar *___toolBar;
 extern QToolBar *___toolBarBtn;
-extern QMainWindow *___mainWindow;
+extern MainWindow *___mainWindow;
 extern FF_User *___ff_user;
 
 #endif // CORE_H

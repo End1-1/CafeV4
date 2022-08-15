@@ -81,8 +81,7 @@ GDocInStore::GDocInStore(QWidget *parent) :
 void GDocInStore::actionNew()
 {
     CHECK_VIEWER
-    StoreOrder *s = new StoreOrder("0", this);
-    s->show();
+    ___mainWindow->createWindow<StoreOrder>(nullptr);
 }
 
 void GDocInStore::actionBeforeSelect()
@@ -182,8 +181,8 @@ void GDocInStore::actionEdit()
         return;
     }
 
-    StoreOrder *storeOrder = new StoreOrder(cellValue(l.toList().at(0), 0).toString(), this);
-    storeOrder->show();
+    StoreOrder *storeOrder = ___mainWindow->createWindow<StoreOrder>(nullptr);
+    storeOrder->setId(cellValue(l.toList().at(0), 0).toString());
 }
 
 void GDocInStore::actionDelete()

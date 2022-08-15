@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QImportFromAS</class>
- <widget class="QMainWindow" name="QImportFromAS">
+ <widget class="QWidget" name="QImportFromAS">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,279 +13,262 @@
   <property name="windowTitle">
    <string>Import from AS</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <property name="spacing">
-     <number>2</number>
-    </property>
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
-     <number>2</number>
-    </property>
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Synchronization</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="4" column="3">
-           <widget class="QStackedWidget" name="stackedWidget">
-            <widget class="QWidget" name="page"/>
-            <widget class="QWidget" name="page_2"/>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QDateEdit" name="deStart">
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QDateEdit" name="deEnd">
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Date range</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="1" colspan="3">
-           <widget class="QCheckBox" name="chSeparateDate">
-            <property name="text">
-             <string>Separate by date</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" colspan="3">
-           <widget class="QCheckBox" name="chUpdateOnlyPrices">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Update only prices</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1" colspan="3">
-           <widget class="QCheckBox" name="chNoPriceUPdate">
-            <property name="text">
-             <string>Dont update prices</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>AS Database</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-        <property name="leftMargin">
-         <number>2</number>
-        </property>
-        <property name="topMargin">
-         <number>2</number>
-        </property>
-        <property name="rightMargin">
-         <number>2</number>
-        </property>
-        <property name="bottomMargin">
-         <number>2</number>
-        </property>
-        <item>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Connection string</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="leUsername"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lePassword"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Username</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Password</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Database</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Query</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="leDatabase"/>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="leConnectionString">
-            <property name="focusPolicy">
-             <enum>Qt::StrongFocus</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QPlainTextEdit" name="leQuery"/>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Store converter</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QTableWidget" name="tblStore">
-          <property name="contextMenuPolicy">
-           <enum>Qt::ActionsContextMenu</enum>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <column>
-           <property name="text">
-            <string>AS</string>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Synchronization</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="4" column="3">
+          <widget class="QStackedWidget" name="stackedWidget">
+           <widget class="QWidget" name="page"/>
+           <widget class="QWidget" name="page_2"/>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QDateEdit" name="deStart">
+           <property name="calendarPopup">
+            <bool>true</bool>
            </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Cafe4</string>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QDateEdit" name="deEnd">
+           <property name="calendarPopup">
+            <bool>true</bool>
            </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="title">
-        <string>Food converter</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QTableWidget" name="tblFood">
-          <property name="contextMenuPolicy">
-           <enum>Qt::ActionsContextMenu</enum>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <column>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>AS</string>
+            <string>Date range</string>
            </property>
-          </column>
-          <column>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="1" colspan="3">
+          <widget class="QCheckBox" name="chSeparateDate">
            <property name="text">
-            <string>Cafe4</string>
+            <string>Separate by date</string>
            </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_5">
-       <attribute name="title">
-        <string>Log</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPlainTextEdit" name="txtLog"/>
-        </item>
-       </layout>
-      </widget>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="3">
+          <widget class="QCheckBox" name="chUpdateOnlyPrices">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Update only prices</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="3">
+          <widget class="QCheckBox" name="chNoPriceUPdate">
+           <property name="text">
+            <string>Dont update prices</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
-    </item>
-   </layout>
-  </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>AS Database</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Connection string</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="leUsername"/>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lePassword"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Database</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Query</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="leDatabase"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="leConnectionString">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QPlainTextEdit" name="leQuery"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Store converter</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTableWidget" name="tblStore">
+         <property name="contextMenuPolicy">
+          <enum>Qt::ActionsContextMenu</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <column>
+          <property name="text">
+           <string>AS</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Cafe4</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Food converter</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QTableWidget" name="tblFood">
+         <property name="contextMenuPolicy">
+          <enum>Qt::ActionsContextMenu</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <column>
+          <property name="text">
+           <string>AS</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Cafe4</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Log</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPlainTextEdit" name="txtLog"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
   <action name="actionAdd">
    <property name="text">
     <string>Add</string>
@@ -317,19 +300,6 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>deStart</tabstop>
-  <tabstop>deEnd</tabstop>
-  <tabstop>leConnectionString</tabstop>
-  <tabstop>leDatabase</tabstop>
-  <tabstop>leUsername</tabstop>
-  <tabstop>lePassword</tabstop>
-  <tabstop>leQuery</tabstop>
-  <tabstop>tblStore</tabstop>
-  <tabstop>tblFood</tabstop>
-  <tabstop>txtLog</tabstop>
-  <tabstop>tabWidget</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

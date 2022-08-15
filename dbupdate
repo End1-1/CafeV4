@@ -58,3 +58,76 @@ begin
 end^
 
 set term ; ^
+
+/* DB - 3 */
+update sys_app set fversion='3' where fname='DB';
+create table o_tr (fid integer primary key, fdate date, ftime time, fcomp varchar(32),fuser varchar(128), forder varchar(32), fbody integer,  ftr varchar(255), fdata varchar(255));
+create sequence gen_o_tr_id;
+set term ^ ;
+
+CREATE OR ALTER trigger o_tr_bi for o_tr
+active before insert position 0
+AS
+begin
+	new.fid = gen_id(gen_o_tr_id, 1);
+	new.fdate = current_date;
+	new.ftime = current_time;
+end^
+
+set term ; ^
+
+
+/* DB - 4 */
+update sys_app set fversion='4' where fname='DB';
+alter table o_dishes_reminder drop  request_correction;
+alter table o_dishes_reminder drop  request_correction_qty;
+alter table o_dishes drop  remove_reason;
+create table o_request_correction (fid integer primary key, fstate smallint, frecord integer, frequest integer, freason varchar(255), fqty decimal(14,3));
+create sequence gen_o_request_correction_id;
+set term ^ ;
+
+CREATE OR ALTER trigger o_request_correction_bi for o_request_correction
+active before insert position 0
+AS
+begin
+    new.fid = gen_id(gen_o_request_correction_id, 1);
+end^
+
+set term ; ^
+
+/* DB - 5 */
+update sys_app set fversion='5' where fname='DB';
+create  table sys_data_exchange_op (fid integer primary key, fname varchar(512));
+insert into sys_data_exchange_op values (1, 'Զեղչի տոկոս');
+create table sys_data_exchange (fid integer primary key, fcreateat timestamp, fup smallint, fexchangeid integer, fcreatefrom varchar(512), fop smallint, fdata BLOB SUB_TYPE 1 SEGMENT SIZE 16384 CHARACTER SET UTF8 );
+create sequence gen_o_sys_data_exchange;
+drop table gat;
+ALTER TABLE COSTUMERS_HISTORY ADD CONSTRAINT PK_COSTUMERS_HISTORY PRIMARY KEY (ORDER_ID);
+CREATE INDEX SYS_DATA_EXCHANGE_IDX1 ON SYS_DATA_EXCHANGE (FUP);
+CREATE INDEX SYS_DATA_EXCHANGE_IDX2 ON SYS_DATA_EXCHANGE (FEXCHANGEID);
+alter table costumers_names add card_value decimal(6,3);
+DROP TRIGGER T_COSTUMERS_NAMES_BU;
+update costumers_names set card_value = (select value_data from mod_order where id=mod_id);
+alter table costumers_names drop mod_id;
+drop table mod_order;
+set term ^ ;
+
+CREATE OR ALTER trigger o_sys_data_exchange_bi for sys_data_exchange
+active before insert position 0
+AS
+begin
+    new.fid = gen_id(gen_o_sys_data_exchange, 1);
+end^
+
+CREATE OR ALTER trigger t_costumers_names_bi for costumers_names
+active before insert position 0
+as begin
+if(new.id is null) then
+new.id=gen_id(gen_costumers_names_id,1);
+end^
+
+set term ; ^
+alter table costumers_names drop a;
+
+/* DB - 6 */
+update sys_app set fversion='6' where fname='DB';

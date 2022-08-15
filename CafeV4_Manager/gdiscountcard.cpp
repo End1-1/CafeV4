@@ -6,7 +6,7 @@ GDiscountCard::GDiscountCard(QWidget *parent) :
     QGrid(parent)
 {
     setWindowTitle(tr("Discount card"));
-    m_actions << "actionNew" << "actionEdit" << "actionExport_to_excel" << "actionRefresh" << "actionFilter"
+    m_actions << "actionNew" << "actionEdit" << "actionExport_to_Excel" << "actionRefresh" << "actionFilter"
               << "actionMagic" << "actionSearch";
     m_editDlgTable = "costumers_names";
     SqlField *fId = addField("ID", tr("Id"), 100, QVariant::Int);
@@ -15,9 +15,7 @@ GDiscountCard::GDiscountCard(QWidget *parent) :
     fState->addFilter(Filter::ftEdit, true, "COSTUMERS_STATES");
     addField("STATE_NAME", tr("State"), 100, QVariant::String);
     addField("NAME", tr("Costumer name"), 200, QVariant::String);
-    SqlField *fMod = addField("MOD_ID", tr("Mod id"), 0, QVariant::Int);
-    fMod->addFilter(Filter::ftEdit, true, "MOD_ORDER");
-    addField("MOD_NAME", tr("Discount"), 100, QVariant::String);
+    addField("CARD_VALUE", tr("Discount"), 100, QVariant::String);
     addField("INFO", tr("Info"), 300, QVariant::String);
     addField("CODE", tr("Card code"), 150, QVariant::String);
     actionBeforeSelect();
@@ -25,15 +23,13 @@ GDiscountCard::GDiscountCard(QWidget *parent) :
 
 void GDiscountCard::actionBeforeSelect()
 {
-    m_sqlString = "select cn.id, cn.state_id, cs.name as state_name, cn.name, cn.mod_id, mo.name as mod_name, "
-            "cn.info, cn.code "
-            "from costumers_names cn, mod_order mo, costumers_states cs ";
-    QString where = "where cn.mod_id=mo.id and cn.state_id=cs.id and";
+    m_sqlString = "select cn.id, cn.state_id, cs.name as state_name, cn.name, "
+            "cn.card_value, cn.info, cn.code "
+            "from costumers_names cn, costumers_states cs ";
+    QString where = "where cn.state_id=cs.id and";
 
     SqlField *f = fieldByName("ID");
     f->haveFilter(where, "cn.ID");
-    f = fieldByName("MOD_ID");
-    f->haveFilter(where, "cn.MOD_ID");
     f = fieldByName("STATE_ID");
     f->haveFilter(where, "cn.state_id");
 

@@ -58,8 +58,8 @@ void QEmployesGroups::accessControl()
         QMessageBox::warning(this, tr("Warning"), tr("No object is selected"));
         return;
     }
-    QDlgEmployesAccess *d = new QDlgEmployesAccess(cellValue(l.toList().at(0), 0).toString(), this);
-    d->show();
+    auto *d = ___mainWindow->createWindow<QDlgEmployesAccess>(nullptr);
+    d->setGroup(cellValue(l.toList().at(0), 0).toString());
 }
 
 void QEmployesGroups::salary()
@@ -69,6 +69,6 @@ void QEmployesGroups::salary()
         QMessageBox::warning(this, tr("Warning"), tr("No object is selected"));
         return;
     }
-    DlgSalaryFormula *d = new DlgSalaryFormula(cellValue(l.toList().at(0), 0).toString(), cellValue(l.toList().at(0), 1).toString(), this);
-    d->show();
+    DlgSalaryFormula *d = ___mainWindow->createWindow<DlgSalaryFormula>(nullptr);
+    d->setPostId(cellValue(l.toList().at(0), 0).toString(), cellValue(l.toList().at(0), 1).toString());
 }

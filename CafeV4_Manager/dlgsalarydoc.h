@@ -38,7 +38,9 @@ class DlgSalaryDoc : public QBaseSqlWindow
     
 public:
     explicit DlgSalaryDoc(const QString &docid, QWidget *parent = 0);
+    explicit DlgSalaryDoc(QWidget *parent = 0);
     ~DlgSalaryDoc();
+    void setDoc(const QString &docid);
     virtual void actionPrintPreview();
     virtual void actionPrint();
     virtual void actionSave();
@@ -61,7 +63,7 @@ private:
     void changeSavedState(bool saved);
     void countSalaries();
     void getSalariesFormulas();
-    float getSalaryOfGroup(int groupId);
+    float getSalaryOfGroup(int groupId, int currentstaff);
 
 private slots:
     void cbEmployeeKeyEnterPressed();

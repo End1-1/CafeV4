@@ -64,8 +64,7 @@ void GSalaryDoc::actionNew()
 {
     if (___ff_user->id != 1)
         CHECK_VIEWER
-    DlgSalaryDoc *d = new DlgSalaryDoc("0", this);
-    d->show();
+    ___mainWindow->createWindow<DlgSalaryDoc>(static_cast<QAction*>(sender()));
 }
 
 void GSalaryDoc::actionEdit()
@@ -76,8 +75,8 @@ void GSalaryDoc::actionEdit()
         return;
     }
 
-    DlgSalaryDoc *d = new DlgSalaryDoc(cellValue(l.toList().at(0), 0).toString(), this);
-    d->show();
+    DlgSalaryDoc *d = ___mainWindow->createWindow<DlgSalaryDoc>(nullptr);
+    d->setDoc(cellValue(l.toList().at(0), 0).toString());
 }
 
 void GSalaryDoc::actionDelete()

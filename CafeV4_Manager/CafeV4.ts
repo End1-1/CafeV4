@@ -619,7 +619,7 @@
     </message>
     <message>
         <source>Discount</source>
-        <translation>Զղջ. տոկոս</translation>
+        <translation type="vanished">Զղջ. տոկոս</translation>
     </message>
     <message>
         <source>Name</source>
@@ -654,18 +654,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MOD_ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MOD_NAME</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MOD_ORDER</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>NAME</source>
         <translation type="unfinished"></translation>
     </message>
@@ -679,6 +667,14 @@
     </message>
     <message>
         <source>INFO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Card value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CARD_VALUE</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1657,6 +1653,22 @@
         <source>H_TABLE</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>History</source>
+        <translation type="unfinished">Պատմություն</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Ժամ</translation>
+    </message>
+    <message>
+        <source>Comp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Օգտագործող</translation>
+    </message>
 </context>
 <context>
     <name>DlgOrderMod</name>
@@ -1837,14 +1849,37 @@
     <name>DlgProgress</name>
     <message>
         <source>Running query</source>
-        <translation>Հարցման կատարում</translation>
+        <translation type="vanished">Հարցման կատարում</translation>
     </message>
+</context>
+<context>
+    <name>DlgRateWaiters</name>
     <message>
-        <source>Dialog</source>
+        <source>Rates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
+        <source>Name</source>
+        <translation type="unfinished">Անվանում</translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2279,6 +2314,18 @@
         <source>N</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Առժեք</translation>
+    </message>
+    <message>
+        <source>No AS record</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgSalaryFormula</name>
@@ -2321,6 +2368,14 @@
     <message>
         <source>Confirm deletion</source>
         <translation type="vanished">Հաստատեք հեռացումը</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished">Տեղեկություն</translation>
+    </message>
+    <message>
+        <source>Saved</source>
+        <translation type="unfinished">Պահպանված է</translation>
     </message>
 </context>
 <context>
@@ -2702,7 +2757,7 @@
     </message>
     <message>
         <source>Mod id</source>
-        <translation>Տեսկաի կոդ</translation>
+        <translation type="vanished">Տեսկաի կոդ</translation>
     </message>
     <message>
         <source>Discount</source>
@@ -3414,6 +3469,53 @@
     </message>
 </context>
 <context>
+    <name>GRMenu</name>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished">Կոդ</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished">Ճաշացանկ</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Տեսակ</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation type="unfinished">Վիճակ</translation>
+    </message>
+    <message>
+        <source>Dish</source>
+        <translation type="unfinished">Ուտեստ</translation>
+    </message>
+    <message>
+        <source>Price</source>
+        <translation type="unfinished">Գին</translation>
+    </message>
+    <message>
+        <source>Store code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store</source>
+        <translation type="unfinished">Պահեստ</translation>
+    </message>
+    <message>
+        <source>Printer 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printer 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Նոր</translation>
+    </message>
+</context>
+<context>
     <name>GSalaryDoc</name>
     <message>
         <source>Salary documents</source>
@@ -3530,6 +3632,180 @@
     <message>
         <source>MainWindow</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GrMeTypes</name>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished">Կոդ</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Անվանում</translation>
+    </message>
+</context>
+<context>
+    <name>GrSelector</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">Ընդունել</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Հրաժարվել</translation>
+    </message>
+</context>
+<context>
+    <name>GridEditorDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Պահպանել</translation>
+    </message>
+    <message>
+        <source>Save and new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Հրաժարվել</translation>
+    </message>
+</context>
+<context>
+    <name>GridEditorWidget</name>
+    <message>
+        <source>Sql error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GridWidget</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IMenuItem</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main</source>
+        <translation type="unfinished">Ընդհանուր</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Queue</source>
+        <translation type="unfinished">Հերթ</translation>
+    </message>
+    <message>
+        <source>Reminder</source>
+        <translation type="unfinished">Հիշեցում</translation>
+    </message>
+    <message>
+        <source>type_id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Տեսակ</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Գույն</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished">Կոդ</translation>
+    </message>
+    <message>
+        <source>color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>type_name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Անվանում</translation>
+    </message>
+    <message>
+        <source>name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished">Ճաշացանկ</translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Price</source>
+        <translation type="unfinished">Գին</translation>
+    </message>
+    <message>
+        <source>Store</source>
+        <translation type="unfinished">Պահեստ</translation>
+    </message>
+    <message>
+        <source>Print 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu item</source>
+        <translation type="unfinished">Ուտեստ</translation>
     </message>
 </context>
 <context>
@@ -4042,7 +4318,7 @@
     </message>
     <message>
         <source>Search Next</source>
-        <translation>Փնտել հաջորդը</translation>
+        <translation type="vanished">Փնտել հաջորդը</translation>
     </message>
     <message>
         <source>Tablet control</source>
@@ -4086,7 +4362,7 @@
     </message>
     <message>
         <source>Closing</source>
-        <translation>Ելք</translation>
+        <translation type="vanished">Ելք</translation>
     </message>
     <message>
         <source>Cafe Manager</source>
@@ -4113,14 +4389,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4134,13 +4402,6 @@
     </message>
     <message>
         <source>New menu names</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MdiButton</name>
-    <message>
-        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4167,50 +4428,38 @@
     <name>NMenu</name>
     <message>
         <source>Menu</source>
-        <translation type="unfinished">Ճաշացանկ</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Ճաշացանկ</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Տեսակ</translation>
+        <translation type="obsolete">Տեսակ</translation>
     </message>
     <message>
         <source>Dish</source>
-        <translation type="unfinished">Ուտեստ</translation>
+        <translation type="obsolete">Ուտեստ</translation>
     </message>
     <message>
         <source>Price</source>
-        <translation type="unfinished">Գին</translation>
+        <translation type="obsolete">Գին</translation>
     </message>
     <message>
         <source>Store</source>
-        <translation type="unfinished">Պահեստ</translation>
-    </message>
-    <message>
-        <source>Print 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Պահեստ</translation>
     </message>
 </context>
 <context>
     <name>NMenuNames</name>
     <message>
         <source>Menu names</source>
-        <translation type="unfinished">Ճաշացանկներ</translation>
+        <translation type="obsolete">Ճաշացանկներ</translation>
     </message>
     <message>
         <source>Code</source>
-        <translation type="unfinished">Կոդ</translation>
+        <translation type="obsolete">Կոդ</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Անվանում</translation>
+        <translation type="obsolete">Անվանում</translation>
     </message>
 </context>
 <context>
@@ -4673,10 +4922,6 @@
     </message>
     <message>
         <source>Unit id</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waste</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5889,6 +6134,21 @@
     </message>
 </context>
 <context>
+    <name>TableWidget</name>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Տեղեկություն</translation>
+    </message>
+    <message>
+        <source>Empty report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Սխալ</translation>
+    </message>
+</context>
+<context>
     <name>Toolkit</name>
     <message>
         <source>Error</source>
@@ -6153,35 +6413,31 @@
     <name>nrecipes</name>
     <message>
         <source>Recipes</source>
-        <translation type="unfinished">Բաղադրատոմսեր</translation>
+        <translation type="obsolete">Բաղադրատոմսեր</translation>
     </message>
     <message>
         <source>Code</source>
-        <translation type="unfinished">Կոդ</translation>
+        <translation type="obsolete">Կոդ</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished">Ճաշացանկ</translation>
+        <translation type="obsolete">Ճաշացանկ</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Տեսակ</translation>
+        <translation type="obsolete">Տեսակ</translation>
     </message>
     <message>
         <source>Dish</source>
-        <translation type="unfinished">Ուտեստ</translation>
+        <translation type="obsolete">Ուտեստ</translation>
     </message>
     <message>
         <source>Store</source>
-        <translation type="unfinished">Պահեստ</translation>
-    </message>
-    <message>
-        <source>Goods</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Պահեստ</translation>
     </message>
     <message>
         <source>Qty</source>
-        <translation type="unfinished">Քնկ</translation>
+        <translation type="obsolete">Քնկ</translation>
     </message>
 </context>
 </TS>

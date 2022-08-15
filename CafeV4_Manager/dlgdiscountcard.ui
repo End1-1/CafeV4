@@ -19,8 +19,29 @@
      <property name="spacing">
       <number>2</number>
      </property>
-     <item row="6" column="0" colspan="2">
+     <item row="7" column="0" colspan="3">
       <widget class="FBtnOkCancel" name="widget" native="true"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Card code</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPLineEdit" name="leName">
+       <property name="field" stdset="0">
+        <string>NAME</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QPLineEdit" name="leInfo">
+       <property name="field" stdset="0">
+        <string>INFO</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
@@ -29,7 +50,35 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="5" column="2">
+      <widget class="QPLineEdit" name="leCode">
+       <property name="field" stdset="0">
+        <string>CODE</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPLineEdit" name="leId">
+       <property name="field" stdset="0">
+        <string>ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
       <widget class="QPComboBox" name="cbState">
        <property name="fieldId" stdset="0">
         <string>STATE_ID</string>
@@ -42,68 +91,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QPComboBox" name="cbDiscount">
-       <property name="fieldId" stdset="0">
-        <string>MOD_ID</string>
-       </property>
-       <property name="fieldName" stdset="0">
-        <string>MOD_NAME</string>
-       </property>
-       <property name="table" stdset="0">
-        <string>MOD_ORDER</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Discount</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPLineEdit" name="leName">
-       <property name="field" stdset="0">
-        <string>NAME</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPLineEdit" name="leId">
-       <property name="field" stdset="0">
-        <string>ID</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Card code</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Id</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QPLineEdit" name="leCode">
-       <property name="field" stdset="0">
-        <string>CODE</string>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_6">
        <property name="text">
@@ -111,10 +98,17 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QPLineEdit" name="leInfo">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Card value</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPLineEdit" name="leCardValue">
        <property name="field" stdset="0">
-        <string>INFO</string>
+        <string>CARD_VALUE</string>
        </property>
       </widget>
      </item>

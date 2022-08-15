@@ -20,8 +20,13 @@ bool DlgSimpleSelect::getValue(QWidget *parent, const QString &caption, const QM
     DlgSimpleSelect *dlg = new DlgSimpleSelect(parent);
     dlg->ui->lbCaption->setText(caption);
     dlg->setWindowTitle(caption);
-    for (QMap<QString, QString>::const_iterator it = data.begin(); it != data.end(); it++)
-        dlg->ui->cbData->addItem(it.value(), it.key());
+    QMap<QString, QString> postreverse;
+    for (QMap<QString, QString>::const_iterator it = data.begin(); it != data.end(); it++) {
+        postreverse[it.value()] = it.key();
+    }
+    for (QMap<QString, QString>::const_iterator it = postreverse.begin(); it != postreverse.end(); it++) {
+        dlg->ui->cbData->addItem(it.key(), it.value());
+    }
     dlg->ui->cbData->setCurrentIndex(-1);
     if (dlg->exec() == QDialog::Accepted) {
         valueStr = dlg->ui->cbData->currentText();

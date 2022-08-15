@@ -12,10 +12,11 @@ class QDlgEmployesAccess : public QBaseSqlWindow
     Q_OBJECT
 
 public:
-    explicit QDlgEmployesAccess(const QString &groupId, QWidget *parent = 0);
+    explicit QDlgEmployesAccess(QWidget *parent = 0);
     ~QDlgEmployesAccess();
     virtual void actionSave();
     virtual void actionCostum(int action);
+    void setGroup(const QString &groupId);
 
 private:
     Ui::QDlgEmployesAccess *ui;

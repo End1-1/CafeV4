@@ -206,8 +206,8 @@ void QSale::actionEdit()
         return;
     }
 
-    DlgOrder *d = new DlgOrder(cellValue(l.toList().at(0), 0).toString(), this);
-    d->show();
+    auto *d = ___mainWindow->createWindow<DlgOrder>(nullptr);
+    d->setId(cellValue(l.toList().at(0), 0).toString());
 }
 
 void QSale::actionBeforeSelect()
@@ -568,8 +568,8 @@ void QSale::viewDishParams()
         return;
     }
 
-    GMenuItem *d = new GMenuItem(cellValue(l.toList()[0], fieldIndexInGrid("DISH_ID")).toInt(), this);
-    d->show();
+    GMenuItem *d = ___mainWindow->createWindow<GMenuItem>(nullptr);
+    d->setDish(cellValue(l.toList()[0], fieldIndexInGrid("DISH_ID")).toInt());
 }
 
 void QSale::slotContextMenu(const QPoint &pos)

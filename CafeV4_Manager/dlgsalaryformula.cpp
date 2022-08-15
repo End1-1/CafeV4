@@ -1,17 +1,27 @@
 #include "dlgsalaryformula.h"
 #include "ui_dlgsalaryformula.h"
-#include "mdibutton.h"
 #include "core.h"
+#include <QClipboard>
 
-DlgSalaryFormula::DlgSalaryFormula(const QString &postId, const QString &postName, QWidget *parent) :
+DlgSalaryFormula::DlgSalaryFormula(QWidget *parent) :
     QBaseSqlWindow(parent),
     ui(new Ui::DlgSalaryFormula),
-    m_postId(postId)
+    m_postId("")
 {
     m_actions << "actionNew" << "actionEdit" << "actionDelete" << "actionSave"
-              << "actionUp" << "actionDown";
+              << "actionUp" << "actionDown" << "actionCopy" << "actionPaste";
 
     ui->setupUi(this);
+}
+
+DlgSalaryFormula::~DlgSalaryFormula()
+{
+    delete ui;
+}
+
+void DlgSalaryFormula::setPostId(const QString &postId, const QString &postName)
+{
+    m_postId = postId;
     setWindowTitle(windowTitle() + " - " + postName);
     QList<int> tableColWidths;
     tableColWidths << 0 << 300 << 0 << 300 << 150;
@@ -19,11 +29,6 @@ DlgSalaryFormula::DlgSalaryFormula(const QString &postId, const QString &postNam
         ui->table->setColumnWidth(i, tableColWidths[i]);
 
     getFormulaData();
-}
-
-DlgSalaryFormula::~DlgSalaryFormula()
-{
-    delete ui;
 }
 
 void DlgSalaryFormula::actionNew()
@@ -77,6 +82,33 @@ void DlgSalaryFormula::actionCostum(int action)
     case ACTION_DOWN:
         rowDown();
         break;
+    case ACTION_COPY: {
+        QString data;
+        for (int i = 0; i < ui->table->rowCount(); i++) {
+            QString row = QString("%1\t%2\t%3\t%4\t%5\r")
+                    .arg(ui->table->item(i, 0)->text())
+                    .arg(ui->table->item(i, 1)->text())
+                    .arg(ui->table->item(i, 2)->text())
+                    .arg(ui->table->item(i, 3)->text())
+                    .arg(ui->table->item(i, 4)->text());
+            data.append(row);
+        }
+        qApp->clipboard()->setText(data);
+        break;
+    }
+    case ACTION_PASTE: {
+        QString data = qApp->clipboard()->text();
+        QStringList rows = data.split("\r", Qt::SkipEmptyParts);
+        for (const QString &s: rows) {
+            QStringList row = s.split("\t");
+            ui->table->setRowCount(ui->table->rowCount() + 1);
+            int rownum = ui->table->rowCount() - 1;
+            for (int i = 0; i < row.count(); i++) {
+                ui->table->setItem(rownum, i, new QTableWidgetItem(row.at(i)));
+            }
+        }
+        break;
+    }
     }
 }
 
@@ -96,6 +128,7 @@ void DlgSalaryFormula::actionSave()
     }
 
     m_sqlDrv->close();
+    QMessageBox::information(this, tr("Info"), tr("Saved"));
 }
 
 void DlgSalaryFormula::getFormulaData()

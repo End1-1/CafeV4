@@ -3,10 +3,9 @@
 #include "ff_user.h"
 #include "core.h"
 
-QDlgEmployesAccess::QDlgEmployesAccess(const QString &groupId, QWidget *parent) :
+QDlgEmployesAccess::QDlgEmployesAccess(QWidget *parent) :
     QBaseSqlWindow(parent),
-    ui(new Ui::QDlgEmployesAccess),
-    m_groupId(groupId)
+    ui(new Ui::QDlgEmployesAccess)
 {
     ui->setupUi(this);
     m_actions << "actionSave" << "actionCopy" << "actionPaste";
@@ -18,9 +17,6 @@ QDlgEmployesAccess::QDlgEmployesAccess(const QString &groupId, QWidget *parent) 
     ui->tblManagment->setColumnWidth(0, 400);
     ui->tblManagment->setColumnWidth(1, 100);
     ui->tblManagment->setColumnWidth(2, 100);
-
-    checkForNewRole();
-    load();
 }
 
 QDlgEmployesAccess::~QDlgEmployesAccess()
@@ -38,6 +34,13 @@ void QDlgEmployesAccess::actionSave()
 void QDlgEmployesAccess::actionCostum(int action)
 {
     Q_UNUSED(action)
+}
+
+void QDlgEmployesAccess::setGroup(const QString &groupId)
+{
+    m_groupId = groupId;
+    checkForNewRole();
+    load();
 }
 
 void QDlgEmployesAccess::checkForNewRole()

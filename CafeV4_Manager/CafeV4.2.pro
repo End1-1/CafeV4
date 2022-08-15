@@ -14,23 +14,52 @@ TEMPLATE = app
 RC_FILE = res.rc
 
 INCLUDEPATH += ./table
+INCLUDEPATH += ./gr
+INCLUDEPATH += ./gr/SelectorModel
 INCLUDEPATH += C:/projects/FastF
+INCLUDEPATH += C:/Projects/FastFServer
+INCLUDEPATH += C:/Projects/FastFServer/phonejson
+INCLUDEPATH += C:/Projects/XLSX/src
 
 SOURCES += main.cpp\
+    ../../FastFServer/phonejson/threadobject.cpp \
+    ../../FastFServer/sqlthread.cpp \
+    ../../XLSX/src/xlsx.cpp \
+    ../../XLSX/src/xlsxborder.cpp \
+    ../../XLSX/src/xlsxcell.cpp \
+    ../../XLSX/src/xlsxcontenttype.cpp \
+    ../../XLSX/src/xlsxdocpropsapp.cpp \
+    ../../XLSX/src/xlsxdocpropscore.cpp \
+    ../../XLSX/src/xlsxdocument.cpp \
+    ../../XLSX/src/xlsxrels.cpp \
+    ../../XLSX/src/xlsxsharedstring.cpp \
+    ../../XLSX/src/xlsxsheet.cpp \
+    ../../XLSX/src/xlsxstyles.cpp \
+    ../../XLSX/src/xlsxtheme.cpp \
+    ../../XLSX/src/xlsxworkbook.cpp \
+    ../../XLSX/src/xlsxwriter.cpp \
+    dlgratewaiters.cpp \
+    gr/SelectorModel/grmetypes.cpp \
+    gr/SelectorModel/grselectormodel.cpp \
+    gr/grdb.cpp \
+    gr/grideditordialog.cpp \
+    gr/grideditorwidget.cpp \
+    gr/grmenu.cpp \
+    gr/grselector.cpp \
+    gr/imenuitem.cpp \
+    gridwidget.cpp \
         mainwindow.cpp \
     dlglogin.cpp \
     dlgsettingspassword.cpp \
     core.cpp \
     ../core/connection.cpp \
     storeorder.cpp \
-    dlgprogress.cpp \
     dockidname.cpp \
     ../core/toolkit.cpp \
     ../core/printing.cpp \
     printpreview.cpp \
     dlgfilterlist.cpp \
     foodgridwidget.cpp \
-    mdibutton.cpp \
     dlgpassword.cpp \
     dlgrecalculation.cpp \
     dlgsalarydoc.cpp \
@@ -102,7 +131,6 @@ SOURCES += main.cpp\
     dlgrecipe.cpp \
     dlgfoodcache.cpp \
     qtotalrecipes.cpp \
-    logwriter.cpp \
     gremoveorders.cpp \
     dlgsettotalmovementaddoption.cpp \
     dlgdatepair.cpp \
@@ -132,27 +160,52 @@ SOURCES += main.cpp\
     table/cdatabase.cpp \
     table/cgridwidget.cpp \
     table/ctablemodel.cpp \
-    nmenu.cpp \
-    nrecipes.cpp \
     table/cfilterdialog.cpp \
-    nmenunames.cpp \
     ../../FastF/cnfmaindb.cpp \
-    table/ceditdialog.cpp
+    table/ceditdialog.cpp \
+    tablewidget.cpp
 
 HEADERS  += mainwindow.h \
+    ../../FastFServer/phonejson/threadobject.h \
+    ../../FastFServer/sqlthread.h \
+    ../../XLSX/src/crs32.h \
+    ../../XLSX/src/xlsx.h \
+    ../../XLSX/src/xlsxall.h \
+    ../../XLSX/src/xlsxborder.h \
+    ../../XLSX/src/xlsxcell.h \
+    ../../XLSX/src/xlsxcontenttype.h \
+    ../../XLSX/src/xlsxdocpropsapp.h \
+    ../../XLSX/src/xlsxdocpropscore.h \
+    ../../XLSX/src/xlsxdocument.h \
+    ../../XLSX/src/xlsxrels.h \
+    ../../XLSX/src/xlsxsharedstring.h \
+    ../../XLSX/src/xlsxsheet.h \
+    ../../XLSX/src/xlsxstyles.h \
+    ../../XLSX/src/xlsxtheme.h \
+    ../../XLSX/src/xlsxworkbook.h \
+    ../../XLSX/src/xlsxwriter.h \
+    ../../XLSX/src/zip.h \
     dlglogin.h \
+    dlgratewaiters.h \
     dlgsettingspassword.h \
     core.h \
     ../core/connection.h \
+    gr/SelectorModel/grmetypes.h \
+    gr/SelectorModel/grselectormodel.h \
+    gr/grdb.h \
+    gr/grideditordialog.h \
+    gr/grideditorwidget.h \
+    gr/grmenu.h \
+    gr/grselector.h \
+    gr/imenuitem.h \
+    gridwidget.h \
     storeorder.h \
-    dlgprogress.h \
     dockidname.h \
     ../core/toolkit.h \
     ../core/printing.h \
     printpreview.h \
     dlgfilterlist.h \
     foodgridwidget.h \
-    mdibutton.h \
     dlgpassword.h \
     dlgrecalculation.h \
     dlgsalarydoc.h \
@@ -238,7 +291,6 @@ HEADERS  += mainwindow.h \
     dlgrecipe.h \
     dlgfoodcache.h \
     qtotalrecipes.h \
-    logwriter.h \
     printing.h \
     gremoveorders.h \
     dlgsettotalmovementaddoption.h \
@@ -270,24 +322,25 @@ HEADERS  += mainwindow.h \
     table/cdatabase.h \
     table/cgridwidget.h \
     table/ctablemodel.h \
-    nmenu.h \
-    nrecipes.h \
     table/cfilterdialog.h \
-    nmenunames.h \
     ../../FastF/cnfmaindb.h \
-    table/ceditdialog.h
+    table/ceditdialog.h \
+    tablewidget.h
 
 FORMS    += mainwindow.ui \
     dlglogin.ui \
+    dlgratewaiters.ui \
     dlgsettingspassword.ui \
     dlgobject.ui \
+    gr/grideditordialog.ui \
+    gr/grselector.ui \
+    gr/imenuitem.ui \
+    gridwidget.ui \
     storeorder.ui \
-    dlgprogress.ui \
     dockidname.ui \
     printpreview.ui \
     dlgfilterlist.ui \
     foodgridwidget.ui \
-    mdibutton.ui \
     dlgpassword.ui \
     dlgrecalculation.ui \
     dlgsalarydoc.ui \
@@ -356,6 +409,7 @@ DEFINES += \
 
 DEFINES += _ORGANIZATION_=\\\"Jazzve\\\"
 DEFINES += _APPLICATION_=\\\"Cafe4\\\"
+DEFINES += _MODULE_=\\\"CAFE4\\\"
 
 
 LIBS += -lVersion

@@ -40,12 +40,13 @@ private:
     static int m_lastTab;
 
 public:
-    explicit GMenuItem(int id, QWidget *parent = 0);
+    explicit GMenuItem(QWidget *parent = 0);
     ~GMenuItem();
     virtual void actionNew();
     virtual void actionSave();
     virtual void actionSearch();
     void setTabIndex(int index);
+    void setDish(int id);
 
 private slots:
     void storeChange(int index);
@@ -66,10 +67,10 @@ private slots:
     void on_actionRCopy_recipe_triggered();
     void on_actionRPaste_recipe_triggered();
     void on_btnLoadImage_clicked();
-
     void on_cbType_currentIndexChanged(int index);
-
     void on_cbPayment_currentIndexChanged(int index);
+
+    void on_chCopyNumToCliboard_clicked(bool checked);
 
 private:
     int m_id;

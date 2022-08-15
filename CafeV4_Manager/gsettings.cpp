@@ -11,8 +11,8 @@ void GSettings::showSalesSettings()
     }
 
     QString id = itemData(m.at(0).row(), 0).toString();
-    QEditWSettings *d = new QEditWSettings(id, qobject_cast<QWidget*>(this->parent()));
-    d->show();
+    QEditWSettings *d = ___mainWindow->createWindow<QEditWSettings>(nullptr);
+    d->setId(id);
 }
 
 GSettings::GSettings(QWidget *parent) :

@@ -167,8 +167,7 @@ void GMenu::actionBeforeSelect()
 void GMenu::actionNew()
 {
     CHECK_VIEWER_AND_MAINDB
-    GMenuItem *i = new GMenuItem(0, this);
-    i->show();
+    GMenuItem *d = ___mainWindow->createWindow<GMenuItem>(nullptr);
 }
 
 void GMenu::actionEdit()
@@ -189,8 +188,8 @@ void GMenu::actionEdit()
         return;
     }
 
-    GMenuItem *g = new GMenuItem(cellValue(rows.values().at(0), indexId).toInt(), this);
-    g->show();
+    GMenuItem *d = ___mainWindow->createWindow<GMenuItem>(nullptr);
+    d->setDish(cellValue(rows.values().at(0), indexId).toInt());
 }
 
 void GMenu::actionDelete()

@@ -7,6 +7,8 @@ namespace Ui {
 class GrSelector;
 }
 
+class GrSelectorModel;
+
 class GrSelector : public QDialog
 {
     Q_OBJECT
@@ -14,9 +16,14 @@ class GrSelector : public QDialog
 public:
     explicit GrSelector(QWidget *parent = nullptr);
     ~GrSelector();
+    static bool get(GrSelectorModel *sm);
 
 private:
     Ui::GrSelector *ui;
+    GrSelectorModel *mSelectorModel;
+
+private slots:
+    void sqlFinished();
 };
 
 #endif // GRSELECTOR_H

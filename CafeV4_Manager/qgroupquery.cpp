@@ -12,7 +12,6 @@
 
 QToolBar *QGroupQuery::m_toolBarBtn;
 QToolBar *QGroupQuery::m_toolBarWnd;
-QMdiArea *QGroupQuery::m_mdiArea;
 QStringList QGroupQuery::m_mainDb;
 QString QDbThread::m_dbNum = "0";
 QMutex QDbThread::m_mutex;
@@ -24,8 +23,6 @@ QGroupQuery::QGroupQuery(QWidget *parent) :
     m_actions << "actionExport_to_Excel" << "actionRefresh" << "actionFilter";
     ui->setupUi(this);
     setWindowTitle(tr("Group query"));
-    m_mdiButton = new MdiButton(this, tr("Group query"));
-    m_subWindow = m_mdiArea->addSubWindow(this);
     setToolbar(m_toolBarBtn);
     init();
 }
@@ -102,7 +99,7 @@ void QGroupQuery::actionRefresh()
     }
     delete bv;
     QSettings s("Jazzve", "Cafe4\\GroupQuery\\" + m_queryTitle);
-    for (QList<BindValue>::const_iterator it = m_bindValues.begin(); it != m_bindValues.end(); it++)
+    for (QList<BindValue>::const_iterator it = m_bindValues.constBegin(); it != m_bindValues.constEnd(); it++)
         s.setValue(it->valueName, it->value);
     ui->tblOutput->setRowCount(0);
     ui->tblOutput->setColumnCount(0);
@@ -117,7 +114,7 @@ void QGroupQuery::actionRefresh()
         dt->row = i;
         dt->alias = ui->tblDatabases->item(i, 0)->data(Qt::DisplayRole).toString();
         dt->sqlText = ui->txtQuery->document()->toPlainText();
-        for (QList<BindValue>::const_iterator it = m_bindValues.begin(); it != m_bindValues.end(); it++)
+        for (QList<BindValue>::const_iterator it = m_bindValues.constBegin(); it != m_bindValues.constEnd(); it++)
             dt->bindValue[it->valueName] = it->value;
         dt->start();
     }
@@ -186,44 +183,25 @@ void QGroupQuery::init()
 
 void QGroupQuery::saveHistory()
 {
-    QString lastQuery = ui->txtQuery->document()->toPlainText();
-    for (int i = 0; i < ui->lstHistory->count(); i++) {
-        if (lastQuery == ui->lstHistory->item(i)->text()) {
-            delete ui->lstHistory->item(i);
-            break;
-        }
-    }
-    QListWidgetItem *item = new QListWidgetItem(ui->lstHistory);
-    item->setText(lastQuery);
-    ui->lstHistory->addItem(item);
-    QSettings s("Jazzve", "Cafe4\\GroupQueryHistory");
-    for (int i = 0; i < ui->lstHistory->count(); i++)
-        s.setValue(QString::number(i), ui->lstHistory->item(i)->text());
+
 }
 
 void QGroupQuery::loadHistory()
 {
-    QSettings s("Jazzve", "Cafe4\\GroupQueryHistory");
-    QStringList keys = s.allKeys();
-    for (QStringList::const_iterator it = keys.begin(); it != keys.end(); it++)  {
-        QListWidgetItem *item = new QListWidgetItem(ui->lstHistory);
-        item->setText(s.value(*it).toString());
-        ui->lstHistory->addItem(item);
-    }
+
 }
 
 void QGroupQuery::dbthreadStatus(int row, const QString &msg)
 {
     //QMutexLocker locker(&m_mutex);
     ui->tblDatabases->item(row, 3)->setText(msg);
-    qApp->processEvents();
 }
 
 void QGroupQuery::dbthreadFetchResult(DATA data)
 {
     int row = ui->tblOutput->rowCount();
     ui->tblOutput->setRowCount(row + data.count());
-    for (QList<QList<QVariant> >::const_iterator it = data.begin(); it != data.end(); it++) {
+    for (QList<QList<QVariant> >::const_iterator it = data.constBegin(); it != data.constEnd(); it++) {
         int col = 0;
         for (QList<QVariant>::const_iterator vt = (*it).begin(); vt != (*it).end(); vt++) {
             QTableWidgetItem *item = new QTableWidgetItem();

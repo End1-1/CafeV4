@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DlgSalaryFormula</class>
- <widget class="QWidget" name="DlgSalaryFormula">
+ <class>DlgRateWaiters</class>
+ <widget class="QDialog" name="DlgRateWaiters">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>480</height>
+    <width>871</width>
+    <height>506</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>780</width>
-    <height>480</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Salary Formula</string>
+   <string>Rates</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QTableWidget" name="table">
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
+    <widget class="CustomTableWidget" name="tbl">
      <column>
       <property name="text">
-       <string>Funcion Id</string>
+       <string>Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Function name</string>
+       <string>1</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Description</string>
+       <string>2</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Params</string>
+       <string>3</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Result cell</string>
+       <string>4</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>5</string>
       </property>
      </column>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CustomTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>customtablewidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
