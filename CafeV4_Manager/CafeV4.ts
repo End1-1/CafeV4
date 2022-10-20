@@ -4404,6 +4404,10 @@
         <source>New menu names</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Staff food</source>
+        <translation>Անձնակազմի սնունդ</translation>
+    </message>
 </context>
 <context>
     <name>MdiWindow</name>
@@ -5884,6 +5888,73 @@
     <message>
         <source>Confirm deletion</source>
         <translation>Հաստատեք հեռացումը</translation>
+    </message>
+</context>
+<context>
+    <name>StaffFood</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Dishes</source>
+        <translation>Ուտեստներ</translation>
+    </message>
+    <message>
+        <source>NN launch</source>
+        <translation>Սննդի համար</translation>
+    </message>
+    <message>
+        <source>NN output</source>
+        <translation>Ելքի համար</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Ամսաթիվ</translation>
+    </message>
+    <message>
+        <source>Dish code</source>
+        <translation>Ուտեստի կոդ</translation>
+    </message>
+    <message>
+        <source>Dish type</source>
+        <translation>Ուտեստի տեսակ</translation>
+    </message>
+    <message>
+        <source>Dish name</source>
+        <translation>Ուտեստի անվանում</translation>
+    </message>
+    <message>
+        <source>Qty</source>
+        <translation>Քնկ</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation>Ելք</translation>
+    </message>
+    <message>
+        <source>Food code</source>
+        <translation>Ապրանքի կոդ</translation>
+    </message>
+    <message>
+        <source>Food name</source>
+        <translation>Ապրանքի անվանում</translation>
+    </message>
+    <message>
+        <source>Total qty</source>
+        <translation>Ընդհանուր</translation>
+    </message>
+    <message>
+        <source>Staff launch</source>
+        <translation>Անձնակազմի սնունդ</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Տեղեկություն</translation>
+    </message>
+    <message>
+        <source>Saved</source>
+        <translation>Պահպանված է</translation>
     </message>
 </context>
 <context>

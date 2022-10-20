@@ -585,6 +585,12 @@ void GMenuItem::on_gridMenu_currentItemChanged(QTableWidgetItem *current, QTable
             c->addItem("bar");
             c->addItem("kit");
             c->addItem("local");
+            c->addItem("mobile:1");
+            c->addItem("mobile:2");
+            c->addItem("mobile:3");
+            c->addItem("printer:k1");
+            c->addItem("printer:k2");
+
             ui->gridMenu->setCellWidget(current->row(), current->column(), c);
             c->setCurrentIndex(c->findText(ui->gridMenu->item(current->row(), current->column())->data(Qt::DisplayRole).toString()));
             connect(c, SIGNAL(currentTextChanged(QString)), this, SLOT(print1Change(QString)));
@@ -598,6 +604,12 @@ void GMenuItem::on_gridMenu_currentItemChanged(QTableWidgetItem *current, QTable
             c->addItem("bar");
             c->addItem("kit");
             c->addItem("local");
+            c->addItem("mobile:1");
+            c->addItem("mobile:2");
+            c->addItem("mobile:3");
+            c->addItem("printer:k1");
+            c->addItem("printer:k2");
+
             ui->gridMenu->setCellWidget(current->row(), current->column(), c);
             c->setCurrentIndex(c->findText(ui->gridMenu->item(current->row(), current->column())->data(Qt::DisplayRole).toString()));
             connect(c, SIGNAL(currentTextChanged(QString)), this, SLOT(print2Change(QString)));

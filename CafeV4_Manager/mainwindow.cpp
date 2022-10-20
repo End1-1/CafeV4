@@ -23,6 +23,7 @@
 #include "qsale.h"
 #include "qmenunames.h"
 #include "qhall.h"
+#include "stafffood.h"
 #include "qdishestypes.h"
 #include "qstorages.h"
 #include "dlgconnection.h"
@@ -668,5 +669,5 @@ void MainWindow::on_actionNew_menu_names_triggered()
 
 void MainWindow::on_actionStaff_food_triggered()
 {
-    //createWindow<StaffFood>(static_`st<QAction*>(sender()));
+    createWindow<StaffFood>(static_cast<QAction*>(sender()));
 }

@@ -763,6 +763,7 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId, int currentstaff)
 #define ODISHESSALES_2 24
 #define ODISHSALE_LU 25
 #define OINDIVDUALSALE 26
+#define ODISHESSALES_STORE 27
 
     //date1 = date1 + one day (param1) + time (param2) ; date2 = date1 + one day + time (param3),
 
@@ -976,7 +977,21 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId, int currentstaff)
             m_sqlDrv->bind(":staff_id", currentstaff);
             m_sqlDrv->execSQL();
             m_sqlDrv->m_query->next();
-            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT");
+            mem[s.cell] = m_sqlDrv->valFloat("AMOUNT") * params[1].toDouble();
+            break;
+        case ODISHESSALES_STORE:
+            m_sqlDrv->prepare("select sum((d.qty*d.price) "
+                                "+ (d.qty*d.price*o.amount_inc_value) "
+                                "- (((d.qty*d.price) + (d.qty*d.price*o.amount_inc_value))) * o.amount_dec_value) "
+                                "from o_dishes d "
+                                "left join o_order o on o.id=d.order_id "
+                                "where o.state_id=2 and d.state_id=1 "
+                                "and o.date_cash=:date_cash and d.store_id=:store_id ");
+            m_sqlDrv->bind(":store_id", params[0]);
+            m_sqlDrv->bind(":date_cash", ui->deDate->date());
+            m_sqlDrv->execSQL();
+            m_sqlDrv->next();
+            mem[s.cell] = m_sqlDrv->val().toFloat() * params[1].toDouble();
             break;
         }
 

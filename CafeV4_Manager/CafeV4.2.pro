@@ -53,6 +53,7 @@ SOURCES += main.cpp\
     dlgsettingspassword.cpp \
     core.cpp \
     ../core/connection.cpp \
+    stafffood.cpp \
     storeorder.cpp \
     dockidname.cpp \
     ../core/toolkit.cpp \
@@ -199,6 +200,7 @@ HEADERS  += mainwindow.h \
     gr/grselector.h \
     gr/imenuitem.h \
     gridwidget.h \
+    stafffood.h \
     storeorder.h \
     dockidname.h \
     ../core/toolkit.h \
@@ -336,6 +338,7 @@ FORMS    += mainwindow.ui \
     gr/grselector.ui \
     gr/imenuitem.ui \
     gridwidget.ui \
+    stafffood.ui \
     storeorder.ui \
     dockidname.ui \
     printpreview.ui \
