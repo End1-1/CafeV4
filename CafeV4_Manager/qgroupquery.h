@@ -16,7 +16,7 @@ namespace Ui {
 class QGroupQuery;
 }
 
-class QDbThread : public QThread {
+class QDbThread : public QObject {
     Q_OBJECT
 public:
     QDbThread(const QString &dbName, const QString &dbUser, const QString &dbPass);
@@ -24,7 +24,7 @@ public:
     QString sqlText;
     QMap<QString, QVariant> bindValue;
     QString alias;
-protected:
+public slots:
     virtual void run();
 private:
     static QMutex m_mutex;
@@ -37,6 +37,7 @@ signals:
     void status(int row, const QString &msg);
     void fetchResult(DATA data);
     void fetchColumns(QStringList colNames);
+    void finish();
 };
 
 class QGroupQuery : public MdiWindow
@@ -49,7 +50,7 @@ public:
     static QStringList m_mainDb;
     explicit QGroupQuery(QWidget *parent = 0);
     ~QGroupQuery();
-    virtual void actionExcel(const QString &fileName = "");
+    virtual void actionExcel(QString fileName = "");
     virtual void actionRefresh();
     virtual bool actionFilter();
 

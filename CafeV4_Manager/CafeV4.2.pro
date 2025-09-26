@@ -16,14 +16,10 @@ RC_FILE = res.rc
 INCLUDEPATH += ./table
 INCLUDEPATH += ./gr
 INCLUDEPATH += ./gr/SelectorModel
-INCLUDEPATH += C:/projects/FastF
-INCLUDEPATH += C:/Projects/FastFServer
-INCLUDEPATH += C:/Projects/FastFServer/phonejson
 INCLUDEPATH += C:/Projects/XLSX/src
+INCLUDEPATH += C:/projects/CafeV4/CafeV4_Manager/xlsx
 
 SOURCES += main.cpp\
-    ../../FastFServer/phonejson/threadobject.cpp \
-    ../../FastFServer/sqlthread.cpp \
     ../../XLSX/src/xlsx.cpp \
     ../../XLSX/src/xlsxborder.cpp \
     ../../XLSX/src/xlsxcell.cpp \
@@ -38,7 +34,11 @@ SOURCES += main.cpp\
     ../../XLSX/src/xlsxtheme.cpp \
     ../../XLSX/src/xlsxworkbook.cpp \
     ../../XLSX/src/xlsxwriter.cpp \
+    cnfapp.cpp \
+    cnfmaindb.cpp \
+    dlgorder.cpp \
     dlgratewaiters.cpp \
+    ff_user.cpp \
     gr/SelectorModel/grmetypes.cpp \
     gr/SelectorModel/grselectormodel.cpp \
     gr/grdb.cpp \
@@ -53,6 +53,10 @@ SOURCES += main.cpp\
     dlgsettingspassword.cpp \
     core.cpp \
     ../core/connection.cpp \
+    monthlyselfcost.cpp \
+    qgrid.cpp \
+    qnet.cpp \
+    sqlthread.cpp \
     stafffood.cpp \
     storeorder.cpp \
     dockidname.cpp \
@@ -83,9 +87,7 @@ SOURCES += main.cpp\
     ../../common/qbasegrid.cpp \
     ../../common/qdlgfilter.cpp \
     ../../common/qdlgcache.cpp \
-    ../../FastF/ff_user.cpp \
     gsettings.cpp \
-    ../../Engine/distrimex/qgrid.cpp \
     gdsettings.cpp \
     ../../common/qplineedit.cpp \
     ../../common/qdlgquery.cpp \
@@ -107,7 +109,6 @@ SOURCES += main.cpp\
     qemployesgroups.cpp \
     gdemployesgroups.cpp \
     qsale.cpp \
-    dlgorder.cpp \
     qmenunames.cpp \
     dlgmenuname.cpp \
     qdishestypes.cpp \
@@ -143,7 +144,6 @@ SOURCES += main.cpp\
     double.cpp \
     dlgmenucopy.cpp \
     dlgcorrectoutstoreofsales.cpp \
-    ../../FastF/qnet.cpp \
     dlgviewimage.cpp \
     qgroupquery.cpp \
     qgroupqueryfilter.cpp \
@@ -162,13 +162,25 @@ SOURCES += main.cpp\
     table/cgridwidget.cpp \
     table/ctablemodel.cpp \
     table/cfilterdialog.cpp \
-    ../../FastF/cnfmaindb.cpp \
     table/ceditdialog.cpp \
-    tablewidget.cpp
+    tablewidget.cpp \
+    threadobject.cpp \
+    xlsx/xlsx.cpp \
+    xlsx/xlsxborder.cpp \
+    xlsx/xlsxcell.cpp \
+    xlsx/xlsxcontenttype.cpp \
+    xlsx/xlsxdocpropsapp.cpp \
+    xlsx/xlsxdocpropscore.cpp \
+    xlsx/xlsxdocument.cpp \
+    xlsx/xlsxrels.cpp \
+    xlsx/xlsxsharedstring.cpp \
+    xlsx/xlsxsheet.cpp \
+    xlsx/xlsxstyles.cpp \
+    xlsx/xlsxtheme.cpp \
+    xlsx/xlsxworkbook.cpp \
+    xlsx/xlsxwriter.cpp
 
 HEADERS  += mainwindow.h \
-    ../../FastFServer/phonejson/threadobject.h \
-    ../../FastFServer/sqlthread.h \
     ../../XLSX/src/crs32.h \
     ../../XLSX/src/xlsx.h \
     ../../XLSX/src/xlsxall.h \
@@ -186,7 +198,10 @@ HEADERS  += mainwindow.h \
     ../../XLSX/src/xlsxworkbook.h \
     ../../XLSX/src/xlsxwriter.h \
     ../../XLSX/src/zip.h \
+    cnfapp.h \
+    cnfmaindb.h \
     dlglogin.h \
+    dlgorder.h \
     dlgratewaiters.h \
     dlgsettingspassword.h \
     core.h \
@@ -200,6 +215,9 @@ HEADERS  += mainwindow.h \
     gr/grselector.h \
     gr/imenuitem.h \
     gridwidget.h \
+    monthlyselfcost.h \
+    qgrid.h \
+    sqlthread.h \
     stafffood.h \
     storeorder.h \
     dockidname.h \
@@ -238,10 +256,7 @@ HEADERS  += mainwindow.h \
     qdlgcache.h \
     ../../common/qdlgcache.h \
     ff_user.h \
-    ../../FastF/ff_user.h \
-    qgrid.h \
     gsettings.h \
-    ../../Engine/distrimex/qgrid.h \
     gdsettings.h \
     ../../common/qplineedit.h \
     qplineedit.h \
@@ -266,7 +281,6 @@ HEADERS  += mainwindow.h \
     qemployesgroups.h \
     gdemployesgroups.h \
     qsale.h \
-    dlgorder.h \
     qmenunames.h \
     dlgmenuname.h \
     qdishestypes.h \
@@ -305,7 +319,6 @@ HEADERS  += mainwindow.h \
     double.h \
     dlgmenucopy.h \
     dlgcorrectoutstoreofsales.h \
-    ../../FastF/qnet.h \
     qnet.h \
     dlgviewimage.h \
     qgroupquery.h \
@@ -325,12 +338,30 @@ HEADERS  += mainwindow.h \
     table/cgridwidget.h \
     table/ctablemodel.h \
     table/cfilterdialog.h \
-    ../../FastF/cnfmaindb.h \
     table/ceditdialog.h \
-    tablewidget.h
+    tablewidget.h \
+    threadobject.h \
+    xlsx/crs32.h \
+    xlsx/xlsx.h \
+    xlsx/xlsxall.h \
+    xlsx/xlsxborder.h \
+    xlsx/xlsxcell.h \
+    xlsx/xlsxcontenttype.h \
+    xlsx/xlsxdocpropsapp.h \
+    xlsx/xlsxdocpropscore.h \
+    xlsx/xlsxdocument.h \
+    xlsx/xlsxrels.h \
+    xlsx/xlsxsharedstring.h \
+    xlsx/xlsxsheet.h \
+    xlsx/xlsxstyles.h \
+    xlsx/xlsxtheme.h \
+    xlsx/xlsxworkbook.h \
+    xlsx/xlsxwriter.h \
+    xlsx/zip.h
 
 FORMS    += mainwindow.ui \
     dlglogin.ui \
+    dlgorder.ui \
     dlgratewaiters.ui \
     dlgsettingspassword.ui \
     dlgobject.ui \
@@ -366,7 +397,6 @@ FORMS    += mainwindow.ui \
     dlgvaluepair.ui \
     dlgemployee.ui \
     gdemployesgroups.ui \
-    dlgorder.ui \
     dlgmenuname.ui \
     dlgdishtype.ui \
     dlghall.ui \

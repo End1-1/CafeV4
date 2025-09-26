@@ -138,10 +138,10 @@ void QImportFromAS::actionRefresh()
     QStringList queriesAs = ui->leQuery->document()->toPlainText().arg(ui->leDatabase->text()).split(";");
 
     QMap<int, int> docType;
-    docType[6] = 1;
-    docType[7] = 2;
-    docType[8] = 3;
-    docType[17] = 5;
+    docType[8] = 1;
+    docType[10] = 2;
+    docType[11] = 3;
+    docType[12] = 5;
 
     QMap<QString, Document> docs;
     QMap<QString, QList<Record> > recs;

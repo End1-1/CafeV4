@@ -38,40 +38,17 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_4">
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>Name</string>
+            <string>Remind</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2" colspan="2">
-          <widget class="QPComboBox" name="cbType">
-           <property name="fieldName" stdset="0">
-            <string>TYPE_NAME</string>
-           </property>
-           <property name="fieldId" stdset="0">
-            <string>TYPE_ID</string>
-           </property>
-           <property name="table" stdset="0">
-            <string>ME_TYPES</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="2">
-          <widget class="QLineEdit" name="leRPrice"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_2">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Code</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Color</string>
+            <string>Type</string>
            </property>
           </widget>
          </item>
@@ -82,19 +59,47 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="2">
-          <widget class="QLineEdit" name="leSecondCode"/>
-         </item>
-         <item row="5" column="3">
-          <widget class="QPushButton" name="btnColor">
-           <property name="maximumSize">
-            <size>
-             <width>25</width>
-             <height>16777215</height>
-            </size>
-           </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>...</string>
+            <string>Code</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QLineEdit" name="leRPrice"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Barcode</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2" colspan="2">
+          <widget class="QPComboBox" name="cbPayment">
+           <property name="fieldId" stdset="0">
+            <string>PAYMENT_MOD</string>
+           </property>
+           <property name="fieldName" stdset="0">
+            <string>NAME</string>
+           </property>
+           <property name="table" stdset="0">
+            <string>ME_DISHES_MOD</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QCheckBox" name="chCopyNumToCliboard">
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -117,13 +122,6 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="2" colspan="2">
-          <widget class="QPLineEdit" name="leQueue">
-           <property name="field" stdset="0">
-            <string>QUEUE</string>
-           </property>
-          </widget>
-         </item>
          <item row="5" column="2">
           <widget class="QPColorEdit" name="leColor">
            <property name="field" stdset="0">
@@ -131,61 +129,17 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_3">
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>Payment</string>
+            <string>Queue</string>
            </property>
           </widget>
          </item>
          <item row="6" column="2">
           <widget class="QLineEdit" name="leRemind"/>
          </item>
-         <item row="7" column="2">
-          <widget class="QLineEdit" name="leDescription"/>
-         </item>
-         <item row="9" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>Second price</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Type</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Description</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2" colspan="2">
-          <widget class="QPComboBox" name="cbPayment">
-           <property name="fieldId" stdset="0">
-            <string>PAYMENT_MOD</string>
-           </property>
-           <property name="fieldName" stdset="0">
-            <string>NAME</string>
-           </property>
-           <property name="table" stdset="0">
-            <string>ME_DISHES_MOD</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2" colspan="2">
-          <widget class="QPLineEdit" name="leName">
-           <property name="field" stdset="0">
-            <string>NAME</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="0" colspan="4">
+         <item row="13" column="0" colspan="4">
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -198,24 +152,94 @@
            </property>
           </spacer>
          </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>Remind</string>
+         <item row="4" column="2" colspan="2">
+          <widget class="QPLineEdit" name="leQueue">
+           <property name="field" stdset="0">
+            <string>QUEUE</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_5">
+         <item row="5" column="3">
+          <widget class="QPushButton" name="btnColor">
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
-            <string>Queue</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <widget class="QCheckBox" name="chCopyNumToCliboard">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Payment</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Color</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="2">
+          <widget class="QLineEdit" name="leBarcode"/>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QLineEdit" name="leSecondCode"/>
+         </item>
+         <item row="1" column="2" colspan="2">
+          <widget class="QPComboBox" name="cbType">
+           <property name="fieldName" stdset="0">
+            <string>TYPE_NAME</string>
+           </property>
+           <property name="fieldId" stdset="0">
+            <string>TYPE_ID</string>
+           </property>
+           <property name="table" stdset="0">
+            <string>ME_TYPES</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Second price</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QLineEdit" name="leDescription"/>
+         </item>
+         <item row="3" column="2" colspan="2">
+          <widget class="QPLineEdit" name="leName">
+           <property name="field" stdset="0">
+            <string>NAME</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="2">
+          <widget class="QCheckBox" name="chNeedManager">
            <property name="text">
             <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Need Manager</string>
            </property>
           </widget>
          </item>
@@ -526,6 +550,27 @@
    <header>qplineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>leCode</tabstop>
+  <tabstop>cbType</tabstop>
+  <tabstop>cbPayment</tabstop>
+  <tabstop>leName</tabstop>
+  <tabstop>leQueue</tabstop>
+  <tabstop>leColor</tabstop>
+  <tabstop>leRemind</tabstop>
+  <tabstop>leDescription</tabstop>
+  <tabstop>leSecondCode</tabstop>
+  <tabstop>leRPrice</tabstop>
+  <tabstop>leBarcode</tabstop>
+  <tabstop>btnColor</tabstop>
+  <tabstop>chCopyNumToCliboard</tabstop>
+  <tabstop>gridMenu</tabstop>
+  <tabstop>tblGoods</tabstop>
+  <tabstop>tblTotal</tabstop>
+  <tabstop>btnLoadImage</tabstop>
+  <tabstop>grImage</tabstop>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -1,9 +1,12 @@
 #include "qgroupquery.h"
 #include "ui_qgroupquery.h"
 #include "qgroupquerybindvalues.h"
+#include "xlsxall.h"
+#include "qbasegrid.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QFileDialog>
 #include <QSqlRecord>
 #include <QLibrary>
 #include <QDir>
@@ -32,62 +35,83 @@ QGroupQuery::~QGroupQuery()
     delete ui;
 }
 
-void QGroupQuery::actionExcel(const QString &fileName)
+void QGroupQuery::actionExcel(QString fileName)
 {
-    typedef int* (*Excel_Create)();
-    typedef int (*Excel_Show)(void*);
-    typedef int* (*Workbook_Add)(void *);
-    typedef int* (*Sheet_Select)(void *, int);
-    typedef int (*Sheet_Set_Cell_Value)(void*, int, int, const wchar_t *);
-    typedef int (*Sheet_Set_Col_Width)(void *, int, int);
-    typedef int (*Clear)(void*);
-    typedef int (*SaveToFile)(void*, const wchar_t *);
-
-    QLibrary lib(QDir::currentPath() + "/excel");
-    if (!lib.load())
-    {
-        QMessageBox::critical(this, "Program error", "Could not load library " + QDir::currentPath() + "/excel.dll");
+    int fXlsxFitToPage = 0;
+    QString fXlsxPageOrientation = xls_page_orientation_portrait;
+    int fXlsxPageSize = xls_page_size_a4;
+    int colCount = ui->tblOutput->columnCount();
+    int rowCount = ui->tblOutput->rowCount();
+    if (colCount == 0 || rowCount == 0) {
+        QMessageBox::information(this, "Error", tr("Empty report!"));
         return;
     }
-
-    Excel_Create excel_create = (Excel_Create)(lib.resolve("Excel_Create"));
-    Excel_Show excel_show = (Excel_Show)(lib.resolve("Excel_Show"));
-    Workbook_Add workbook_add = (Workbook_Add)(lib.resolve("Workbook_Add"));
-    Sheet_Select sheet_select = (Sheet_Select)(lib.resolve("Sheet_Select"));
-    Sheet_Set_Cell_Value sheet_set_cell_value = (Sheet_Set_Cell_Value)(lib.resolve("Sheet_Set_Cell_Value"));
-    Sheet_Set_Col_Width sheet_set_col_width = (Sheet_Set_Col_Width)(lib.resolve("Sheet_Set_Col_Width"));
-    Clear clear = (Clear)(lib.resolve("Clear"));
-    SaveToFile save = (SaveToFile)(lib.resolve("SaveToFile"));
-
-    int *excel = excel_create();
-    int *workbook = workbook_add(excel);
-    int *sheet = sheet_select(workbook, 1);
-
-    QStringList headers;
-    for (int i = 0; i < ui->tblOutput->columnCount(); i++) {
-        sheet_set_cell_value(sheet, i + 1, 1, ui->tblOutput->model()->headerData(i, Qt::Horizontal).toString().toStdWString().c_str());
-        sheet_set_col_width(sheet, i + 1, ui->tblOutput->columnWidth(i) / 7);
-        headers << ui->tblOutput->model()->headerData(i, Qt::Horizontal).toString();
+    XlsxDocument d;
+    XlsxSheet *s = d.workbook()->addSheet("Sheet1");
+    s->setupPage(fXlsxPageSize, fXlsxFitToPage, fXlsxPageOrientation);
+    /* HEADER */
+    QColor color = QColor::fromRgb(200, 200, 250);
+    QFont headerFont(qApp->font());
+    headerFont.setBold(true);
+    d.style()->addFont("header", headerFont);
+    d.style()->addBackgrounFill("header", color);
+    d.style()->addHAlignment("header", xls_alignment_center);
+    d.style()->addBorder("header", XlsxBorder());
+    QBaseGrid::CustomHeader *h = static_cast<QBaseGrid::CustomHeader*>(ui->tblOutput->horizontalHeader());
+    for (int i = 0; i < colCount; i++) {
+        //s->addCell(1, i + 1, h->m_captions[i], d.style()->styleNum("header"));
+        s->setColumnWidth(i + 1, ui->tblOutput->columnWidth(i) / 7);
+    }
+    /* BODY */
+    QMap<int, QString> bgFill;
+    QMap<int, QString> bgFillb;
+    QFont bodyFont(qApp->font());
+    d.style()->addFont("body", bodyFont);
+    d.style()->addBackgrounFill("body", QColor(Qt::white));
+    d.style()->addVAlignment("body", xls_alignment_center);
+    d.style()->addBorder("body", XlsxBorder());
+    bgFill[QColor(Qt::white).rgb()] = "body";
+    bodyFont.setBold(true);
+    d.style()->addFont("body_b", bodyFont);
+    d.style()->addBackgrounFill("body_b", QColor(Qt::white));
+    d.style()->addVAlignment("body_b", xls_alignment_center);
+    d.style()->addBorder("body_b", XlsxBorder());
+    bgFillb[QColor(Qt::white).rgb()] = "body_b";
+    for (int j = 0; j < rowCount; j++) {
+        for (int i = 0; i < colCount; i++) {
+            int bgColor = QColor(Qt::white).rgb();
+            if (!bgFill.contains(bgColor)) {
+                bodyFont.setBold(false);
+                d.style()->addFont(QString::number(bgColor), bodyFont);
+                d.style()->addBackgrounFill(QString::number(bgColor), QColor::fromRgb(bgColor));
+                bgFill[bgColor] = QString::number(bgColor);
+            }
+            if (!bgFill.contains(bgColor)) {
+                bodyFont.setBold(true);
+                d.style()->addFont(QString::number(bgColor), bodyFont);
+                d.style()->addBackgrounFill(QString::number(bgColor), QColor::fromRgb(bgColor));
+                bgFillb[bgColor] = QString::number(bgColor);
+            }
+            QString bgStyle = bgFill[bgColor];
+            if (ui->tblOutput->item(j, i)->data(Qt::FontRole).value<QFont>().bold()) {
+                bgStyle = bgFillb[bgColor];
+            }
+            s->addCell(j + 2, i + 1, ui->tblOutput->item(j, i)->data(Qt::EditRole), d.style()->styleNum(bgStyle));
+        }
     }
 
-    for (int i = 0; i < ui->tblOutput->rowCount(); i++)
-        for (int j =  0; j < ui->tblOutput->columnCount(); j++)
-            sheet_set_cell_value(sheet, j + 1, i + 2, ui->tblOutput->item(i, j)->data(Qt::EditRole).toString().toStdWString().c_str());
-
-//    int footerRow = ui->tblOutputTotal->rowCount() + ui->tblOutput->rowCount() + 2;
-//    for (int i = 0; i < ui->tblOutput->rowCount(); i++)
-//        for (int j =  0; j < ui->tblOutputTotal->columnCount(); j++) {
-//            QTableWidgetItem *item = ui->tblOutputTotal->item(i, j);
-//            if (item)
-//                sheet_set_cell_value(sheet, j + 1, i + footerRow, item->text().toStdWString().c_str());
-//        }
-
-    excel_show(excel);
-    if (fileName.length())
-        save(workbook, fileName.toStdWString().c_str());
-    clear(sheet);
-    clear(workbook);
-    clear(excel);
+    QString err;
+    if (fileName.isEmpty()) {
+        const_cast<QString&>(fileName) = QFileDialog::getSaveFileName(this, "", "", "*.xlsx");
+    }
+    if (fileName.isEmpty()) {
+        return;
+    }
+    if (!d.save(fileName, err)) {
+        if (!err.isEmpty()) {
+            QMessageBox::critical(this, "Error", err);
+        }
+    }
 }
 
 void QGroupQuery::actionRefresh()
@@ -116,7 +140,12 @@ void QGroupQuery::actionRefresh()
         dt->sqlText = ui->txtQuery->document()->toPlainText();
         for (QList<BindValue>::const_iterator it = m_bindValues.constBegin(); it != m_bindValues.constEnd(); it++)
             dt->bindValue[it->valueName] = it->value;
-        dt->start();
+        auto *th = new QThread();
+        connect(th, &QThread::finished, th, &QThread::deleteLater);
+        connect(th, &QThread::started, dt, &QDbThread::run);
+        connect(dt, &QDbThread::finish, th, &QThread::quit);
+        dt->moveToThread(th);
+        th->start();
     }
     saveHistory();
     ui->tab->setCurrentIndex(3);
@@ -220,9 +249,9 @@ void QGroupQuery::dbthreadFetchColumns(QStringList colNames)
     ui->tblOutput->setHorizontalHeaderLabels(colNames);
 }
 
-QDbThread::QDbThread(const QString &dbName, const QString &dbUser, const QString &dbPass)
+QDbThread::QDbThread(const QString &dbName, const QString &dbUser, const QString &dbPass) :
+    QObject()
 {
-    connect(this, SIGNAL(finished()), this, SLOT(deleteLater()));
     m_dbName = dbName;
     m_userName = dbUser;
     m_password = dbPass;
@@ -254,17 +283,20 @@ void QDbThread::run()
                             QSqlRecord rec = q.record();
                             QStringList cols;
                             cols << tr("Cafe");
-                            for (int i = 0; i < rec.count(); i++)
+                            int colcount = rec.count();
+                            for (int i = 0; i < colcount; i++)
                                 cols << QString::fromUtf8(rec.fieldName(i).toLatin1());
                             emit fetchColumns(cols);
+                            int rows = 0;
                             do {
                                 QList<QVariant> d;
                                 d.append(alias);
-                                for (int i = 0; i < q.record().count(); i++)
+                                for (int i = 0; i < colcount; i++)
                                     d.append(q.value(i));
                                 data.append(d);
                             } while (q.next());
-                            QMutexLocker locker(&m_mutex);
+                            //QMutexLocker locker(&m_mutex);
+                            qDebug() << "EMIT FETCH RESULT";
                             emit fetchResult(data);
                         }
                     } else {
@@ -285,13 +317,14 @@ void QDbThread::run()
     if (!error)
         emit status(row, tr("Done."));
     QSqlDatabase::removeDatabase(dbId);
-    terminate();
+    emit finish();
 }
 
 QString QDbThread::getDbId()
 {
     QMutexLocker locker(&m_mutex);
     m_dbNum = QString::number(m_dbNum.toInt() + 1);
+    qDebug() << "NEW DB NUMBER" << m_dbNum;
     return "DbThread" + m_dbNum;
 }
 

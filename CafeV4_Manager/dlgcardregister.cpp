@@ -37,7 +37,7 @@ void DlgCardRegister::on_leCode_returnPressed()
     }
     int id = code.mid(9, 5).toInt();
     m_sqlDriver->openDB();
-    m_sqlDriver->prepare("select id, name, mod_id, info from costumers_names where id=:id");
+    m_sqlDriver->prepare("select id, name, info from costumers_names where id=:id");
     m_sqlDriver->bind(":id", id);
     m_sqlDriver->execSQL();
     if (m_sqlDriver->next()) {

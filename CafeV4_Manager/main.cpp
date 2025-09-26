@@ -1,12 +1,13 @@
 #include <QApplication>
 #include <QFontDatabase>
 #include "mainwindow.h"
-#include "core.h"
 #include "qsqldb.h"
 #include "dlgconnection.h"
 #include "qgroupquery.h"
 #include <QProcess>
 #include "cnfmaindb.h"
+#include <QFile>
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,8 @@ int main(int argc, char *argv[])
 
     QSqlDB::setDbName(QSqlDB::addDatabase(__cnfmaindb.fHost, __cnfmaindb.fDatabase, __cnfmaindb.fUser, __cnfmaindb.fPassword), "maindb");
     QSqlDB::setDbName(QSqlDB::addDatabase(__cnfmaindb.fHost, __cnfmaindb.fDatabase, __cnfmaindb.fUser, __cnfmaindb.fPassword), "clientdb");
+    QSqlDB::setDbName(QSqlDB::addDatabase(__cnfmaindb.fHost, __cnfmaindb.fDatabase, __cnfmaindb.fUser, __cnfmaindb.fPassword), "clientdb1");
+    QSqlDB::setDbName(QSqlDB::addDatabase(__cnfmaindb.fHost, __cnfmaindb.fDatabase, __cnfmaindb.fUser, __cnfmaindb.fPassword), "clientdb2");
     QGroupQuery::m_mainDb.append(__cnfmaindb.fHost + ":" + __cnfmaindb.fDatabase);
     QGroupQuery::m_mainDb.append(__cnfmaindb.fUser);
     QGroupQuery::m_mainDb.append(__cnfmaindb.fPassword);

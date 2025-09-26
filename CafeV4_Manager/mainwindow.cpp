@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "dlglogin.h"
 #include "dlgsettingspassword.h"
-#include "dlgpassword.h"
 #include "mainwindow.h"
 #include "dlgrecalculation.h"
 #include "dlgsalarydoc.h"
@@ -29,6 +28,7 @@
 #include "dlgconnection.h"
 #include "qfoodgroup.h"
 #include "qfoodunits.h"
+#include "monthlyselfcost.h"
 #include "qfoods.h"
 #include "qprintschema.h"
 #include "qdishesgroupofgroup.h"
@@ -671,3 +671,9 @@ void MainWindow::on_actionStaff_food_triggered()
 {
     createWindow<StaffFood>(static_cast<QAction*>(sender()));
 }
+
+void MainWindow::on_actionMonthly_selfcost_triggered()
+{
+    createWindow<MonthlySelfcost>(static_cast<QAction*>(sender()));
+}
+

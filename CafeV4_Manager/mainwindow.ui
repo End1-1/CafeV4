@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>1110</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
@@ -165,6 +165,7 @@
     <addaction name="actionRecipes_2"/>
     <addaction name="actionRemoved_orders"/>
     <addaction name="actionGroup_queries"/>
+    <addaction name="actionMonthly_selfcost"/>
    </widget>
    <addaction name="menuProgram"/>
    <addaction name="menuActions"/>
@@ -797,6 +798,11 @@
   <action name="actionStaff_food">
    <property name="text">
     <string>Staff food</string>
+   </property>
+  </action>
+  <action name="actionMonthly_selfcost">
+   <property name="text">
+    <string>Monthly selfcost</string>
    </property>
   </action>
  </widget>

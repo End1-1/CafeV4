@@ -287,7 +287,7 @@ void GFullFinalMovement::getAllStores()
                              "from st_documents st, st_draft sd, food_names fn "
                              "where st.id=sd.doc_id and sd.goods_id=fn.id " + goodsCond +
                              "and st.doc_date between :date1 and :date2 and store_output=:store_id "
-                             "and st.action_id=:action_id "
+                             "and st.action_id=:action_id and st.comment not like 'Անձնակազմի%'"
                              "group by 1, 2");
 
         /* Sale */
@@ -426,6 +426,7 @@ void GFullFinalMovement::getAllStores()
             }
 
             /* Update values */
+            /*
             if (cellValue(i, m_dataFields["q_fact"]).toDouble() > 0.001) {
                 m_sqlDriver->prepare("update st_draft set amount = qty * :price "
                                      "where goods_id=:goods_id "
@@ -439,6 +440,7 @@ void GFullFinalMovement::getAllStores()
                 m_sqlDriver->bind(":action_id", DOC_INVERNTORIZATION);
                 m_sqlDriver->execSQL();
             }
+*/
         }
 
         for (int i = 0; i < tableWidget(0)->rowCount(); i++) {

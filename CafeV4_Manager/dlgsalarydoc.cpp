@@ -330,6 +330,7 @@ void DlgSalaryDoc::actionRefresh()
         int vi = ((int)(v / 100)) * 100;
         if (vi < 3000)
             vi = 3000;
+        vi -= 300;
         int row = ui->tblList->rowCount();
         ui->tblList->setRowCount(row + 1);
         for (int i = 0; i < ui->tblList->columnCount(); i++)
@@ -365,6 +366,7 @@ void DlgSalaryDoc::actionRefresh()
         if (v < 3000) {
             v = 3000;
         }
+        v -= 300;
         ui->tblList->item(i, 6)->setText(QString::number(nv));
         ui->tblList->item(i, 4)->setText(QString::number(v));
     }
@@ -847,7 +849,7 @@ float DlgSalaryDoc::getSalaryOfGroup(int groupId, int currentstaff)
             mem[s.cell] = 0;
             for (int k = 0; k < ui->tblList->rowCount(); k++) {
                 QStringList emps = params[0].split(",", QString::SkipEmptyParts);
-                ui->tblList->item(k, GROUP_COL)->text();
+                qDebug() << ui->tblList->item(k, GROUP_COL)->text();
                 if (emps.contains(ui->tblList->item(k, GROUP_COL)->text()))
                     mem[s.cell] ++;
             }

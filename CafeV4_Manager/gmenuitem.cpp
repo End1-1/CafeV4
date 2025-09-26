@@ -113,12 +113,18 @@ void GMenuItem::actionSave()
     if (!m_id) {
         m_id = m_sqlDrv->genId("GEN_ME_DISHES_ID");
         ui->leCode->setText(QString::number(m_id));
-        m_sqlDrv->prepare("insert into me_dishes (id, type_id, name, payment_mod, color, queue, remind, img_link, descr) "
+        m_sqlDrv->prepare("insert into me_dishes (id, type_id, name, payment_mod, color, "
+                          "queue, remind, img_link, descr, barcode, f_addbymanager) "
                           "values "
-                          "(:id, :type_id, :name, :payment_mod, :color, :queue, :remid, :img_link, :descr)");
+                          "(:id, :type_id, :name, :payment_mod, :color, "
+                          ":queue, :remid, :img_link, :descr, :barcode, :f_addbymanager)");
     } else {
-        m_sqlDrv->prepare("update me_dishes set type_id=:type_id, name=:name, payment_mod=:payment_mod, color=:color,"
-                          "queue=:queue, remind=:remind, img_link=:img_link, descr=:descr, rdish=:rdish, rprice=:rprice where id=:id");
+        m_sqlDrv->prepare("update me_dishes set type_id=:type_id, "
+                          "name=:name, payment_mod=:payment_mod, color=:color,"
+                          "queue=:queue, remind=:remind, img_link=:img_link,"
+                          "descr=:descr, rdish=:rdish, rprice=:rprice, barcode=:barcode, "
+                          "f_addbymanager=:f_addbymanager "
+                          "where id=:id");
     }
     m_sqlDrv->bind(":id", m_id);
     m_sqlDrv->bind(":type_id", ui->cbType->currentItemData());
@@ -131,6 +137,8 @@ void GMenuItem::actionSave()
     m_sqlDrv->bind(":descr", ui->leDescription->text());
     m_sqlDrv->bind(":rdish", ui->leSecondCode->text().toInt());
     m_sqlDrv->bind(":rprice", ui->leRPrice->text());
+    m_sqlDrv->bind(":barcode", ui->leBarcode->text());
+    m_sqlDrv->bind(":f_addbymanager", ui->chNeedManager->isChecked() ? "1" : "0");
     if (!m_sqlDrv->execSQL()) {
         if (!update)
             m_id = 0;
@@ -327,7 +335,9 @@ void GMenuItem::loadMenu()
 
     int row = 0;
 
-    if (!m_sqlDrv->prepare("select menu_id, price, store_id, print_schema, state_id, print1, print2 from me_dishes_menu where dish_id=:dish_id"))
+    if (!m_sqlDrv->prepare("select menu_id, price, store_id, print_schema, "
+                           "state_id, print1, print2 "
+                           "from me_dishes_menu where dish_id=:dish_id"))
         return;
     m_sqlDrv->bind(":dish_id", m_id);
     if (!m_sqlDrv->execSQL())
@@ -371,8 +381,9 @@ void GMenuItem::loadMenu()
     if (!m_sqlDrv->openDB())
         return;
 
-    m_sqlDrv->prepare("select md.type_id, md.name, md.color, md.queue, md.payment_mod, md.remind, md.img_link, md.descr, md.rdish, "
-                      "md.rprice "
+    m_sqlDrv->prepare("select md.type_id, md.name, md.color, md.queue, "
+                      "md.payment_mod, md.remind, md.img_link, md.descr, md.rdish, "
+                      "md.rprice, md.barcode, md.f_addbymanager "
                       "from me_dishes md where md.id=:id");
     m_sqlDrv->bind(":id", m_id);
     m_sqlDrv->execSQL();
@@ -388,6 +399,8 @@ void GMenuItem::loadMenu()
         ui->leDescription->setText(m_sqlDrv->val().toString());
         ui->leSecondCode->setText(m_sqlDrv->val().toString());
         ui->leRPrice->setText(m_sqlDrv->val().toString());
+        ui->leBarcode->setText(m_sqlDrv->val().toString());
+        ui->chNeedManager->setChecked(m_sqlDrv->val().toInt() > 0);
     }
     m_sqlDrv->close();
 

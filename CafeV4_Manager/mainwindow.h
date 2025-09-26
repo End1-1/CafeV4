@@ -105,6 +105,8 @@ private slots:
 
     void on_actionStaff_food_triggered();
 
+    void on_actionMonthly_selfcost_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMap<QAction*, QString> m_costumReports;

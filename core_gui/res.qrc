@@ -51,4 +51,7 @@
         <file>res/icons/add-key-icon.png</file>
         <file>res/icons/peple.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>../CafeV4_Manager/img/app.ico</file>
+    </qresource>
 </RCC>

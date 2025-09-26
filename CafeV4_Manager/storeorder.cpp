@@ -152,35 +152,7 @@ void StoreOrder::actionPrintPreview()
 
 void StoreOrder::actionExcel()
 {
-    QLibrary lib(QDir::currentPath() + "/excel");
-    if (!lib.load())
-    {
-        QMessageBox::critical(this, "Program error", "Could not load library " + QDir::currentPath() + "/excel.dll");
-        return;
-    }
 
-    Excel_Create excel_create = (Excel_Create)(lib.resolve("Excel_Create"));
-    Excel_Show excel_show = (Excel_Show)(lib.resolve("Excel_Show"));
-    Workbook_Add workbook_add = (Workbook_Add)(lib.resolve("Workbook_Add"));
-    Sheet_Select sheet_select = (Sheet_Select)(lib.resolve("Sheet_Select"));
-    Sheet_Set_Cell_Value sheet_set_cell_value = (Sheet_Set_Cell_Value)(lib.resolve("Sheet_Set_Cell_Value"));
-    Sheet_Set_Col_Width sheet_set_col_width = (Sheet_Set_Col_Width)(lib.resolve("Sheet_Set_Col_Width"));
-    Clear clear = (Clear)(lib.resolve("Clear"));
-    SaveToFile save = (SaveToFile)(lib.resolve("SaveToFile"));
-
-    int *excel = excel_create();
-    int *workbook = workbook_add(excel);
-    int *sheet = sheet_select(workbook, 1);
-
-
-    for (int i = 0; i < ui->tableWidget->rowCount(); i++)
-        for (int j =  0; j < ui->tableWidget->columnCount(); j++)
-            sheet_set_cell_value(sheet, j + 1, i + 2, ui->tableWidget->item(i, j)->text().toStdWString().c_str());
-
-    excel_show(excel);
-    clear(sheet);
-    clear(workbook);
-    clear(excel);
 }
 
 
@@ -400,7 +372,7 @@ bool StoreOrder::checkDoc()
     }
 
     for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
-        if (!ui->tableWidget->item(i, 2)->text().toDouble()) {
+        if (ui->tableWidget->item(i, 2)->text().toDouble() < 0.001 && ui->cbAction->currentItemData() != 7) {
             error += tr("One of the quantity of the foods is not set") + "\n";
             break;
         }
@@ -434,13 +406,16 @@ void StoreOrder::loadDoc()
         ui->leComment->setText(m_sqlDrv->val().toString());
     }
 
-    m_sqlDrv->prepare("select sdd.goods_id, f.name, sdd.qty, fu.name, sdd.amount/sdd.qty, sdd.amount "
+    m_sqlDrv->prepare("select sdd.goods_id, f.name, sdd.qty, fu.name, iif(sdd.qty>0, sdd.amount/sdd.qty, 0), sdd.amount "
                       "from st_draft sdd, food_names f, food_units fu "
                       "where sdd.goods_id=f.id and f.unit_id=fu.id and sdd.doc_id=:doc_id "
                       "order by f.name ");
     m_sqlDrv->bind(":doc_id", m_docNum.toInt());
     m_sqlDrv->execSQL();
     while (m_sqlDrv->next()) {
+//        if (m_sqlDrv->valFloat("QTY") < 0.001) {
+//            continue;
+//        }
         int row = Toolkit::newRow(ui->tableWidget);
         for (int i = 0; i < ui->tableWidget->columnCount(); i++)
             ui->tableWidget->item(row, i)->setData(Qt::DisplayRole, m_sqlDrv->val());
