@@ -19,16 +19,17 @@ GridWidget::GridWidget(QWidget *parent) :
     ui->wQuickSearch->setVisible(false);
     mDb.setDatabase(_gr_host_, _gr_path_, _gr_user_, _gr_pass_, "lc_ctype=utf8");
     connect(&mDb, SIGNAL(finished()), this, SLOT(queryFinished()));
-    connect(ui->tblData->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(mainTableSectionResized(int,int,int)));
+    connect(ui->tblData->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(mainTableSectionResized(int, int, int)));
     connect(ui->tblData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(mainTableSectionClicked(int)));
     connect(ui->tblTotal->horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(mainTableValueChanged(int)));
 }
 
 GridWidget::~GridWidget()
 {
-    if (mEditorWidget) {
+    if(mEditorWidget) {
         mEditorWidget->deleteLater();
     }
+
     delete ui;
 }
 
@@ -37,42 +38,54 @@ void GridWidget::go()
     QString select;
     QStringList leftJoin;
     QMap<QString, QString> translation;
-    for (GridColumn &g: mColumns) {
-        if (!g.mSelect) {
+
+    for(GridColumn &g : mColumns) {
+        if(!g.mSelect) {
             continue;
         }
-        if (select.isEmpty()) {
+
+        if(select.isEmpty()) {
             select += "select ";
         } else {
             select += ", ";
         }
+
         select += g.mField;
-        if (!g.mLeftJoinTable.isEmpty()) {
-            if (!leftJoin.contains(g.mLeftJoinTable)) {
+
+        if(!g.mLeftJoinTable.isEmpty()) {
+            if(!leftJoin.contains(g.mLeftJoinTable)) {
                 leftJoin.append(g.mLeftJoinTable);
             }
         }
-        if (!g.mLeftJoinRelation.isEmpty()) {
-            if (!leftJoin.contains(g.mLeftJoinRelation)) {
+
+        if(!g.mLeftJoinRelation.isEmpty()) {
+            if(!leftJoin.contains(g.mLeftJoinRelation)) {
                 leftJoin.insert(0, g.mLeftJoinRelation);
             }
         }
+
         QString trField = g.mField;
         int pos = trField.indexOf(" as ", 0, Qt::CaseInsensitive);
-        if (pos > -1) {
+
+        if(pos > -1) {
             trField = trField.mid(pos + 4, trField.length() - pos);
         } else {
             pos = trField.indexOf(".", 0, Qt::CaseInsensitive);
-            if (pos > -1) {
+
+            if(pos > -1) {
                 trField = trField.mid(pos + 1, trField.length() - pos);
             }
         }
+
         translation[trField] = g.mTranslation;
     }
+
     QString query = select + " from " + mMainTable + " ";
-    for (const QString &s: leftJoin) {
+
+    for(const QString &s : leftJoin) {
         query += mLeftJoinTables[s] + " ";
     }
+
     mModel->setTranslation(translation);
     mDb.setSqlQuery(query);
     mDb.start();
@@ -98,7 +111,7 @@ void GridWidget::search()
 
 void GridWidget::escapeKey()
 {
-    if (ui->wQuickSearch->isVisible()) {
+    if(ui->wQuickSearch->isVisible()) {
         ui->wQuickSearch->setVisible(false);
     }
 }
@@ -137,13 +150,15 @@ void GridWidget::mainTableValueChanged(int value)
 
 void GridWidget::newItem()
 {
-    if (mEditorWidget) {
+    if(mEditorWidget) {
         GridEditorDialog *gw = new GridEditorDialog(mEditorWidget, this);
-        while (gw->exec() == QDialog::Accepted) {
-            if (!gw->mFlagNew) {
+
+        while(gw->exec() == QDialog::Accepted) {
+            if(!gw->mFlagNew) {
                 break;
             }
         }
+
         mEditorWidget->setParent(nullptr);
         delete gw;
     }
@@ -151,14 +166,16 @@ void GridWidget::newItem()
 
 void GridWidget::editItem()
 {
-    if (mEditorWidget) {
+    if(mEditorWidget) {
         GridEditorDialog *gw = new GridEditorDialog(mEditorWidget, this);
         mEditorWidget->load(getItemID());
-        while (gw->exec() == QDialog::Accepted) {
-            if (!gw->mFlagNew) {
+
+        while(gw->exec() == QDialog::Accepted) {
+            if(!gw->mFlagNew) {
                 break;
             }
         }
+
         mEditorWidget->setParent(nullptr);
         delete gw;
     }
@@ -171,7 +188,6 @@ void GridWidget::setTitle(const QString &title)
 
 void GridWidget::prepare()
 {
-
 }
 
 void GridWidget::restoreColumnsWidths()
@@ -180,20 +196,22 @@ void GridWidget::restoreColumnsWidths()
                 .arg(_APPLICATION_)
                 .arg(_MODULE_)
                 .arg(mReportTitle));
-    for (int i = 0; i < mModel->columnCount(); i++) {
-        if (s.contains(mModel->nameForColumnIndex(i))) {
+
+    for(int i = 0; i < mModel->columnCount(); i++) {
+        if(s.contains(mModel->nameForColumnIndex(i))) {
             ui->tblData->setColumnWidth(i, s.value(mModel->nameForColumnIndex(i)).toInt());
         }
     }
-
 }
 
 int GridWidget::getItemID()
 {
     QModelIndexList il = ui->tblData->selectionModel()->selectedIndexes();
-    if (il.count() > 0) {
+
+    if(il.count() > 0) {
         return mModel->data(il.at(0).row(), 0, Qt::EditRole).toInt();
     }
+
     return 0;
 }
 
@@ -208,29 +226,30 @@ void GridWidget::addColumn(const QString &field, const QString &translation, boo
     mColumns.append(g);
 }
 
-GridTableModel::GridTableModel(QList<QList<QVariant> > &data, QMap<QString, int> &indexOfField) :
+GridTableModel::GridTableModel(QList<QList<QVariant> >& data, QMap<QString, int>& indexOfField) :
     mData(data),
     mIndexOfField(indexOfField)
 {
-
 }
 
 QVariant GridTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    switch (role) {
+    switch(role) {
     case Qt::DisplayRole:
-        if (orientation == Qt::Vertical) {
+        if(orientation == Qt::Vertical) {
             return section + 1;
         } else {
             return mTranslation.contains(mFieldIndex[section]) ? mTranslation[mFieldIndex[section]] : mFieldIndex[section];
         }
+
     case Qt::DecorationRole:
-        if (orientation == Qt::Horizontal) {
+        if(orientation == Qt::Horizontal) {
 //            if (fFilters.contains(section)) {
 //                return QIcon(":/filter_set.png");
 //            }
         }
     }
+
     return QVariant();
 }
 
@@ -264,49 +283,65 @@ QVariant GridTableModel::data(const QModelIndex &index, int role) const
 QVariant GridTableModel::data(int row, int column, int role) const
 {
     row = mProxyRows[row];
-    switch (role) {
+
+    switch(role) {
     case Qt::DisplayRole: {
         QVariant &v = mData[row][column];
-        switch (v.type()) {
+
+        switch(v.type()) {
         case QVariant::Int:
             return v.toString();
+
         case QVariant::Date:
             return v.toDate().toString(FORMAT_DATE_TO_STR);
+
         case QVariant::DateTime:
             return v.toDateTime().toString(FORMAT_DATETIME_TO_STR);
+
         case QVariant::Time:
             return v.toTime().toString(FORMAT_TIME_TO_STR);
+
         case QVariant::Double:
             return double_str(v.toDouble(), 4);
+
         default:
             return v.toString();
         }
+
         break;
     }
+
     case Qt::EditRole:
         return mData[row][column];
     }
+
     return QVariant();
 }
 
 void GridTableModel::sort(int column, Qt::SortOrder order)
 {
     Q_UNUSED(order);
-    if (mLastSortedColumn == column) {
+
+    if(mLastSortedColumn == column) {
         mSortAsc = !mSortAsc;
     } else {
         mSortAsc = true;
     }
+
     mLastSortedColumn = column;
     QMap<QVariant, int> data;
-    foreach (int i, mProxyRows) {
+
+    foreach(int i, mProxyRows) {
         data.insertMulti(mData[i][column], i);
     }
+
     beginResetModel();
     mProxyRows = data.values();
-    if (!mSortAsc) {
+
+    if(!mSortAsc) {
         std::reverse(mProxyRows.begin(), mProxyRows.end());
     }
+
     endResetModel();
 }
 
@@ -320,7 +355,7 @@ QString GridTableModel::nameForColumnIndex(int index) const
     return mFieldIndex[index];
 }
 
-void GridTableModel::setTranslation(const QMap<QString, QString> &translation)
+void GridTableModel::setTranslation(const QMap<QString, QString>& translation)
 {
     mTranslation = translation;
 }
@@ -329,23 +364,29 @@ void GridTableModel::setFilter(int column, const QString &pattern)
 {
     mFilters[column] = pattern;
     mProxyRows.clear();
-    for (int i = 0; i < mData.count(); i++) {
+
+    for(int i = 0; i < mData.count(); i++) {
         mProxyRows << i;
     }
+
     filterData();
 }
 
 void GridTableModel::reset()
 {
     QStringList fields = mIndexOfField.keys();
-    for (const QString s: fields) {
+
+    for(const QString s : fields) {
         mFieldIndex[mIndexOfField[s]] = s;
     }
+
     beginResetModel();
     mProxyRows.clear();
-    for (int i = 0; i < mData.count(); i++) {
+
+    for(int i = 0; i < mData.count(); i++) {
         mProxyRows.append(i);
     }
+
     endResetModel();
 }
 
@@ -354,51 +395,67 @@ void GridTableModel::filterData()
     beginResetModel();
     QList<int> ps;
     QList<int> columns = mFilters.keys();
-    if (columns.contains(-1)) {
+
+    if(columns.contains(-1)) {
         columns.removeFirst();
     }
+
     QMap<int, QStringList> filter;
-    for (QMap<int, QString>::const_iterator it = mFilters.begin(); it != mFilters.end(); it++) {
-        filter[it.key()] = it.value().split("|", QString::SkipEmptyParts);
-        if (filter[it.key()].count() == 0) {
+
+    for(QMap<int, QString>::const_iterator it = mFilters.begin(); it != mFilters.end(); it++) {
+        filter[it.key()] = it.value().split("|", Qt::SkipEmptyParts);
+
+        if(filter[it.key()].count() == 0) {
             filter.remove(it.key());
         }
     }
-    for (int r = 0, count = mData.count(); r < count; r++) {
+
+    for(int r = 0, count = mData.count(); r < count; r++) {
         int row = r;
         bool found = filter.count() == 0;
-        if (found) {
+
+        if(found) {
             goto FOUND;
         }
-        if (mFilters.contains(-1)) {
-            for (int c = 0; c < mFieldIndex.count(); c++) {
-                foreach (QString searchStr, filter[-1]) {
-                    if (data(row, c, Qt::DisplayRole).toString().contains(searchStr, Qt::CaseInsensitive)) {
+
+        if(mFilters.contains(-1)) {
+            for(int c = 0; c < mFieldIndex.count(); c++) {
+                foreach(QString searchStr, filter[-1]) {
+                    if(data(row, c, Qt::DisplayRole).toString().contains(searchStr, Qt::CaseInsensitive)) {
                         found = true;
                         goto FOUND;
                     }
                 }
             }
         }
+
         found = columns.count() > 0;
-        foreach (int col, columns) {
+
+        foreach(int col, columns) {
             bool found2 = false;
-            foreach (QString searchStr, filter[col]) {
+
+            foreach(QString searchStr, filter[col]) {
                 found2 = found2 || data(row, col, Qt::DisplayRole).toString().contains(searchStr, Qt::CaseInsensitive);
-                if (found2) {
+
+                if(found2) {
                     break;
                 }
             }
+
             found = found && found2;
-            if (!found) {
+
+            if(!found) {
                 goto FOUND;
             }
         }
-        FOUND:
-        if (found) {
+
+FOUND:
+
+        if(found) {
             ps.append(row);
         }
     }
+
     mProxyRows = ps;
     endResetModel();
 }

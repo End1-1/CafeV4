@@ -3,9 +3,9 @@
 
 #include <QString>
 #include <QLocale>
-#include <QRegExp>
+#include <QRegularExpression>
 
-#define double_str(value, f) QLocale().toString(value, 'f', f).remove(QRegExp("(?!\\d[\\.\\,][1-9]+)0+$")).remove(QRegExp("[\\.\\,]$"))
+#define double_str(value, f) QLocale().toString(value, 'f', f).remove(QRegularExpression("(?!\\d[\\.\\,][1-9]+)0+$")).remove(QRegularExpression("[\\.\\,]$"))
 #define FORMAT_DATETIME_TO_STR "dd/MM/yyyy HH:mm:ss"
 #define FORMAT_DATETIME_TO_STR2 "dd/MM/yyyy HH:mm"
 #define FORMAT_DATE_TO_STR "dd/MM/yyyy"

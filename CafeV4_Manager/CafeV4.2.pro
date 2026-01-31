@@ -34,6 +34,7 @@ SOURCES += main.cpp\
     ../../XLSX/src/xlsxtheme.cpp \
     ../../XLSX/src/xlsxworkbook.cpp \
     ../../XLSX/src/xlsxwriter.cpp \
+    c5printing.cpp \
     cnfapp.cpp \
     cnfmaindb.cpp \
     dlgorder.cpp \
@@ -61,7 +62,6 @@ SOURCES += main.cpp\
     storeorder.cpp \
     dockidname.cpp \
     ../core/toolkit.cpp \
-    ../core/printing.cpp \
     printpreview.cpp \
     dlgfilterlist.cpp \
     foodgridwidget.cpp \
@@ -73,25 +73,25 @@ SOURCES += main.cpp\
     dlgsalaryformula.cpp \
     dlgaddsalaryfunction.cpp \
     qcostumcombobox.cpp \
-    ../../common/qsqldrv.cpp \
-    ../../common/qsystem.cpp \
-    ../../common/qlogwindow.cpp \
+    ../common/qsqldrv.cpp \
+    ../common/qsystem.cpp \
+    ../common/qlogwindow.cpp \
     dlgcalcselfcost.cpp \
-    ../../common/qpcombobox.cpp \
-    ../../common/qsqlcache.cpp \
-    ../../common/qbasesqldriver.cpp \
-    ../../common/SqlField.cpp \
-    ../../common/qdlgbase.cpp \
-    ../../common/fbtnokcancel.cpp \
-    ../../common/mdiwindow.cpp \
-    ../../common/qbasegrid.cpp \
-    ../../common/qdlgfilter.cpp \
-    ../../common/qdlgcache.cpp \
+    ../common/qpcombobox.cpp \
+    ../common/qsqlcache.cpp \
+    ../common/qbasesqldriver.cpp \
+    ../common/SqlField.cpp \
+    ../common/qdlgbase.cpp \
+    ../common/fbtnokcancel.cpp \
+    ../common/mdiwindow.cpp \
+    ../common/qbasegrid.cpp \
+    ../common/qdlgfilter.cpp \
+    ../common/qdlgcache.cpp \
     gsettings.cpp \
     gdsettings.cpp \
-    ../../common/qplineedit.cpp \
-    ../../common/qdlgquery.cpp \
-    ../../common/qbasesqlwindow.cpp \
+    ../common/qplineedit.cpp \
+    ../common/qdlgquery.cpp \
+    ../common/qbasesqlwindow.cpp \
     qeditwsettings.cpp \
     qsinchronizedatabasechanges.cpp \
     qdlgemployesaccess.cpp \
@@ -99,7 +99,7 @@ SOURCES += main.cpp\
     magicmenu.cpp \
     qimportfromas.cpp \
     dlgvaluepair.cpp \
-    ../../common/qsqldb.cpp \
+    ../common/qsqldb.cpp \
     gsalerreportcommon.cpp \
     gdocinstore.cpp \
     gsalarydoc.cpp \
@@ -117,7 +117,7 @@ SOURCES += main.cpp\
     dlghall.cpp \
     qstorages.cpp \
     dlgstorages.cpp \
-    ../../common/dlgconnection.cpp \
+    ../common/dlgconnection.cpp \
     qfoodgroup.cpp \
     dlgfoodgroups.cpp \
     qfoodunits.cpp \
@@ -198,6 +198,7 @@ HEADERS  += mainwindow.h \
     ../../XLSX/src/xlsxworkbook.h \
     ../../XLSX/src/xlsxwriter.h \
     ../../XLSX/src/zip.h \
+    c5printing.h \
     cnfapp.h \
     cnfmaindb.h \
     dlglogin.h \
@@ -222,7 +223,6 @@ HEADERS  += mainwindow.h \
     storeorder.h \
     dockidname.h \
     ../core/toolkit.h \
-    ../core/printing.h \
     printpreview.h \
     dlgfilterlist.h \
     foodgridwidget.h \
@@ -234,35 +234,35 @@ HEADERS  += mainwindow.h \
     dlgsalaryformula.h \
     dlgaddsalaryfunction.h \
     qcostumcombobox.h \
-    ../../common/qsqldrv.h \
-    ../../common/qsystem.h \
-    ../../common/qlogwindow.h \
+    ../common/qsqldrv.h \
+    ../common/qsystem.h \
+    ../common/qlogwindow.h \
     dlgcalcselfcost.h \
     qbasegrid.h \
     qsqldrv.h \
-    ../../common/qpcombobox.h \
+    ../common/qpcombobox.h \
     qpcombobox.h \
-    ../../common/qsqlcache.h \
-    ../../common/qbasesqldriver.h \
-    ../../common/SqlField.h \
+    ../common/qsqlcache.h \
+    ../common/qbasesqldriver.h \
+    ../common/SqlField.h \
     qsqlcache.h \
-    ../../common/qdlgbase.h \
-    ../../common/fbtnokcancel.h \
-    ../../common/mdiwindow.h \
-    ../../common/qbasegrid.h \
-    ../../common/qdlgfilter.h \
+    ../common/qdlgbase.h \
+    ../common/fbtnokcancel.h \
+    ../common/mdiwindow.h \
+    ../common/qbasegrid.h \
+    ../common/qdlgfilter.h \
     mdiwindow.h \
     fbtnokcancel.h \
     qdlgcache.h \
-    ../../common/qdlgcache.h \
+    ../common/qdlgcache.h \
     ff_user.h \
     gsettings.h \
     gdsettings.h \
-    ../../common/qplineedit.h \
+    ../common/qplineedit.h \
     qplineedit.h \
     qdlgquery.h \
-    ../../common/qdlgquery.h \
-    ../../common/qbasesqlwindow.h \
+    ../common/qdlgquery.h \
+    ../common/qbasesqlwindow.h \
     qbasesqlwindow.h \
     qeditwsettings.h \
     qsinchronizedatabasechanges.h \
@@ -290,7 +290,7 @@ HEADERS  += mainwindow.h \
     qstorages.h \
     dlgstorages.h \
     dlgconnection.h \
-    ../../common/dlgconnection.h \
+    ../common/dlgconnection.h \
     qfoodgroup.h \
     dlgfoodgroups.h \
     qfoodunits.h \
@@ -307,7 +307,6 @@ HEADERS  += mainwindow.h \
     dlgrecipe.h \
     dlgfoodcache.h \
     qtotalrecipes.h \
-    printing.h \
     gremoveorders.h \
     dlgsettotalmovementaddoption.h \
     dlgdatepair.h \
@@ -382,12 +381,12 @@ FORMS    += mainwindow.ui \
     dlgabout.ui \
     dlgsalaryformula.ui \
     dlgaddsalaryfunction.ui \
-    ../../common/qlogwindow.ui \
+    ../common/qlogwindow.ui \
     dlgcalcselfcost.ui \
-    ../../common/qbasegrid.ui \
-    ../../common/fbtnokcancel.ui \
-    ../../common/qdlgfilter.ui \
-    ../../common/qdlgcache.ui \
+    ../common/qbasegrid.ui \
+    ../common/fbtnokcancel.ui \
+    ../common/qdlgfilter.ui \
+    ../common/qdlgcache.ui \
     gdsettings.ui \
     qeditwsettings.ui \
     qsinchronizedatabasechanges.ui \
@@ -401,7 +400,7 @@ FORMS    += mainwindow.ui \
     dlgdishtype.ui \
     dlghall.ui \
     dlgstorages.ui \
-    ../../common/dlgconnection.ui \
+    ../common/dlgconnection.ui \
     dlgfoodgroups.ui \
     dlggoodsunits.ui \
     dlggoods.ui \

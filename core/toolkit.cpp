@@ -15,39 +15,46 @@ int Toolkit::newRow(QTableWidget *t)
 {
     int row = t->rowCount();
     t->setRowCount(row + 1);
-    for (int i = 0; i < t->columnCount(); i++)
+
+    for(int i = 0; i < t->columnCount(); i++)
         t->setItem(row, i, new QTableWidgetItem());
+
     return row;
 }
 
-int Toolkit::currentRow(QTableWidget *table, int &row)
+int Toolkit::currentRow(QTableWidget *table, int& row)
 {
     QModelIndexList lstRows = table->selectionModel()->selectedIndexes();
-    if (lstRows.count() == 0) {
+
+    if(lstRows.count() == 0) {
         QMessageBox::critical(table, tr("Error"), (tr("Nothing is selected")));
         row = -1;
     } else
         row = lstRows.at(0).row();
+
     return row;
 }
 
-void Toolkit::updateRow(QTableWidget *table, const int &row)
+void Toolkit::updateRow(QTableWidget *table, const int& row)
 {
-    for (int i = 0, count = table->columnCount(); i < count; i++)
+    for(int i = 0, count = table->columnCount(); i < count; i++)
         table->update(table->model()->index(row, i));
 }
 
 bool Toolkit::rowUp(QTableWidget *table)
 {
     QModelIndexList lst = table->selectionModel()->selectedIndexes();
-    if (!lst.count()) {
+
+    if(!lst.count()) {
         table->setCurrentCell(0, 0);
         return false;
     }
 
     QModelIndex &modelIndex = lst[0];
-    if (!modelIndex.row())
+
+    if(!modelIndex.row())
         return false;
+
     modelIndex = table->model()->index(modelIndex.row() - 1, modelIndex.column());
     table->selectionModel()->clear();
     table->selectionModel()->setCurrentIndex(modelIndex, QItemSelectionModel::Select);
@@ -57,14 +64,17 @@ bool Toolkit::rowUp(QTableWidget *table)
 bool Toolkit::rowDown(QTableWidget *table)
 {
     QModelIndexList lst = table->selectionModel()->selectedIndexes();
-    if (!lst.count()) {
+
+    if(!lst.count()) {
         table->setCurrentCell(0, 0);
         return false;
     }
 
     QModelIndex &modelIndex = lst[0];
-    if (modelIndex.row() == table->rowCount() - 1)
+
+    if(modelIndex.row() == table->rowCount() - 1)
         return false;
+
     modelIndex = table->model()->index(modelIndex.row() + 1, modelIndex.column());
     table->selectionModel()->clear();
     table->selectionModel()->setCurrentIndex(modelIndex, QItemSelectionModel::Select);
@@ -74,11 +84,13 @@ bool Toolkit::rowDown(QTableWidget *table)
 void Toolkit::columnLeft(QTableWidget *table)
 {
     QModelIndexList lst = table->selectionModel()->selectedIndexes();
-    if (!lst.count())
+
+    if(!lst.count())
         return;
 
     QModelIndex &modelIndex = lst[0];
-    if (!modelIndex.column())
+
+    if(!modelIndex.column())
         return;
 
     table->setFocus();
@@ -90,11 +102,13 @@ void Toolkit::columnLeft(QTableWidget *table)
 void Toolkit::columnRight(QTableWidget *table)
 {
     QModelIndexList lst = table->selectionModel()->selectedIndexes();
-    if (!lst.count())
+
+    if(!lst.count())
         return;
 
     QModelIndex &modelIndex = lst[0];
-    if (modelIndex.column() == table->columnCount() - 1)
+
+    if(modelIndex.column() == table->columnCount() - 1)
         return;
 
     table->setFocus();
@@ -106,8 +120,10 @@ void Toolkit::columnRight(QTableWidget *table)
 bool Toolkit::comboStringData(QComboBox *comboBox, QString &result)
 {
     result = "0";
-    if (comboBox->currentIndex() > -1)
+
+    if(comboBox->currentIndex() > -1)
         result = comboBox->itemData(comboBox->currentIndex()).toString();
+
     return result != "0";
 }
 
@@ -118,7 +134,7 @@ void Toolkit::comboSetIndexByData(QComboBox *comboBox, const QString &data)
 
 int Toolkit::comboItemData(QComboBox *comboBox)
 {
-    if (comboBox->currentIndex() < 0)
+    if(comboBox->currentIndex() < 0)
         return 0;
     else
         return comboBox->itemData(comboBox->currentIndex()).toInt();
@@ -130,7 +146,7 @@ void Toolkit::setFirstAndLastDateEdit(QDateEdit *date1, QDateEdit *date2)
     date2->setDate(QDate::currentDate());
 }
 
-QString Toolkit::formatDouble(const double &value, const int &f)
+QString Toolkit::formatDouble(const double& value, const int& f)
 {
-    return QString::number(value, 'f', f).remove(QRegExp("\\.0+$")).remove(QRegExp("\\.$"));
+    return QString::number(value, 'f', f).remove(QRegularExpression("\\.0+$")).remove(QRegularExpression("\\.$"));
 }

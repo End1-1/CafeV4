@@ -42,38 +42,44 @@ int CTableModel::columnIndexByName(const QString &field) const
 
 QVariant CTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    switch (role) {
+    switch(role) {
     case Qt::DisplayRole:
-        if (orientation == Qt::Vertical) {
+        if(orientation == Qt::Vertical) {
             return section + 1;
         } else {
             QString columnName = fDatabase->columnNameByIndex(section);
-            if (fHeaderCaptions.contains(columnName)) {
+
+            if(fHeaderCaptions.contains(columnName)) {
                 return fHeaderCaptions[columnName];
             } else {
                 return "UNKNOWN";
             }
         }
+
         break;
+
     case Qt::DecorationRole:
-        if (orientation == Qt::Horizontal) {
-            if (section == fFilteredColumn) {
+        if(orientation == Qt::Horizontal) {
+            if(section == fFilteredColumn) {
                 return QVariant::fromValue(QIcon(":/img/filter.png"));
             }
         }
     }
+
     return QVariant();
 }
 
 QVariant CTableModel::data(const QModelIndex &index, int role) const
 {
-    switch (role) {
+    switch(role) {
     case Qt::DisplayRole: {
         return fDatabase->fRawData[fProxyRows.at(index.row())].at(index.column());
     }
+
     case Qt::EditRole:
         return fDatabase->fRawData[fProxyRows.at(index.row())].at(index.column());
     }
+
     return QVariant();
 }
 
@@ -86,20 +92,26 @@ void CTableModel::sort(int column, Qt::SortOrder order)
 {
     Q_UNUSED(order)
     QMap<QVariant, int> m;
-    for (int i = 0, count = fProxyRows.count(); i < count; i++) {
+
+    for(int i = 0, count = fProxyRows.count(); i < count; i++) {
         m.insertMulti(fDatabase->fRawData.at(fProxyRows.at(i)).at(column), fProxyRows.at(i));
     }
+
     beginResetModel();
     fProxyRows = m.values();
-    if (fLastSortIndex == column) {
+
+    if(fLastSortIndex == column) {
         fLastSortOrder = fLastSortOrder == Qt::AscendingOrder ? Qt::DescendingOrder : Qt::AscendingOrder;
     } else {
         fLastSortOrder = Qt::AscendingOrder;
     }
+
     fLastSortIndex = column;
-    if (fLastSortOrder == Qt::DescendingOrder) {
+
+    if(fLastSortOrder == Qt::DescendingOrder) {
         std::reverse(fProxyRows.begin(), fProxyRows.end());
     }
+
     endResetModel();
 }
 
@@ -107,14 +119,16 @@ void CTableModel::search(const QString &text)
 {
     fFilteredColumn = -1;
     QList<int> tempRows;
-    for (int i = 0; i < fDatabase->fRawData.count(); i++ ) {
-        for (int j = 0; j < fDatabase->fRawData[i].count(); j++) {
-            if (fDatabase->fRawData[i][j].toString().contains(text, Qt::CaseInsensitive)) {
+
+    for(int i = 0; i < fDatabase->fRawData.count(); i++) {
+        for(int j = 0; j < fDatabase->fRawData[i].count(); j++) {
+            if(fDatabase->fRawData[i][j].toString().contains(text, Qt::CaseInsensitive)) {
                 tempRows.append(i);
                 break;
             }
         }
     }
+
     beginResetModel();
     fProxyRows = tempRows;
     endResetModel();
@@ -123,18 +137,21 @@ void CTableModel::search(const QString &text)
 void CTableModel::search(const QStringList &values)
 {
     QList<int> tempRows;
-    for (int i = 0; i < fDatabase->fRawData.count(); i++ ) {
-        for (int j = 0; j < fDatabase->fRawData[i].count(); j++) {
-            foreach (QString text, values) {
-                if (fDatabase->fRawData[i][j].toString().contains(text, Qt::CaseInsensitive)) {
+
+    for(int i = 0; i < fDatabase->fRawData.count(); i++) {
+        for(int j = 0; j < fDatabase->fRawData[i].count(); j++) {
+            foreach(QString text, values) {
+                if(fDatabase->fRawData[i][j].toString().contains(text, Qt::CaseInsensitive)) {
                     tempRows.append(i);
                     goto mark;
                 }
             }
         }
-        mark:
+
+mark:
         continue;
     }
+
     beginResetModel();
     fProxyRows = tempRows;
     endResetModel();
@@ -143,24 +160,29 @@ void CTableModel::search(const QStringList &values)
 void CTableModel::search(int column, QStringList &values)
 {
     QList<int> tempRows;
-    if (values.empty()) {
+
+    if(values.empty()) {
         fFilteredColumn = -1;
-        for (int i = 0, count = fDatabase->fRawData.count(); i < count; i++) {
+
+        for(int i = 0, count = fDatabase->fRawData.count(); i < count; i++) {
             fProxyRows << i;
         }
     } else {
         fFilteredColumn = column;
-        for (int i = 0; i < fDatabase->fRawData.count(); i++ ) {
-            foreach (QString text, values) {
-                if (fDatabase->fRawData[i][column].toString().compare(text, Qt::CaseInsensitive) == 0) {
+
+        for(int i = 0; i < fDatabase->fRawData.count(); i++) {
+            foreach(QString text, values) {
+                if(fDatabase->fRawData[i][column].toString().compare(text, Qt::CaseInsensitive) == 0) {
                     tempRows.append(i);
                     goto mark;
                 }
             }
-            mark:
+
+mark:
             continue;
         }
     }
+
     beginResetModel();
     fProxyRows = tempRows;
     endResetModel();
@@ -169,11 +191,12 @@ void CTableModel::search(int column, QStringList &values)
 void CTableModel::getUniqueValuesForColumn(int column, QStringList &values)
 {
     QSet<QString> list;
-    for (int i = 0, count = fDatabase->fRawData.count(); i < count; i++) {
+
+    for(int i = 0, count = fDatabase->fRawData.count(); i < count; i++) {
         list << fDatabase->fRawData.at(i).at(column).toString();
     }
-    values = list.toList();
-    qSort(values);
+
+    std::sort(values.begin(), values.end());
 }
 
 int CTableModel::rowCount() const
@@ -190,9 +213,11 @@ void CTableModel::dataLoaded(CDatabase *db)
     beginResetModel();
     fProxyRows.clear();
     fColumnCount = db->fFieldsMapName.count();
-    for (int i = 0, count = db->fRawData.count(); i < count; i++) {
+
+    for(int i = 0, count = db->fRawData.count(); i < count; i++) {
         fProxyRows << i;
     }
+
     endResetModel();
     emit endOfLoadData();
 #ifdef QT_DEBUG
